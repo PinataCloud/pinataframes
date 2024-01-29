@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@resvg/resvg-js": "^2.6.0",
+    "@supabase/supabase-js": "^2.39.3",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",

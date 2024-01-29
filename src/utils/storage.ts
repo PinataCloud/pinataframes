@@ -1,0 +1,76 @@
+
+import { createClient } from '@supabase/supabase-js'
+const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_KEY!)
+
+type User = {
+  username: string;
+  pfp: string;
+  fid: number;
+}
+
+export const addMessage = async (user: User, message: string) => {
+
+  const { data, error } = await supabase
+    .from('messages')
+    .insert([
+      {
+        username: user.username,
+        pfp: user.pfp,
+        fid: user.fid,
+        content: message
+      },
+    ])
+    .select()
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+export const addOrUpdateUserInput = async (fid: number, input: string) => {
+  const { data, error } = await supabase
+    .from('user_input')
+    .upsert(
+      {
+        "fid": fid,
+        "input": input
+      },
+      { onConflict: "fid" }
+    )
+    .select()
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+export const getCurrentInputForUser = async (fid: number) => {
+
+  let { data: user_input, error } = await supabase
+    .from('user_input')
+    .select('*')
+    .eq("fid", fid)
+
+  if (error) {
+    throw error;
+  }
+
+  return user_input ? user_input[0] : null;
+}
+
+export const getLastFourMessages = async () => {
+
+  let { data: messages, error } = await supabase
+    .from('messages')
+    .select('*')
+    .limit(4)
+  if (error) {
+    throw error;
+  }
+
+  return messages;
+}

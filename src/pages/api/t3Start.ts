@@ -1,4 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { generateImage } from "@/utils/satori";
+import { getLastFourMessages } from "@/utils/storage";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -11,7 +13,7 @@ const emojiMapper = [
   ['🍻', '🍷', '🌮', '🍔']
 ]
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
@@ -41,7 +43,12 @@ export default function handler(
   } else if(req.method === "POST") {
     try {      
       //  Render the chat messages, nothing in the input box
-      let imgUrl = "";
+      const messages = await getLastFourMessages();
+      const requestBody = {
+        messages, 
+        input: ""
+      }
+      let imgUrl = await generateImage(requestBody);
       const template1 = `
 <!DOCTYPE html>
 <html lang="en">
