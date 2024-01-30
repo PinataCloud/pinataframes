@@ -149,6 +149,7 @@ const adTemplate = `
           }
           const finalMessage = await getCurrentInputForUser(fid) || {input: ""};
           await addMessage(user, finalMessage.input)
+          await addOrUpdateUserInput(fid, "");
           //  Return ad template
           return res.send(adTemplate)        
       }
