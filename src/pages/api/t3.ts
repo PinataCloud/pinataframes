@@ -24,25 +24,7 @@ if(req.method === "POST") {
       //  Check the button index
       const buttonIndex = untrustedData.buttonIndex;
       const fid = untrustedData.fid;
-      let imgUrl = ""
-      const template1 = `
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta property="fc:frame:button:1" content="${emojiMapper[0].join(" ")}" />
-    <meta property="fc:frame:button:2" content="${emojiMapper[1].join(" ")}" />
-    <meta property="fc:frame:button:3" content="${emojiMapper[2].join(" ")}" /> 
-    <meta property="fc:frame:button:4" content="Send" />    
-    <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:image" content="${imgUrl}?filename=t3.png" />
-    <meta property="fc:frame:post_url" content="${process.env.POST_URL}" />
-    <body>
-    <img src="${imgUrl}?filename=t3.png" />
-  </body>
-</html>`
+
 
 const adTemplate = `
 <!DOCTYPE html>
@@ -75,7 +57,25 @@ const adTemplate = `
             messages: messages0, 
             input: newMessage0
           }
-          imgUrl = await generateImage(requestBody0);      
+          const imgUrl = await generateImage(requestBody0);  
+          const template1 = `
+          <!DOCTYPE html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <meta http-equiv="X-UA-Compatible" content="ie=edge">
+              <meta property="fc:frame:button:1" content="${emojiMapper[0].join(" ")}" />
+              <meta property="fc:frame:button:2" content="${emojiMapper[1].join(" ")}" />
+              <meta property="fc:frame:button:3" content="${emojiMapper[2].join(" ")}" /> 
+              <meta property="fc:frame:button:4" content="Send" />    
+              <meta property="fc:frame" content="vNext" />
+              <meta property="fc:frame:image" content="${imgUrl}?filename=t3.png" />
+              <meta property="fc:frame:post_url" content="${process.env.POST_URL}" />
+              <body>
+              <img src="${imgUrl}?filename=t3.png" />
+            </body>
+          </html>`    
           return res.send(template1);        
         case 2: 
           //  Grab random emoji from correct index
@@ -89,8 +89,26 @@ const adTemplate = `
             messages, 
             input: newMessage
           }
-          imgUrl = await generateImage(requestBody);
-          return res.send(template1);
+          const imgUrl2 = await generateImage(requestBody);  
+          const template2 = `
+          <!DOCTYPE html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <meta http-equiv="X-UA-Compatible" content="ie=edge">
+              <meta property="fc:frame:button:1" content="${emojiMapper[0].join(" ")}" />
+              <meta property="fc:frame:button:2" content="${emojiMapper[1].join(" ")}" />
+              <meta property="fc:frame:button:3" content="${emojiMapper[2].join(" ")}" /> 
+              <meta property="fc:frame:button:4" content="Send" />    
+              <meta property="fc:frame" content="vNext" />
+              <meta property="fc:frame:image" content="${imgUrl2}?filename=t3.png" />
+              <meta property="fc:frame:post_url" content="${process.env.POST_URL}" />
+              <body>
+              <img src="${imgUrl2}?filename=t3.png" />
+            </body>
+          </html>` 
+          return res.send(template2);
         case 3: 
           //  Grab random emoji from correct index
           const emoji3 = emojiMapper[2][Math.floor(Math.random()*emojiMapper[2].length)]
@@ -103,8 +121,26 @@ const adTemplate = `
             messages: messages2, 
             input: newMessage2
           }
-          imgUrl = await generateImage(requestBody2);
-          return res.send(template1);
+          const imgUrl3 = await generateImage(requestBody2);  
+          const template3 = `
+          <!DOCTYPE html>
+          <html lang="en">
+            <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <meta http-equiv="X-UA-Compatible" content="ie=edge">
+              <meta property="fc:frame:button:1" content="${emojiMapper[0].join(" ")}" />
+              <meta property="fc:frame:button:2" content="${emojiMapper[1].join(" ")}" />
+              <meta property="fc:frame:button:3" content="${emojiMapper[2].join(" ")}" /> 
+              <meta property="fc:frame:button:4" content="Send" />    
+              <meta property="fc:frame" content="vNext" />
+              <meta property="fc:frame:image" content="${imgUrl3}?filename=t3.png" />
+              <meta property="fc:frame:post_url" content="${process.env.POST_URL}" />
+              <body>
+              <img src="${imgUrl3}?filename=t3.png" />
+            </body>
+          </html>` 
+          return res.send(template3);
         case 4: 
           //  Save final message
           const user = await getUserByFid(fid);

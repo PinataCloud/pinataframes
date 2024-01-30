@@ -112,8 +112,8 @@ export const generateImage = async (requestData: any) => {
     );
     const { IpfsHash } = await imageUpload.json();
 
-    const url = `${process.env.GATEWAY_URL}/ipfs/${IpfsHash}?filename=image.png`;
-    console.log(url);
+    const url = `${process.env.GATEWAY_URL}/ipfs/${IpfsHash}?filename=image.png`
+    console.log({url})
     return url;
   } catch (error) {
     console.log(error);
