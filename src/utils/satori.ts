@@ -70,7 +70,7 @@ export const satoriHelper = async (requestBody: any) => {
     <div
       tw="flex flex-col justify-between p-16 items-start text-2xl font-semibold bg-purple-200 w-full h-full"
     >
-      <div></div>
+      <div tw="flex"></div>
 
       <div tw="flex w-full bg-white p-3 rounded-xl">
         ${chatInput ? chatInput : ""}
