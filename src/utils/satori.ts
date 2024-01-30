@@ -49,11 +49,11 @@ export const satoriHelper = async (requestBody: any) => {
 
   const markup = (requestBody: any, chatInput: any): any => html`
     <div
-      tw="flex flex-col justify-between p-16 items-start text-2xl font-semibold bg-purple-200 w-full h-full"
+      tw="flex flex-col justify-between p-8 items-start text-2xl font-semibold bg-purple-200 w-full h-full"
     >
       ${requestBody?.messages?.map((m: any) => {
         return String.raw`
-    <div id="message" tw="flex flex-col gap-6 w-full">
+    <div id="message" tw="flex flex-col gap-6 w-full mb-4">
       <div tw="text-lg text-gray-500 mb-2">${m.username}</div>
         <div tw="flex">
           <img src="${m.pfp}" tw="h-12 w-12 rounded-full mr-6" alt="image test" />
