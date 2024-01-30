@@ -1,17 +1,18 @@
 import satori, { SatoriOptions } from "satori";
 import { html } from "satori-html";
 import { Resvg } from "@resvg/resvg-js";
+import { getIconCode, loadEmoji } from "./twemoji";
 
 export const satoriHelper = async (requestBody: any) => {
   console.log(requestBody);
   const chatInput = requestBody.input;
 
   const monoFontReg = await fetch(
-    "https://api.fontsource.org/v1/fonts/roboto-mono/latin-400-normal.ttf",
+    "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
   );
 
   const monoFontBold = await fetch(
-    "https://api.fontsource.org/v1/fonts/roboto-mono/latin-700-normal.ttf",
+    "https://api.fontsource.org/v1/fonts/inter/latin-700-normal.ttf",
   );
 
   const ogOptions: SatoriOptions = {
@@ -33,6 +34,11 @@ export const satoriHelper = async (requestBody: any) => {
         style: "normal",
       },
     ],
+    loadAdditionalAsset: async (code, segment) => {
+    if (code === "emoji") {
+      return (`data:image/svg+xml;base64,${btoa(await loadEmoji("twemoji", getIconCode(segment)))}`);
+    }
+  },
   };
 
   const markup = (requestBody: any, chatInput: any): any =>
@@ -42,7 +48,7 @@ export const satoriHelper = async (requestBody: any) => {
 >
 ${
   requestBody?.messages?.map((m: any) => {
-    return html`
+    return String.raw`
     <div id="message" tw="flex flex-col gap-6 w-full">
       <div tw="text-lg text-gray-500 mb-2">${m.username}</div>
         <div tw="flex">
