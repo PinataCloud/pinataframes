@@ -34,21 +34,22 @@ export const satoriHelper = async (requestBody: any) => {
         style: "normal",
       },
     ],
-    loadAdditionalAsset: async (code, segment) => {
-    if (code === "emoji") {
-      return (`data:image/svg+xml;base64,${btoa(await loadEmoji("twemoji", getIconCode(segment)))}`);
-    }
-  },
+    loadAdditionalAsset: async (code: any, segment: any) => {
+      if (code === "emoji") {
+        return `data:image/svg+xml;base64,${btoa(
+          await loadEmoji("twemoji", getIconCode(segment)),
+        )}`;
+      }
+      return []
+    },
   };
 
-  const markup = (requestBody: any, chatInput: any): any =>
-    html`
-<div
-  tw="flex flex-col justify-between p-16 items-start text-2xl font-semibold bg-purple-200 w-full h-full"
->
-${
-  requestBody?.messages?.map((m: any) => {
-    return String.raw`
+  const markup = (requestBody: any, chatInput: any): any => html`
+    <div
+      tw="flex flex-col justify-between p-16 items-start text-2xl font-semibold bg-purple-200 w-full h-full"
+    >
+      ${requestBody?.messages?.map((m: any) => {
+        return String.raw`
     <div id="message" tw="flex flex-col gap-6 w-full">
       <div tw="text-lg text-gray-500 mb-2">${m.username}</div>
         <div tw="flex">
@@ -58,67 +59,64 @@ ${
         </div>
       </div>
     </div>
-    `
-  })
-}
+    `;
+      })}
 
-<div tw="flex w-full bg-white p-3 rounded-xl">
-${chatInput}
-</div>
-</div>
-`;
+      <div tw="flex w-full bg-white p-3 rounded-xl">${chatInput}</div>
+    </div>
+  `;
 
-  const markupNoMessages = (chatInput: string): any =>
-    html`
-<div
-tw="flex flex-col justify-between p-16 items-start text-2xl font-semibold bg-purple-200 w-full h-full"
->
+  const markupNoMessages = (chatInput: string): any => html`
+    <div
+      tw="flex flex-col justify-between p-16 items-start text-2xl font-semibold bg-purple-200 w-full h-full"
+    >
+      <div></div>
 
-</div>
+      <div tw="flex w-full bg-white p-3 rounded-xl">
+        ${chatInput ? chatInput : ""}
+      </div>
+    </div>
+  `;
 
-
-<div tw="flex w-full bg-white p-3 rounded-xl">
-${chatInput ? chatInput : ""}
-</div>
-</div>
-`;
-
-  if(!requestBody.messages || requestBody.messages.length === 0) {
+  if (!requestBody.messages || requestBody.messages.length === 0) {
     const svg = await satori(markupNoMessages(chatInput), ogOptions);
     const png = new Resvg(svg).render().asPng();
-    return png
+    return png;
   } else {
     const svg = await satori(markup(requestBody, chatInput), ogOptions);
     const png = new Resvg(svg).render().asPng();
-    return png
+    return png;
   }
 };
 
 export const generateImage = async (requestData: any) => {
   try {
     const image = await satoriHelper(requestData);
-    const file = new File([image], "image.png")
-    const formData = new FormData()
-    formData.append('file', file)
+    const file = new File([image], "image.png");
+    const formData = new FormData();
+    formData.append("file", file);
 
     const metadata = JSON.stringify({
-      name: `image.png`
-    })
-    formData.append('pinataMetadata', metadata)
-    const imageUpload = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.PINATA_JWT}`,
-      },
-      body: formData,
+      name: `image.png`,
     });
+    formData.append("pinataMetadata", metadata);
+    const imageUpload = await fetch(
+      "https://api.pinata.cloud/pinning/pinFileToIPFS",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.PINATA_JWT}`,
+        },
+        body: formData,
+      },
+    );
     const { IpfsHash } = await imageUpload.json();
 
-    const url = `${process.env.GATEWAY_URL}/ipfs/${IpfsHash}?filename=image.png`
-    console.log(url)
+    const url = `${process.env.GATEWAY_URL}/ipfs/${IpfsHash}?filename=image.png`;
+    console.log(url);
     return url;
   } catch (error) {
     console.log(error);
     throw error;
   }
-}
+};
