@@ -3,6 +3,11 @@ import { generateImage } from "@/utils/satori";
 import { getLastFourMessages } from "@/utils/storage";
 import type { NextApiRequest, NextApiResponse } from "next";
 
+export const config = {
+  maxDuration: 300,
+};
+
+
 type Data = {
   name: string;
 };
