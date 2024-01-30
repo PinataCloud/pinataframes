@@ -20,7 +20,8 @@ export default async function handler(
 if(req.method === "POST") {
     try {      
       //  Render the chat messages, nothing in the input box
-      const messages = await getLastFourMessages();
+      let messages:any = await getLastFourMessages();
+      messages.reverse()
       console.log(messages);
       const requestBody = {
         messages: messages, 

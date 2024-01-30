@@ -54,7 +54,8 @@ const adTemplate = `
           let newMessage0 = currentMessage0.input + emoji1;
           console.log(newMessage0)
           await addOrUpdateUserInput(fid, newMessage0);
-          const messages0 = await getLastFourMessages();
+          let messages0:any = await getLastFourMessages();
+          messages0.reverse()
           const requestBody0 = {
             messages: messages0, 
             input: newMessage0
@@ -88,7 +89,8 @@ const template1 = `
           const currentMessage = await getCurrentInputForUser(fid) || {input: ""};
           let newMessage = currentMessage.input + emoji2;
           await addOrUpdateUserInput(fid, newMessage);
-          const messages = await getLastFourMessages();
+          let messages:any = await getLastFourMessages();
+          messages.reverse()
           const requestBody = {
             messages, 
             input: newMessage
@@ -122,7 +124,8 @@ const template2 = `
           const currentMessage2 = await getCurrentInputForUser(fid) || {input: ""};
           let newMessage2 = currentMessage2.input + emoji3;
           await addOrUpdateUserInput(fid, newMessage2);
-          const messages2 = await getLastFourMessages();
+          let messages2:any = await getLastFourMessages();
+          messages2.reverse()
           const requestBody2 = {
             messages: messages2, 
             input: newMessage2
