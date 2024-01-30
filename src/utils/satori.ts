@@ -78,7 +78,7 @@ tw="flex flex-col justify-between p-16 items-start text-2xl font-semibold bg-pur
 
 
 <div tw="flex w-full bg-white p-3 rounded-xl">
-${chatInput}
+${chatInput ? chatInput : ""}
 </div>
 </div>
 `;
