@@ -42,7 +42,7 @@ if(req.method === "POST") {
     <meta property="fc:frame:post_url" content="${process.env.POST_URL}" />
   </head>
   <body>
-    <img src="${imgUrl}?filename=t3.png" />
+    <img src="${imgUrl}" />
   </body>
 </html>`
     return res.setHeader('content-type', 'text/html').send(template1);

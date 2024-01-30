@@ -35,11 +35,11 @@ const adTemplate = `
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta property="fc:frame:button:1" content="See messages" />    
     <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:image" content="https://mktg.mypinata.cloud/ipfs/QmfXmxjs6oQdieAkYuEEqeVXTUVc2fE1KwmMmLC9AsaRRM?filename=t3.png" />
+    <meta property="fc:frame:image" content="https://mktg.mypinata.cloud/ipfs/QmfXmxjs6oQdieAkYuEEqeVXTUVc2fE1KwmMmLC9AsaRRM?filename=t3.gif" />
     <meta property="fc:frame:post_url" content="${process.env.AD_POST_URL}" />
   </head>
   <body>
-    <img src="https://mktg.mypinata.cloud/ipfs/QmfXmxjs6oQdieAkYuEEqeVXTUVc2fE1KwmMmLC9AsaRRM?filename=t3.png" />
+    <img src="https://mktg.mypinata.cloud/ipfs/QmfXmxjs6oQdieAkYuEEqeVXTUVc2fE1KwmMmLC9AsaRRM?filename=t3.gif" />
   </body>
 </html>
 `
@@ -108,7 +108,7 @@ const template2 = `
     <meta property="fc:frame:post_url" content="${process.env.POST_URL}" />
   </head>
   <body>
-    <img src="${imgUrl2}?filename=t3.png" />
+    <img src="${imgUrl2}" />
   </body>
 </html>` 
           return res.setHeader('content-type', 'text/html').send(template2);
@@ -141,7 +141,7 @@ const template3 = `
   <meta property="fc:frame:post_url" content="${process.env.POST_URL}" />
 </head>
 <body>
-  <img src="${imgUrl3}?filename=t3.png" />
+  <img src="${imgUrl3}" />
 </body>
 </html>` 
           return res.setHeader('content-type', 'text/html').send(template3);
