@@ -36,7 +36,7 @@ export default async function handler(
     <img src="${imgUrl}" />
   </body>
 </html>`
-      res.send(initialFrame);
+      res.setHeader('content-type', 'text/html').send(initialFrame);
     } catch (error) {
       console.log(error);
       res.status(500).send("Server error");
@@ -68,7 +68,7 @@ export default async function handler(
     <img src="${imgUrl}?filename=t3.png" />
   </body>
 </html>`
-      res.send(template1);
+      res.setHeader('content-type', 'text/html').send(template1);
     } catch (error) {
       console.log(error);
       res.status(500).send("Server error");

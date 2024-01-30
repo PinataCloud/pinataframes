@@ -78,7 +78,7 @@ const template1 = `
   <img src="${imgUrl}?filename=t3.png" />
 </body>
 </html>`    
-          return res.send(template1);        
+          return res.setHeader('content-type', 'text/html').send(template1);        
         case 2: 
           //  Grab random emoji from correct index
           const emoji2 = emojiMapper[1][Math.floor(Math.random()*emojiMapper[1].length)]
@@ -111,7 +111,7 @@ const template2 = `
     <img src="${imgUrl2}?filename=t3.png" />
   </body>
 </html>` 
-          return res.send(template2);
+          return res.setHeader('content-type', 'text/html').send(template2);
         case 3: 
           //  Grab random emoji from correct index
           const emoji3 = emojiMapper[2][Math.floor(Math.random()*emojiMapper[2].length)]
@@ -144,7 +144,7 @@ const template3 = `
   <img src="${imgUrl3}?filename=t3.png" />
 </body>
 </html>` 
-          return res.send(template3);
+          return res.setHeader('content-type', 'text/html').send(template3);
         case 4: 
           //  Save final message
           const user = await getUserByFid(fid);
@@ -155,7 +155,7 @@ const template3 = `
           await addMessage(user, finalMessage.input)
           await addOrUpdateUserInput(fid, "");
           //  Return ad template
-          return res.send(adTemplate)        
+          return res.setHeader('content-type', 'text/html').send(adTemplate)        
       }
       //  Render image accordingly
       //  Set buttons in OG button tags

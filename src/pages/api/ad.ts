@@ -45,7 +45,7 @@ if(req.method === "POST") {
     <img src="${imgUrl}?filename=t3.png" />
   </body>
 </html>`
-      res.send(template1);
+    return res.setHeader('content-type', 'text/html').send(template1);
     } catch (error) {
       console.log(error);
       res.status(500).send("Server error");
