@@ -68,6 +68,7 @@ export const getLastFourMessages = async () => {
     .from('messages')
     .select('*')
     .limit(4)
+    .order('created_at', { ascending: false });
   if (error) {
     throw error;
   }
