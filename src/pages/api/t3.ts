@@ -36,11 +36,11 @@ const adTemplate = `
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta property="fc:frame:button:1" content="See messages" />    
     <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:image" content="https://mktg.mypinata.cloud/ipfs/QmfXmxjs6oQdieAkYuEEqeVXTUVc2fE1KwmMmLC9AsaRRM?filename=t3.gif" />
+    <meta property="fc:frame:image" content="https://mktg.mypinata.cloud/ipfs/QmSAPdmCYuu9RyGi4KGnjagyLg3xYkVkjkTzA1ddqPjHnm?filename=t3.gif" />
     <meta property="fc:frame:post_url" content="${process.env.AD_POST_URL}" />
   </head>
   <body>
-    <img src="https://mktg.mypinata.cloud/ipfs/QmfXmxjs6oQdieAkYuEEqeVXTUVc2fE1KwmMmLC9AsaRRM?filename=t3.gif" />
+    <img src="https://mktg.mypinata.cloud/ipfs/QmSAPdmCYuu9RyGi4KGnjagyLg3xYkVkjkTzA1ddqPjHnm?filename=t3.gif" />
   </body>
 </html>
 `
