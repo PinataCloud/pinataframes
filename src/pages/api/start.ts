@@ -24,7 +24,7 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     try {
-      let imgUrl = "https://mktg.mypinata.cloud/ipfs/QmVqEKexfVFiLB3xPXcwDyyUETLowQwvP2rqjhgpet95Cf?filename=emojichat.png"
+      let imgUrl = "https://mktg.mypinata.cloud/ipfs/Qma5xSFiGDrjta8NXVzVubzFNj21zkn9Bn16W6pAcKpVnB?filename=emojichat.png"
       //  Return the initial frame
       const initialFrame = `
 <!DOCTYPE html>
