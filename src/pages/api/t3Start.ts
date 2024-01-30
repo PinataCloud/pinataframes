@@ -25,6 +25,7 @@ export default async function handler(
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>T3 Emoji</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -54,6 +55,7 @@ export default async function handler(
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>T3 Emoji</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">

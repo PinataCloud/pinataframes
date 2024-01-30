@@ -30,6 +30,7 @@ const adTemplate = `
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>T3 Emoji</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -63,6 +64,7 @@ const template1 = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>T3 Emoji</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -75,7 +77,7 @@ const template1 = `
   <meta property="fc:frame:post_url" content="${process.env.POST_URL}" />
 </head>
 <body>
-  <img src="${imgUrl}?filename=t3.png" />
+  <img src="${imgUrl}" />
 </body>
 </html>`    
           return res.setHeader('content-type', 'text/html').send(template1);        
@@ -96,6 +98,7 @@ const template2 = `
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>T3 Emoji</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -129,6 +132,7 @@ const template3 = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>T3 Emoji</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">

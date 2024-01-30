@@ -16,8 +16,8 @@ export const satoriHelper = async (requestBody: any) => {
   );
 
   const ogOptions: SatoriOptions = {
-    width: 800,
-    height: 418,
+    width: 1200,
+    height: 630,
     // debug: true,
     embedFont: true,
     fonts: [
