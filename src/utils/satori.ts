@@ -2,6 +2,9 @@ import satori, { SatoriOptions } from "satori";
 import { html } from "satori-html";
 import { Resvg } from "@resvg/resvg-js";
 import { getIconCode, loadEmoji } from "./twemoji";
+import fs from 'fs'
+import path from 'path';
+
 
 export const satoriHelper = async (requestBody: any) => {
   console.log(requestBody);
@@ -40,7 +43,7 @@ export const satoriHelper = async (requestBody: any) => {
           await loadEmoji("twemoji", getIconCode(segment)),
         )}`;
       }
-      return []
+      return [];
     },
   };
 
@@ -92,9 +95,11 @@ export const satoriHelper = async (requestBody: any) => {
 export const generateImage = async (requestData: any) => {
   try {
     const image = await satoriHelper(requestData);
-    const file = new File([image], "image.png");
+    const tempPath = path.join("/tmp", "image.png");
+    fs.writeFileSync(tempPath, image);
+    const file = fs.readFileSync(tempPath);
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("file", new Blob([file]), "image.png");
 
     const metadata = JSON.stringify({
       name: `image.png`,
@@ -112,8 +117,8 @@ export const generateImage = async (requestData: any) => {
     );
     const { IpfsHash } = await imageUpload.json();
 
-    const url = `${process.env.GATEWAY_URL}/ipfs/${IpfsHash}?filename=image.png`
-    console.log({url})
+    const url = `${process.env.GATEWAY_URL}/ipfs/${IpfsHash}?filename=image.png`;
+    console.log({ url });
     return url;
   } catch (error) {
     console.log(error);
