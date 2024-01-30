@@ -31,7 +31,8 @@ export default async function handler(
     <meta property="fc:frame:button:1" content="Start emoji chatting" /> 
     <meta property="fc:frame" content="vNext" />
     <meta property="fc:frame:image" content="${imgUrl}" />
-    <body>
+  </head>
+  <body>
     <img src="${imgUrl}" />
   </body>
 </html>`
@@ -62,7 +63,8 @@ export default async function handler(
     <meta property="fc:frame" content="vNext" />
     <meta property="fc:frame:image" content="${imgUrl}?filename=t3.png" />
     <meta property="fc:frame:post_url" content="${process.env.POST_URL}" />
-    <body>
+  </head>
+  <body>
     <img src="${imgUrl}?filename=t3.png" />
   </body>
 </html>`

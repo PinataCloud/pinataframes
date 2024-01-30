@@ -38,9 +38,10 @@ if(req.method === "POST") {
     <meta property="fc:frame:button:2" content="${emojiMapper[1].join(" ")}" />
     <meta property="fc:frame:button:3" content="${emojiMapper[2].join(" ")}" />  
     <meta property="fc:frame" content="vNext" />
-    <meta property="fc:frame:image" content="${imgUrl}?filename=t3.png" />
+    <meta property="fc:frame:image" content="${imgUrl}" />
     <meta property="fc:frame:post_url" content="${process.env.POST_URL}" />
-    <body>
+  </head>
+  <body>
     <img src="${imgUrl}?filename=t3.png" />
   </body>
 </html>`

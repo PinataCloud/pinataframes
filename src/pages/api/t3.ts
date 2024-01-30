@@ -37,7 +37,8 @@ const adTemplate = `
     <meta property="fc:frame" content="vNext" />
     <meta property="fc:frame:image" content="https://mktg.mypinata.cloud/ipfs/QmfXmxjs6oQdieAkYuEEqeVXTUVc2fE1KwmMmLC9AsaRRM?filename=t3.png" />
     <meta property="fc:frame:post_url" content="${process.env.AD_POST_URL}" />
-    <body>
+  </head>
+  <body>
     <img src="https://mktg.mypinata.cloud/ipfs/QmfXmxjs6oQdieAkYuEEqeVXTUVc2fE1KwmMmLC9AsaRRM?filename=t3.png" />
   </body>
 </html>
@@ -70,9 +71,10 @@ const adTemplate = `
               <meta property="fc:frame:button:3" content="${emojiMapper[2].join(" ")}" /> 
               <meta property="fc:frame:button:4" content="Send" />    
               <meta property="fc:frame" content="vNext" />
-              <meta property="fc:frame:image" content="${imgUrl}?filename=t3.png" />
+              <meta property="fc:frame:image" content="${imgUrl}" />
               <meta property="fc:frame:post_url" content="${process.env.POST_URL}" />
-              <body>
+            </head>
+            <body>
               <img src="${imgUrl}?filename=t3.png" />
             </body>
           </html>`    
@@ -102,9 +104,10 @@ const adTemplate = `
               <meta property="fc:frame:button:3" content="${emojiMapper[2].join(" ")}" /> 
               <meta property="fc:frame:button:4" content="Send" />    
               <meta property="fc:frame" content="vNext" />
-              <meta property="fc:frame:image" content="${imgUrl2}?filename=t3.png" />
+              <meta property="fc:frame:image" content="${imgUrl2}" />
               <meta property="fc:frame:post_url" content="${process.env.POST_URL}" />
-              <body>
+            </head>
+            <body>
               <img src="${imgUrl2}?filename=t3.png" />
             </body>
           </html>` 
@@ -134,9 +137,10 @@ const adTemplate = `
               <meta property="fc:frame:button:3" content="${emojiMapper[2].join(" ")}" /> 
               <meta property="fc:frame:button:4" content="Send" />    
               <meta property="fc:frame" content="vNext" />
-              <meta property="fc:frame:image" content="${imgUrl3}?filename=t3.png" />
+              <meta property="fc:frame:image" content="${imgUrl3}" />
               <meta property="fc:frame:post_url" content="${process.env.POST_URL}" />
-              <body>
+            </head>
+            <body>
               <img src="${imgUrl3}?filename=t3.png" />
             </body>
           </html>` 
