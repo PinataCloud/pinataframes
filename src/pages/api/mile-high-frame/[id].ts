@@ -96,6 +96,7 @@ export default async function handler(
       </html>`
         return res.send(template1);
       } else {
+        console.log("MINTING");
         //  Verify the signature from the payload
         const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
         const result = await client.validateMessage(frameMessage);
