@@ -107,8 +107,8 @@ export default async function handler(
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <meta property="fc:frame:image" content="${selectedPlane.image}" />
-          <meta property="fc:frame:button:1" content="Mint plane" />
-          <meta property="fc:frame:button:2" content="Get another plane" />
+          <meta property="fc:frame:button:1" content="Different plane" />
+          <meta property="fc:frame:button:2" content="Mint plane" />
           <meta property="fc:frame" content="vNext" />
           <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/mile-high-frame/${selectedPlane.index}" />
         <title>MHFC</title>
