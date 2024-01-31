@@ -10,7 +10,7 @@ const config = {
   apiKey: process.env.ALCHEMY_KEY,
   network: Network.BASE_SEPOLIA,
 };
-const contractAbi = require("./milehigh.json");
+const contractAbi = require("./milehigh.json").abi;
 const alchemy = new Alchemy(config);
 
 const contract = new ethers.Contract(
@@ -21,6 +21,7 @@ const contract = new ethers.Contract(
 
 export const mintFrame = async (address: string, uri: string) => {
   try {
+    console.log(address, uri);
     const tx = await contract.mintFrame(address, `ipfs://${uri}`, { gasLimit: "0x1000000" });
     console.log(tx);
     return tx; 
