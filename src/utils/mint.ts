@@ -20,7 +20,11 @@ const contract = new ethers.Contract(
 );
 
 export const mintFrame = async (address: string, uri: string) => {
-  const tx = await contract.mintFrame(address, `ipfs://${uri}`, { gasLimit: "0x1000000" });
-  console.log(tx);
-  return tx;
+  try {
+    const tx = await contract.mintFrame(address, `ipfs://${uri}`, { gasLimit: "0x1000000" });
+    console.log(tx);
+    return tx; 
+  } catch (error) {
+    console.log("Minting error");
+  }
 }
