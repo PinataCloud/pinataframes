@@ -69,8 +69,12 @@ export default async function handler(
   if (req.method === "POST") {
     try {
       const { id } = req.query
+      console.log({id});
+      console.log(req.body);
       if (req.body.untrustedData.buttonIndex === 1) {
         const randomPlane = availablePlanes[Math.floor(Math.random()*availablePlanes.length)];
+        console.log("Random plane: ")
+        console.log(randomPlane);
         //  Template should have a post_url that matches the index of the plane selected
         const template1 = `
       <!DOCTYPE html>
@@ -117,7 +121,7 @@ export default async function handler(
           <meta property="fc:frame:button:1" content="Start over, but don't be greedy" />
           <meta property="fc:frame" content="vNext" />
           <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/mile" />
-        <title>T3 Emoji</title>
+        <title>MHFC</title>
         </head>
         <body>
           <img src="${selectedPlane.image}" />
