@@ -14,7 +14,7 @@ const contractAbi = require("./steveNft.json").output.abi;
 const alchemy = new Alchemy(config);
 
 const contract = new ethers.Contract(
-  process.env.MILE_HIGH_CONTRACT_ADDRESS,
+  process.env.STEVE_NFT_CONTRACT_ADDRESS,
   contractAbi,
   wallet
 );
@@ -22,7 +22,7 @@ const contract = new ethers.Contract(
 export const mintFrame = async (address: string, uri: string) => {
   try {
     console.log(address, uri);
-    const tx = await contract.mintFrame(address, `${uri}`, { gasLimit: "0x1000000" });
+    const tx = await contract.safeMint(address, `${uri}`, { gasLimit: "0x1000000" });
     console.log(tx);
     return tx; 
   } catch (error) {
