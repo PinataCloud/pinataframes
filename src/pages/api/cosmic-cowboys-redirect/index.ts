@@ -13,7 +13,8 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     try {
-      let imgUrl = "https://mktg.mypinata.cloud/ipfs/QmVqEKexfVFiLB3xPXcwDyyUETLowQwvP2rqjhgpet95Cf?filename=emojichat.png"
+      //add ipfs url here
+      let imgUrl = `${process.env.HOSTED_URL}/cosmiccowboys.png`
       const initialFrame = `
       <!DOCTYPE html>
       <html lang="en">
