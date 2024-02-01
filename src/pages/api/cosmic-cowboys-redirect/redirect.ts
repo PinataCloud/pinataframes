@@ -19,7 +19,7 @@ export default async function handler(
         // Set the Location header for redirection
         res.setHeader('Location', redirectUrl);
         // Set the status code for redirection (302 is the default for temporary redirection)
-        res.statusCode = 302;
+        res.status(302);
         // End the response to trigger the redirection
         res.end();
     } catch (error) {
