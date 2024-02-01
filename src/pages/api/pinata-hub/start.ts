@@ -16,12 +16,14 @@ export default async function handler(
 ) {
 if (req.method === "POST") {
     try {
+      console.log(req.body);
       //  Verify the signature from the payload
-      const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
-      const result = await client.validateMessage(frameMessage);
+      // const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
+      // const result = await client.validateMessage(frameMessage);
       // if (result.isOk() && result.value.valid) {
         const fid = req.body.untrustedData.fid;
         const user = await getUserByFid(fid);
+        console.log(user);
         await addHubster(user);
         //  Template should have a post_url that matches the index of the plane selected
         const template1 = `

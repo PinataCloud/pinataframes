@@ -41,9 +41,9 @@ export default async function handler(
     try {
       console.log(req.body);
       //  Verify the signature from the payload
-      const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
-      const result = await client.validateMessage(frameMessage);
-      console.log(result);
+      // const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
+      // const result = await client.validateMessage(frameMessage);
+      // console.log(result);
       // if (result.isOk() && result.value.valid) {
         //  Template should have a post_url that matches the index of the plane selected
         const template1 = `
