@@ -19,7 +19,7 @@ if (req.method === "POST") {
       //  Verify the signature from the payload
       const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
       const result = await client.validateMessage(frameMessage);
-      if (result.isOk() && result.value.valid) {
+      // if (result.isOk() && result.value.valid) {
         const fid = req.body.untrustedData.fid;
         const user = await getUserByFid(fid);
         await addHubster(user);
@@ -41,9 +41,9 @@ if (req.method === "POST") {
         </html>`
         
         return res.send(template1);
-      } else {
-        return res.status(401).send("Unauthorized");
-      }
+      // } else {
+      //   return res.status(401).send("Unauthorized");
+      // }
     } catch (error) {
       console.log(error);
       res.status(500).send("Server error");
