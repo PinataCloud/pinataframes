@@ -3,7 +3,7 @@ import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
 import { getUserByFid } from "@/utils/fc";
 import { addHubster } from "@/utils/storage";
 
-const HUB_URL = process.env['HUB_URL'] || "http://54.88.44.144:2281"
+const HUB_URL = process.env['HUB_URL'] || "https://hub.pinata.cloud"
 const client = getSSLHubRpcClient(HUB_URL);
 
 export const config = {
@@ -20,6 +20,9 @@ if (req.method === "POST") {
       const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
       const result = await client.validateMessage(frameMessage);
       if (result.isOk() && result.value.valid) {
+        const fid = req.body.untrustedData.fid;
+        const user = await getUserByFid(fid);
+        await addHubster(user);
         //  Template should have a post_url that matches the index of the plane selected
         const template1 = `
         <!DOCTYPE html>
