@@ -1,3 +1,9 @@
+export type FCUser = {
+    fid: number;
+    username: string;
+    pfp: string;
+}
+
 export const getUserByFid = async (fid: number) => {
   const res = await fetch(`https://nemes.farcaster.xyz:2281/v1/userDataByFid?fid=${fid}`)
   const json = await res.json();

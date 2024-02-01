@@ -1,5 +1,6 @@
 
 import { createClient } from '@supabase/supabase-js'
+import { FCUser } from './fc';
 const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_KEY!)
 
 type User = {
@@ -74,4 +75,20 @@ export const getLastFourMessages = async () => {
   }
 
   return messages;
+}
+
+export const addHubster = async (user: FCUser) => {
+  const { data, error } = await supabase
+    .from('hubsters')
+    .upsert(
+      user,
+      { onConflict: "fid" }
+    )
+    .select()
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
 }

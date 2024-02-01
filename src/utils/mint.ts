@@ -1,6 +1,6 @@
 import { Alchemy, Network, TokenBalancesResponse } from "alchemy-sdk";
 const { ethers } = require("ethers");
-const provider = new ethers.JsonRpcProvider(process.env.ALCHEMY_URL_BASE)
+const provider = new ethers.JsonRpcProvider(process.env.SEPOLIA_URL)
 
 const wallet = new ethers.Wallet(
   process.env.SERVER_WALLET_PRIVATE_KEY,

@@ -101,8 +101,9 @@ export default async function handler(
         const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
         const result = await client.validateMessage(frameMessage);
         if (result.isOk() && result.value.valid) {
+          console.log(id);
           //  If verified, randomly select a plane to display
-          const selectedPlane = availablePlanes.find((p: any) => p.index === id);
+          const selectedPlane = availablePlanes.find((p: any) => p.index === parseInt(id as string, 10));
           if (!selectedPlane) {
             return res.status(400).send("No plane found");
           }
