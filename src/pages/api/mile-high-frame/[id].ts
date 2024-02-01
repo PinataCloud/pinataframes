@@ -14,52 +14,52 @@ const availablePlanes = [
   {
     index: 1,
     image: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmdfSmozLFGfrXfSKzZHobtQ6LDkCUt8rmJo9ZEXfdcDyz",
-    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWZGdaNhRBgNeBcKZuAnsXeiEYwk91VmPb4M4gG8Rthmg/1.json",
+    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWPZBdLbvepMsQS6oSpTAyRDqr5vLYZ9JMFwGry7syraN/1",
   },
   {
     index: 2,
     image: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmcBHH2iJbqxA4VKTREUK27SyotxBwxetnBSCQQU3BFvrx",
-    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWZGdaNhRBgNeBcKZuAnsXeiEYwk91VmPb4M4gG8Rthmg/2.json",
+    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWPZBdLbvepMsQS6oSpTAyRDqr5vLYZ9JMFwGry7syraN/2",
   },
   {
     index: 3,
     image: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmYsQNdMWM17p8AJaTQByo5Ae5UBh5apVbaxrJNkwDvG1G",
-    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWZGdaNhRBgNeBcKZuAnsXeiEYwk91VmPb4M4gG8Rthmg/3.json",
+    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWPZBdLbvepMsQS6oSpTAyRDqr5vLYZ9JMFwGry7syraN/3",
   },
   {
     index: 4,
     image: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmXKHR9QBtoeMD6pA8mqhay4jpRbD15D1axAFmkvrgihGU",
-    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWZGdaNhRBgNeBcKZuAnsXeiEYwk91VmPb4M4gG8Rthmg/4.json",
+    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWPZBdLbvepMsQS6oSpTAyRDqr5vLYZ9JMFwGry7syraN/4",
   },
   {
     index: 5,
     image: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmabNYmkeJSKJUYNd8CtyPdnJE2wz6q2YQAtnj59UZKbVp",
-    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWZGdaNhRBgNeBcKZuAnsXeiEYwk91VmPb4M4gG8Rthmg/5.json",
+    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWPZBdLbvepMsQS6oSpTAyRDqr5vLYZ9JMFwGry7syraN/5",
   },
   {
     index: 6,
     image: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmRXU6d5vzHQfEajUiia7TyhatjX3PpfNyvBNd5yQVsSWv",
-    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWZGdaNhRBgNeBcKZuAnsXeiEYwk91VmPb4M4gG8Rthmg/6.json",
+    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWPZBdLbvepMsQS6oSpTAyRDqr5vLYZ9JMFwGry7syraN/6",
   },
   {
     index: 7,
     image: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmUzXsoWmJ8w5ystUpVe1DZ5cs1AzxqcsYGrXebEa84cMs",
-    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWZGdaNhRBgNeBcKZuAnsXeiEYwk91VmPb4M4gG8Rthmg/7.json",
+    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWPZBdLbvepMsQS6oSpTAyRDqr5vLYZ9JMFwGry7syraN/7",
   },
   {
     index: 8,
     image: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/Qmbx3MkEhqSegyvqAYaHGvTsvFu1aq77LrzzbEnNsjexAs",
-    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWZGdaNhRBgNeBcKZuAnsXeiEYwk91VmPb4M4gG8Rthmg/8.json",
+    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWPZBdLbvepMsQS6oSpTAyRDqr5vLYZ9JMFwGry7syraN/8",
   },
   {
     index: 9,
     image: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmTntQR5SyFshiYkZQE3dCrj7xxjvKECkXvNzAn4AaiJA3",
-    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWZGdaNhRBgNeBcKZuAnsXeiEYwk91VmPb4M4gG8Rthmg/9.json",
+    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWPZBdLbvepMsQS6oSpTAyRDqr5vLYZ9JMFwGry7syraN/9",
   },
   {
     index: 10,
     image: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmU1FH4CrpGH9UZh85wX2BgoPeuehNwMo7CUmQxUEPpXXJ",
-    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWZGdaNhRBgNeBcKZuAnsXeiEYwk91VmPb4M4gG8Rthmg/10.json",
+    tokenUri: "https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmWPZBdLbvepMsQS6oSpTAyRDqr5vLYZ9JMFwGry7syraN/10",
   },
 ]
 
