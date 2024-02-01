@@ -39,6 +39,7 @@ export default async function handler(
     }
   } else if (req.method === "POST") {
     try {
+      console.log(req.body);
       //  Verify the signature from the payload
       const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
       const result = await client.validateMessage(frameMessage);
