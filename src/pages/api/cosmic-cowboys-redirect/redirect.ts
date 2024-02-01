@@ -12,15 +12,16 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   if (req.method === "GET") {
-    try {
-        res.redirect("cosmicowboys.cloud");
-    } catch (error) {
-        console.log(error);
-        res.status(500).send("Server error");
-    }
+    res.status(500).send("Server error");
   } else if (req.method === "POST") {
     try {
-        res.redirect("cosmicowboys.cloud");
+        const redirectUrl = 'www.cosmiccowboys.cloud';
+        // Set the Location header for redirection
+        res.setHeader('Location', redirectUrl);
+        // Set the status code for redirection (302 is the default for temporary redirection)
+        res.statusCode = 302;
+        // End the response to trigger the redirection
+        res.end();
     } catch (error) {
       console.log(error);
       res.status(500).send("Server error");
