@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
 import { mintFrame } from "@/utils/mint";
+import { getConnectedAddressForUser } from "@/utils/fc";
 
-const HUB_URL = process.env['HUB_URL'] || "nemes.farcaster.xyz:2283"
+const HUB_URL = process.env['HUB_URL'] || "hub.pinata.cloud"
 const client = getSSLHubRpcClient(HUB_URL);
 
 export const config = {
@@ -108,8 +109,15 @@ export default async function handler(
             return res.status(400).send("No plane found");
           }
 
+          const connectedAddressData = await getConnectedAddressForUser(req.body.untrustedData.fid);
+          if(!connectedAddressData || connectedAddressData.length === 0) {
+            console.log("No connected address");
+            return res.status(400).send("No connected address")
+          }
+
+          const connectedAddress = connectedAddressData[0].connectedAddress;
           //  Mint the plane to the wallet
-          const tx = await mintFrame("0x1612C6DFf0Eb5811108b709A30d8150495ce9CC5", selectedPlane.tokenUri)
+          const tx = await mintFrame(connectedAddress, selectedPlane.tokenUri)
           console.log({tx});
           //  Template should have a post_url that matches the index of the plane selected
           const template1 = `

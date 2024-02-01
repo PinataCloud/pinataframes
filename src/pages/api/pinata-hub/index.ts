@@ -44,7 +44,7 @@ export default async function handler(
       const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
       const result = await client.validateMessage(frameMessage);
       console.log(result);
-      // if (result.isOk() && result.value.valid) {
+      if (result.isOk() && result.value.valid) {
         //  Template should have a post_url that matches the index of the plane selected
         const template1 = `
         <!DOCTYPE html>
@@ -63,11 +63,11 @@ export default async function handler(
             <img src="https://azure-tiny-tahr-350.mypinata.cloud/ipfs/QmS61nyZqrxbUZrbRbDX6LuqpSk6D8iRLHetVd2ByR9K19" />
           </body>
         </html>`
-
+        
         return res.send(template1)
-      // } else {
-      //   return res.status(401).send("Unauthorized");
-      // }
+      } else {
+        return res.status(401).send("Unauthorized");
+      }
     } catch (error) {
       console.log(error);
       res.status(500).send("Server error");

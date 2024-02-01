@@ -5,7 +5,7 @@ export type FCUser = {
 }
 
 export const getUserByFid = async (fid: number) => {
-  const res = await fetch(`https://nemes.farcaster.xyz:2281/v1/userDataByFid?fid=${fid}`)
+  const res = await fetch(`https://${process.env.HUB_URL}/v1/userDataByFid?fid=${fid}`)
   const json = await res.json();
   const { messages } = json;
   const usernamePayload = messages.find((m: any) => m.data.userDataBody.type === "USER_DATA_TYPE_USERNAME")
@@ -17,4 +17,10 @@ export const getUserByFid = async (fid: number) => {
     username, 
     pfp
   }
+}
+
+export const getConnectedAddressForUser = async (fid: number) => {
+  const res = await fetch(`https://searchcaster.xyz/api/profiles?fid=${fid}`)
+  const json = await res.json();
+  return json;
 }
