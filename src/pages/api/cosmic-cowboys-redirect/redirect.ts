@@ -12,7 +12,18 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   if (req.method === "GET") {
-    res.status(500).send("Server error");
+    try {
+        const redirectUrl = 'https://www.cosmiccowboys.cloud/';
+        // Set the Location header for redirection
+        res.setHeader('Location', redirectUrl);
+        // Set the status code for redirection (302 is the default for temporary redirection)
+        res.status(302);
+        // End the response to trigger the redirection
+        res.end();
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Server error");
+    }
   } else if (req.method === "POST") {
     try {
         const redirectUrl = 'https://www.cosmiccowboys.cloud/';
