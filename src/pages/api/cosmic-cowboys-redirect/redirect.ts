@@ -15,7 +15,7 @@ export default async function handler(
     res.status(500).send("Server error");
   } else if (req.method === "POST") {
     try {
-        const redirectUrl = 'www.cosmiccowboys.cloud';
+        const redirectUrl = 'https://www.cosmiccowboys.cloud/';
         // Set the Location header for redirection
         res.setHeader('Location', redirectUrl);
         // Set the status code for redirection (302 is the default for temporary redirection)
