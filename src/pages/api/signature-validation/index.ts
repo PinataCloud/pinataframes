@@ -1,10 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
+import { getSSLClient, getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
 import { getUserByFid } from "@/utils/fc";
 import { addHubster } from "@/utils/storage";
 
 const HUB_URL = process.env['HUB_URL'] || "hub.pinata.cloud"
-const client = getSSLHubRpcClient(HUB_URL);
+console.log({HUB_URL})
+const client = getSSLHubRpcClient(`${HUB_URL}`);
 
 export const config = {
   maxDuration: 300,
