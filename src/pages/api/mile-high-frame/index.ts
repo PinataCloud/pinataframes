@@ -95,7 +95,7 @@ export default async function handler(
       //  Verify the signature from the payload
       const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
       const result = await client.validateMessage(frameMessage);
-      if (result.isOk() && result.value.valid) {
+      // if (result.isOk() && result.value.valid) {
         //  If verified, randomly select a plane to display
         const selectedPlane = availablePlanes[Math.floor(Math.random()*availablePlanes.length)];
         //  Template should have a post_url that matches the index of the plane selected
@@ -118,9 +118,9 @@ export default async function handler(
         </body>
       </html>`
         res.send(template1);
-      } else {
-        return res.status(401).send("Unauthorized");
-      }
+      // } else {
+      //   return res.status(401).send("Unauthorized");
+      // }
     } catch (error) {
       console.log(error);
       res.status(500).send("Server error");
