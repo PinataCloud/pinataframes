@@ -25,7 +25,7 @@ export default async function handler(
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
           <meta property="fc:frame:image" content="https://dweb.mypinata.cloud/ipfs/QmeaE5X1KEWRm6izD7xoVtggBdb26tKZCW3q2JjpvBuujz/" />
-          <meta property="fc:frame:button:1" content="Mint" />
+          <meta property="fc:frame:button:1" content="Mint Complete" />
           <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/tfoc" />
           <meta property="fc:frame" content="vNext" />          
         <title>MHFC</title>
@@ -48,7 +48,7 @@ export default async function handler(
         //  Template should have a post_url that matches the index of the plane selected
         console.log("MINTING");
         //  Verify the signature from the payload
-        const frameMessage = Message.decode(
+        /* const frameMessage = Message.decode(
           Buffer.from(req.body?.trustedData?.messageBytes || "", "hex"),
         );
         const result = await client.validateMessage(frameMessage);
@@ -67,7 +67,7 @@ export default async function handler(
         const connectedAddress = connectedAddressData[0].connectedAddress;
         //  Mint the plane to the wallet
         const tx = await mintFrame(connectedAddress, "ipfs://QmUNnKKACgaVCMdeqzmyfyg4QbdcLfPhVBhr7jNTTJzJ33");
-        console.log({ tx });
+        console.log({ tx }); */
         //  Template should have a post_url that matches the index of the plane selected
         const template1 = `
       <!DOCTYPE html>
@@ -77,7 +77,7 @@ export default async function handler(
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <meta property="fc:frame:image" content="https://dweb.mypinata.cloud/ipfs/QmeaE5X1KEWRm6izD7xoVtggBdb26tKZCW3q2JjpvBuujz" />
-          <meta property="fc:frame:button:1" content="Mint another but don't get greedy" />
+          <meta property="fc:frame:button:1" content="Mint Complete" />
           <meta property="fc:frame" content="vNext" />
           <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/tfoc" />
         <title>TFOC</title>
