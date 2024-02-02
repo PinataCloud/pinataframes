@@ -26,7 +26,7 @@ export default async function handler(
           <meta property="fc:frame:image" content="${imgUrl}" />
           <meta property="fc:frame:button:1" content="Play Beta" />
           <meta property="fc:frame:button:1:action" content="post_redirect" />
-          <meta property="fc:frame:post_url "content="${process.env.HOSTED_URL}/api/cosmic-cowboys-redirect/link" />
+          <meta property="fc:frame:post_url "content="${process.env.HOSTED_URL}/api/redirect/cosmiccowboys" />
         <title>Cosmic Cowboys</title>
         </head>
         <body>
