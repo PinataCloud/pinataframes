@@ -142,7 +142,7 @@ export default async function handler(
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <meta property="fc:frame:image" content="https://dweb.mypinata.cloud/ipfs/QmcBRbicZN7ptxhRxQhf5g7FnBcVEbg8UaPL4pUWfk8Tq9/8.png" />
+      <meta property="fc:frame:image" content="https://dweb.mypinata.cloud/ipfs/QmPEQPdNtqBr1jsRqD3zAcvNQ9HjnibrpTsrKXPYT5VYZM" />
           <meta property="fc:frame:button:1" content="Start over, but don't be greedy" />
           <meta property="fc:frame" content="vNext" />
           <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/steve-frames" />
