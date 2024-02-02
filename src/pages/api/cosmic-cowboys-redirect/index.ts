@@ -14,7 +14,7 @@ export default async function handler(
   if (req.method === "GET") {
     try {
       //add ipfs url here
-      let imgUrl = `${process.env.HOSTED_URL}/cosmiccowboys.png`
+      let imgUrl = `https://scarlet-muddy-pike-648.mypinata.cloud/ipfs/QmTeLL1Uu78tBtQTsmE8Qapop1HbtqSq1NYTpEhSt56XiQ`
       const initialFrame = `
       <!DOCTYPE html>
       <html lang="en">
