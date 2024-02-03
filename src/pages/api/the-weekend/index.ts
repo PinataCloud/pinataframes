@@ -62,7 +62,7 @@ export default async function handler(
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <meta property="fc:frame:image" content="https://dweb.mypinata.cloud/ipfs/QmQgqbUnCVwcXvdXjPMxEvY2vTv9HLY3ZwjG6rQS9Jc8XN" />
-          <meta property="fc:frame:button:1" content="Check again" />
+          <meta property="fc:frame:button:1" content="Not the Weekend :(" />
           <meta property="fc:frame" content="vNext" />
           <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/the-weekend" />
         </head>
