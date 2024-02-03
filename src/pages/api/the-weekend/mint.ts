@@ -14,7 +14,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  console.log(req.body)
   var date = new Date();
   date.setHours(date.getHours() - date.getTimezoneOffset() / 60 + 5);
   var dayOfWeek = date.getDay();
