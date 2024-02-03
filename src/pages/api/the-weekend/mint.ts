@@ -3,7 +3,7 @@ import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
 import { mintFrame } from "@/utils/weekendMint";
 import { getConnectedAddressForUser } from "@/utils/fc";
 
-const HUB_URL = process.env["hub-grpc.pinata.cloud:2283"] || "hub.pinata.cloud";
+const HUB_URL = "hub-grpc.pinata.cloud:2283";
 const client = getSSLHubRpcClient(HUB_URL);
 
 export const config = {
