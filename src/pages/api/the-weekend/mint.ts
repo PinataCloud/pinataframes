@@ -36,6 +36,7 @@ export default async function handler(
         Buffer.from(req.body?.trustedData?.messageBytes || "", "hex"),
       );
       const result = await client.validateMessage(frameMessage);
+      console.log(result)
       // if (result.isOk() && result.value.valid) {
       //  If verified, randomly select a plane to display
       if (result.isOk() && result.value.valid && isWeekend) {
