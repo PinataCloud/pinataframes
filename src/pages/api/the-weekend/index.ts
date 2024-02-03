@@ -24,7 +24,7 @@ export default async function handler(
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
           <meta property="fc:frame:image" content="https://dweb.mypinata.cloud/ipfs/QmTidtsgh4faygkV3Fj1f2gfdLNYCFh3gsgNVWRsGwSQbA" />
           <meta property="fc:frame:button:1" content="Is it the weekend?" />
-          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/theweekend" />
+          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/the-weekend" />
           <meta property="fc:frame" content="vNext" />          
        <title>The Weekend</title>
         </head>
@@ -64,7 +64,7 @@ export default async function handler(
       <meta property="fc:frame:image" content="https://dweb.mypinata.cloud/ipfs/QmQgqbUnCVwcXvdXjPMxEvY2vTv9HLY3ZwjG6rQS9Jc8XN" />
           <meta property="fc:frame:button:1" content="Check again" />
           <meta property="fc:frame" content="vNext" />
-          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/theweekend" />
+          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/the-weekend" />
         </head>
         <body>
           <img src="https://dweb.mypinata.cloud/ipfs/QmQgqbUnCVwcXvdXjPMxEvY2vTv9HLY3ZwjG6rQS9Jc8XN" />
@@ -83,7 +83,7 @@ export default async function handler(
       <meta property="fc:frame:image" content="https://dweb.mypinata.cloud/ipfs/QmeDejkafV9hwBE2zYmmfUkLb5AjqPFpRUY2XkbLd8iq6n" />
           <meta property="fc:frame:button:1" content="Mint the Weekend" />
           <meta property="fc:frame" content="vNext" />
-          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/theweekend/mint" />
+          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/the-weekend/mint" />
         </head>
         <body>
           <img src="https://dweb.mypinata.cloud/ipfs/QmeDejkafV9hwBE2zYmmfUkLb5AjqPFpRUY2XkbLd8iq6n" />

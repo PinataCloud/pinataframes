@@ -62,7 +62,7 @@ export default async function handler(
       <meta property="fc:frame:image" content="https://dweb.mypinata.cloud/ipfs/QmZpFMrCFc8Xs3orLBUukiG3f1VfNaHweSZYTB2SyZGyfc" />
           <meta property="fc:frame:button:1" content="Check again" />
           <meta property="fc:frame" content="vNext" />
-          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/theweekend" />
+          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/the-weekend" />
         <title>The Weekend</title>
         </head>
         <body>
@@ -82,7 +82,7 @@ export default async function handler(
       <meta property="fc:frame:image" content="https://dweb.mypinata.cloud/ipfs/QmRfY43eP6ySdEPE94ZQ2fDve3VQEpdbmYAgj4jdCgDsjR" />
           <meta property="fc:frame:button:1" content="Check Again" />
           <meta property="fc:frame" content="vNext" />
-          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/theweekend" />
+          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/the-weekend" />
         <title>The Weekend</title>
         </head>
         <body>
