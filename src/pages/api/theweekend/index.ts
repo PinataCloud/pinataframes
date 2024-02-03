@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
-import { mintFrame } from "@/utils/tfocMint";
-import { getConnectedAddressForUser } from "@/utils/fc";
 
 const HUB_URL = process.env["HUB_URL"] || "hub.pinata.cloud";
 const client = getSSLHubRpcClient(HUB_URL);
@@ -73,9 +71,6 @@ export default async function handler(
         </body>
       </html>`;
         return res.send(template1);
-        // } else {
-        //   return res.status(401).send("Unauthorized");
-        // }
       } else {
         const template1 = `
       <!DOCTYPE html>

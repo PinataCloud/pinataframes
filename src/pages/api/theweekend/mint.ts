@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
-import { mintFrame } from "@/utils/tfocMint";
+import { mintFrame } from "@/utils/weekendMint";
 import { getConnectedAddressForUser } from "@/utils/fc";
 
 const HUB_URL = process.env["hub-grpc.pinata.cloud"] || "hub.pinata.cloud";
@@ -38,7 +38,7 @@ export default async function handler(
       const result = await client.validateMessage(frameMessage);
       // if (result.isOk() && result.value.valid) {
       //  If verified, randomly select a plane to display
-      if (/* result.isOk() && result.value.valid && */ isWeekend) {
+      if (result.isOk() && result.value.valid && isWeekend) {
         const connectedAddressData = await getConnectedAddressForUser(
           req.body.untrustedData.fid,
         );
@@ -49,7 +49,7 @@ export default async function handler(
 
         const connectedAddress = connectedAddressData[0].connectedAddress;
         //  Mint the plane to the wallet
-        const tx = await mintFrame(connectedAddress, "ipfs://METADATA_CID");
+        const tx = await mintFrame(connectedAddress, "ipfs://QmRYNWE6AGNc11MZrPGuqe47Rr35aLqpuPRnTQdPpxu5Hk");
         console.log({ tx });
         //  Template should have a post_url that matches the index of the plane selected
         const template1 = `
@@ -60,7 +60,7 @@ export default async function handler(
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <meta property="fc:frame:image" content="https://dweb.mypinata.cloud/ipfs/QmZpFMrCFc8Xs3orLBUukiG3f1VfNaHweSZYTB2SyZGyfc" />
-          <meta property="fc:frame:button:1" content="Check Again" />
+          <meta property="fc:frame:button:1" content="Check again" />
           <meta property="fc:frame" content="vNext" />
           <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/theweekend" />
         <title>The Weekend</title>
@@ -91,9 +91,6 @@ export default async function handler(
       </html>`;
         return res.send(template1);
       }
-      // } else {
-      //   return res.status(401).send("Unauthorized");
-      // }
     }
   } catch (error) {
     console.log(error);
