@@ -52,6 +52,7 @@ export default async function handler(
         const connectedAddress = connectedAddressData[0].connectedAddress;
         //  Mint the plane to the wallet
         const tx = await mintFrame(connectedAddress, "ipfs://QmRYNWE6AGNc11MZrPGuqe47Rr35aLqpuPRnTQdPpxu5Hk");
+        await tx.wait()
         console.log({ tx });
         //  Template should have a post_url that matches the index of the plane selected
         const template1 = `
