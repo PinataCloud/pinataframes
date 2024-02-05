@@ -1,4 +1,3 @@
-import { NextRequest, NextResponse } from "next/server";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -31,6 +30,7 @@ export default async function handler(
       res.status(500).send("Server error");
     }
   } else if (req.method === "POST") {
+    console.log(req.query)
     const { id }: any = req.query;
     const idAsNumber = parseInt(id);
     const nextId = idAsNumber + 1;
