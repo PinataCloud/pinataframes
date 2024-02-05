@@ -14,8 +14,7 @@ export default async function handler(
       console.log(req.body);
       //  Verify the signature from the payload
       //  Template should have a post_url that matches the index of the plane selected
-      const template1 = `
-      <!DOCTYPE html><html><head>
+      const template1 = `<!DOCTYPE html><html><head>
           <title>This is frame ${id}</title>
           <meta property="fc:frame" content="vNext" />
           <meta property="fc:frame:image" content="https://dweb.mypinata.clou/ipfs/Qme4FXhoxHHfyzTfRxSpASbMF8kajLEPkRQWhwWu9pkUjm/${id}.png" />
