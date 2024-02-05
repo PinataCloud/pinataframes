@@ -34,6 +34,7 @@ export default async function handler(
     const { id }: any = req.query;
     const idAsNumber = parseInt(id);
     const nextId = idAsNumber + 1;
+    console.log(nextId)
     try {
       console.log(req.body);
       //  Verify the signature from the payload
