@@ -25,7 +25,7 @@ export default async function handler(
     dayOfWeek === 0 ||
     dayOfWeek === 6 ||
     (dayOfWeek === 5 && hours >= 17) ||
-    (dayOfWeek === 1 && hours < 24);
+    (dayOfWeek === 1 && hours < 5);
   try {
     console.log(req.body);
     if (req.body.untrustedData.buttonIndex === 1) {

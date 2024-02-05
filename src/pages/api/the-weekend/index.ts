@@ -50,7 +50,7 @@ export default async function handler(
         dayOfWeek === 0 ||
         dayOfWeek === 6 ||
         (dayOfWeek === 5 && hours >= 17) ||
-        (dayOfWeek === 1 && hours < 24);
+        (dayOfWeek === 1 && hours < 5);
       if (!isWeekend) {
         //  Template should have a post_url that matches the index of the plane selected
         const template1 = `
