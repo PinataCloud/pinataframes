@@ -16,7 +16,7 @@ export default async function handler(
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
           <meta property="fc:frame:image" content="https://dweb.mypinata.cloud/ipfs/Qme4FXhoxHHfyzTfRxSpASbMF8kajLEPkRQWhwWu9pkUjm/0.png" />
           <meta property="fc:frame:button:1" content="Begin" />
-          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/pocketcast-blog?id=1" />
+          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/pocketcastblog?id=1" />
           <meta property="fc:frame" content="vNext" />          
         <title>Pocketcast Blog</title>
         </head>
@@ -45,10 +45,8 @@ export default async function handler(
           <meta property="fc:frame" content="vNext" />
           <meta property="fc:frame:image" content="https://dweb.mypinata.clou/ipfs/Qme4FXhoxHHfyzTfRxSpASbMF8kajLEPkRQWhwWu9pkUjm/${id}.png" />
           <meta property="fc:frame:button:1" content="Next Page" />
-          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/pocketcast-blog?id=${nextId}" />
-        </head></html>
-`;
-
+          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/pocketcastblog?id=${nextId}" />
+        </head></html>`;
       return res.send(template1);
     } catch (error) {
       console.log(error);
