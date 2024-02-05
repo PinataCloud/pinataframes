@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
-  req: NextRequest,
+  req: NextApiRequest,
   res: NextApiResponse,
 ) {
   if (req.method === "GET") {
@@ -31,8 +31,7 @@ export default async function handler(
       res.status(500).send("Server error");
     }
   } else if (req.method === "POST") {
-    const searchParams = req.nextUrl.searchParams;
-    const id: any = searchParams.get("id");
+    const { id }: any = req.query;
     const idAsNumber = parseInt(id);
 
     const nextId = idAsNumber + 1;
