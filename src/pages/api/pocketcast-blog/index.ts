@@ -33,9 +33,7 @@ export default async function handler(
   } else if (req.method === "POST") {
     const { id }: any = req.query;
     const idAsNumber = parseInt(id);
-
     const nextId = idAsNumber + 1;
-
     try {
       console.log(req.body);
       //  Verify the signature from the payload
@@ -44,7 +42,7 @@ export default async function handler(
       <!DOCTYPE html><html><head>
           <title>This is frame ${id}</title>
           <meta property="fc:frame" content="vNext" />
-          <meta property="fc:frame:image" content="${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/Qme4FXhoxHHfyzTfRxSpASbMF8kajLEPkRQWhwWu9pkUjm/${id}.png" />
+          <meta property="fc:frame:image" content="https://dweb.mypinata.clou/ipfs/Qme4FXhoxHHfyzTfRxSpASbMF8kajLEPkRQWhwWu9pkUjm/${id}.png" />
           <meta property="fc:frame:button:1" content="Next Page" />
           <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/pocketcast-blog?id=${nextId}" />
         </head></html>
