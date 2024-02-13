@@ -5,7 +5,7 @@ import { addmagic8BallRow } from "@/utils/storage";
 
 const fdk = new PinataFDK({
   pinata_jwt: process.env.PINATA_JWT!,
-  pinata_gateway: process.env.GATEWAY_URL!
+  pinata_gateway: process.env.GATEWAY_URL!.split("https://")[1]
 },
 );
 
