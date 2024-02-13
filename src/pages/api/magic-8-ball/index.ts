@@ -91,7 +91,8 @@ export default async function handler(
       </body>
         </html>`
 
-      if(req.body.trustedData) {
+      if(req.body?.trustedData?.messageBytes) {
+        console.log(req.body);
         const { isValid, message } = await fdk.validateFrameMessage(req.body);
         if (isValid) {
           const { inputText, fid } = req.body.untrustedData;
