@@ -71,7 +71,7 @@ export default async function handler(
       ];
       const selectedAnswer = answerCids[Math.floor(Math.random() * answerCids.length)];
       const frameMetadata = await fdk.getFrameMetadata({
-        post_url: `${process.env.HOSTED_URL}api/magic-8-ball`,
+        post_url: `${process.env.HOSTED_URL}/api/magic-8-ball`,
         input: { text: "Ask a question" },
         aspectRatio: "1.91:1",
         buttons: [
@@ -91,14 +91,15 @@ export default async function handler(
       </body>
         </html>`
 
-      if(req.body?.trustedData?.messageBytes) {
+      if (req.body?.trustedData?.messageBytes) {
         console.log(req.body);
         const { isValid, message } = await fdk.validateFrameMessage(req.body);
+        console.log(isValid);
         if (isValid) {
           const { inputText, fid } = req.body.untrustedData;
           await addmagic8BallRow(fid, inputText, selectedAnswer)
         }
-      }      
+      }
       res.send(html);
     } catch (error) {
       console.log(error);
