@@ -92,3 +92,13 @@ export const addHubster = async (user: FCUser) => {
 
   return data;
 }
+
+export const addmagic8BallRow = async (fid: number, question: string, response: string) => {
+  const { data, error } = await supabase
+    .from('magic_eight_ball')
+    .insert([
+      { fid, question, response },
+    ])
+    .select()
+
+}
