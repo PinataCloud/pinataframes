@@ -20,7 +20,7 @@ export default async function handler(
   if (req.method === "GET") {
     try {
       const frameMetadata = await fdk.getFrameMetadata({
-        post_url: `${process.env.HOSTED_URL}api/magic-8-ball`,
+        post_url: `${process.env.HOSTED_URL}/api/magic-8-ball`,
         input: { text: "Ask a question" },
         aspectRatio: "1.91:1",
         buttons: [
