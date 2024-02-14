@@ -62,7 +62,7 @@ export default async function handler(
             return res.status(400).send("No connected address");
           }
 
-          const connectedAddress = connectedAddressData[0].connectedAddress;
+          const connectedAddress = connectedAddressData[0];
           //  Mint the plane to the wallet
           const tx = await mintFrame(connectedAddress, "ipfs://QmUNnKKACgaVCMdeqzmyfyg4QbdcLfPhVBhr7jNTTJzJ33");
           console.log({ tx });
