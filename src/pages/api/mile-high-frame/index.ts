@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
 
-const HUB_URL = process.env['HUB_URL'] || "nemes.farcaster.xyz:2283"
+const HUB_URL = process.env['HUB_URL'] || "hub-grpc.pinata.cloud"
 const client = getSSLHubRpcClient(HUB_URL);
 
 export const config = {
@@ -67,8 +67,6 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     try {
-      const selectedPlane = availablePlanes[Math.floor(Math.random()*availablePlanes.length)];
-        //  Template should have a post_url that matches the index of the plane selected
         const template1 = `
       <!DOCTYPE html>
       <html lang="en">
@@ -95,10 +93,8 @@ export default async function handler(
       //  Verify the signature from the payload
       const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
       const result = await client.validateMessage(frameMessage);
-      // if (result.isOk() && result.value.valid) {
-        //  If verified, randomly select a plane to display
-        const selectedPlane = availablePlanes[Math.floor(Math.random()*availablePlanes.length)];
-        //  Template should have a post_url that matches the index of the plane selected
+      if (result.isOk() && result.value.valid) {        
+        const selectedPlane = availablePlanes[Math.floor(Math.random()*availablePlanes.length)];        
         const template1 = `
       <!DOCTYPE html>
       <html lang="en">
@@ -118,9 +114,9 @@ export default async function handler(
         </body>
       </html>`
         res.send(template1);
-      // } else {
-      //   return res.status(401).send("Unauthorized");
-      // }
+      } else {
+        return res.status(401).send("Unauthorized");
+      }
     } catch (error) {
       console.log(error);
       res.status(500).send("Server error");

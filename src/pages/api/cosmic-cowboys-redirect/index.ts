@@ -1,6 +1,4 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { generateImage } from "@/utils/satori";
-import { getLastFourMessages } from "@/utils/storage";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export const config = {

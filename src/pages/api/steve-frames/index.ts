@@ -1,14 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
 
-const HUB_URL = process.env['HUB_URL'] || "nemes.farcaster.xyz:2283"
+const HUB_URL = process.env['HUB_URL'] || "hub-grpc.pinata.cloud"
 const client = getSSLHubRpcClient(HUB_URL);
 
 export const config = {
   maxDuration: 300,
 };
 
-const availablePlanes = [
+const availableSteves = [
   {
     index: 1,
     image: "https://dweb.mypinata.cloud/ipfs/QmcBRbicZN7ptxhRxQhf5g7FnBcVEbg8UaPL4pUWfk8Tq9/0.png",
@@ -82,8 +82,6 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     try {
-      const selectedPlane = availablePlanes[Math.floor(Math.random() * availablePlanes.length)];
-      //  Template should have a post_url that matches the index of the plane selected
       const template1 = `
       <!DOCTYPE html>
       <html lang="en">
@@ -110,32 +108,30 @@ export default async function handler(
       //  Verify the signature from the payload
       const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
       const result = await client.validateMessage(frameMessage);
-      // if (result.isOk() && result.value.valid) {
-      //  If verified, randomly select a plane to display
-      const selectedPlane = availablePlanes[Math.floor(Math.random() * availablePlanes.length)];
-      //  Template should have a post_url that matches the index of the plane selected
-      const template1 = `
+      if (result.isOk() && result.value.valid) {
+        const selectedSteve = availableSteves[Math.floor(Math.random() * availableSteves.length)];
+        const template1 = `
       <!DOCTYPE html>
       <html lang="en">
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <meta property="fc:frame:image" content="${selectedPlane.image}" />
+      <meta property="fc:frame:image" content="${selectedSteve.image}" />
           <meta property="fc:frame:button:1" content="Different Steve" />
           <meta property="fc:frame:button:2" content="Mint Steve" />
           <meta property="fc:frame" content="vNext" />
-          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/steve-frames/${selectedPlane.index}" />
+          <meta property="fc:frame:post_url" content="${process.env.HOSTED_URL}/api/steve-frames/${selectedSteve.index}" />
         <title>MHFC</title>
         </head>
         <body>
-          <img src="${selectedPlane.image}" />
+          <img src="${selectedSteve.image}" />
         </body>
       </html>`
-      res.send(template1);
-      // } else {
-      //   return res.status(401).send("Unauthorized");
-      // }
+        res.send(template1);
+      } else {
+        return res.status(401).send("Unauthorized");
+      }
     } catch (error) {
       console.log(error);
       res.status(500).send("Server error");

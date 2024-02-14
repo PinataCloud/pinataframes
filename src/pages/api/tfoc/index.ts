@@ -3,7 +3,7 @@ import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
 import { mintFrame } from "@/utils/tfocMint";
 import { getConnectedAddressForUser } from "@/utils/fc";
 
-const HUB_URL = process.env["HUB_URL"] || "hub.pinata.cloud";
+const HUB_URL = process.env["HUB_URL"] || "hub-grpc.pinata.cloud";
 const client = getSSLHubRpcClient(HUB_URL);
 
 export const config = {
@@ -42,34 +42,32 @@ export default async function handler(
   } else if (req.method === "POST") {
     try {
       const { id } = req.query;
-      console.log({ id });
-      console.log(req.body);
       if (req.body.untrustedData.buttonIndex === 1) {
         //  Template should have a post_url that matches the index of the plane selected
         console.log("MINTING");
         //  Verify the signature from the payload
-        /* const frameMessage = Message.decode(
+        const frameMessage = Message.decode(
           Buffer.from(req.body?.trustedData?.messageBytes || "", "hex"),
         );
         const result = await client.validateMessage(frameMessage);
-        // if (result.isOk() && result.value.valid) {
-        console.log(id);
-        //  If verified, randomly select a plane to display
+        if (result.isOk() && result.value.valid) {
+          console.log(id);
+          //  If verified, randomly select a plane to display
 
-        const connectedAddressData = await getConnectedAddressForUser(
-          req.body.untrustedData.fid,
-        );
-        if (!connectedAddressData || connectedAddressData.length === 0) {
-          console.log("No connected address");
-          return res.status(400).send("No connected address");
-        }
+          const connectedAddressData = await getConnectedAddressForUser(
+            req.body.untrustedData.fid,
+          );
+          if (!connectedAddressData || connectedAddressData.length === 0) {
+            console.log("No connected address");
+            return res.status(400).send("No connected address");
+          }
 
-        const connectedAddress = connectedAddressData[0].connectedAddress;
-        //  Mint the plane to the wallet
-        const tx = await mintFrame(connectedAddress, "ipfs://QmUNnKKACgaVCMdeqzmyfyg4QbdcLfPhVBhr7jNTTJzJ33");
-        console.log({ tx }); */
-        //  Template should have a post_url that matches the index of the plane selected
-        const template1 = `
+          const connectedAddress = connectedAddressData[0].connectedAddress;
+          //  Mint the plane to the wallet
+          const tx = await mintFrame(connectedAddress, "ipfs://QmUNnKKACgaVCMdeqzmyfyg4QbdcLfPhVBhr7jNTTJzJ33");
+          console.log({ tx });
+          //  Template should have a post_url that matches the index of the plane selected
+          const template1 = `
       <!DOCTYPE html>
       <html lang="en">
         <head>
@@ -86,10 +84,10 @@ export default async function handler(
           <img src="https://dweb.mypinata.cloud/ipfs/QmeaE5X1KEWRm6izD7xoVtggBdb26tKZCW3q2JjpvBuujz" />
         </body>
       </html>`;
-        return res.send(template1);
-        // } else {
-        //   return res.status(401).send("Unauthorized");
-        // }
+          return res.send(template1);
+        } else {
+          return res.status(401).send("Unauthorized");
+        }
       }
     } catch (error) {
       console.log(error);

@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
 import PinataFDK from "pinata-fdk";
 import { addmagic8BallRow } from "@/utils/storage";
 
@@ -8,10 +7,6 @@ const fdk = new PinataFDK({
   pinata_gateway: process.env.GATEWAY_URL!.split("https://")[1]
 },
 );
-
-const HUB_URL = process.env['HUB_URL'] || "hub-grpc.pinata.cloud"
-const client = getSSLHubRpcClient(HUB_URL);
-
 
 export default async function handler(
   req: NextApiRequest,

@@ -28,18 +28,13 @@ export default async function handler(
     (dayOfWeek === 1 && hours < 5);
   try {
     console.log(req.body);
-    if (req.body.untrustedData.buttonIndex === 1) {
-      //  Template should have a post_url that matches the index of the plane selected
+    if (req.body.untrustedData.buttonIndex === 1) {      
       console.log("MINTING");
       //  Verify the signature from the payload
       const frameMessage = Message.decode(
         Buffer.from(req.body?.trustedData?.messageBytes || "", "hex"),
       );
-      const result = await client.validateMessage(frameMessage);
-      console.log(result.isOk())
-      console.log(req.body.untrustedData.fid)
-      // if (result.isOk() && result.value.valid) {
-      //  If verified, randomly select a plane to display
+      const result = await client.validateMessage(frameMessage);          
       if (result.isOk() && result.value.valid && isWeekend) {
         const connectedAddressData = await getConnectedAddressForUser(
           req.body.untrustedData.fid,
@@ -49,11 +44,9 @@ export default async function handler(
           return res.status(400).send("No connected address");
         }
 
-        const connectedAddress = connectedAddressData[0].connectedAddress;
-        //  Mint the plane to the wallet
+        const connectedAddress = connectedAddressData[0].connectedAddress;        
         const tx = await mintFrame(connectedAddress, "ipfs://QmRYNWE6AGNc11MZrPGuqe47Rr35aLqpuPRnTQdPpxu5Hk");
-        console.log({ tx });
-        //  Template should have a post_url that matches the index of the plane selected
+        console.log({ tx });        
         const template1 = `
       <!DOCTYPE html>
       <html lang="en">

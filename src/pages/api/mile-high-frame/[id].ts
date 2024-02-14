@@ -3,7 +3,7 @@ import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
 import { mintFrame } from "@/utils/mint";
 import { getConnectedAddressForUser } from "@/utils/fc";
 
-const HUB_URL = process.env['HUB_URL'] || "hub.pinata.cloud"
+const HUB_URL = process.env['HUB_URL'] || "hub-grpc.pinata.cloud"
 const client = getSSLHubRpcClient(HUB_URL);
 
 export const config = {
@@ -101,7 +101,7 @@ export default async function handler(
         //  Verify the signature from the payload
         const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
         const result = await client.validateMessage(frameMessage);
-        // if (result.isOk() && result.value.valid) {
+        if (result.isOk() && result.value.valid) {
           console.log(id);
           //  If verified, randomly select a plane to display
           const selectedPlane = availablePlanes.find((p: any) => p.index === parseInt(id as string, 10));
@@ -138,9 +138,9 @@ export default async function handler(
         </body>
       </html>`
           return res.send(template1);
-        // } else {
-        //   return res.status(401).send("Unauthorized");
-        // }
+        } else {
+          return res.status(401).send("Unauthorized");
+        }
       }
     } catch (error) {
       console.log(error);

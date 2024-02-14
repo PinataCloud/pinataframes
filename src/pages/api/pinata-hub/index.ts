@@ -3,7 +3,7 @@ import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
 import { getUserByFid } from "@/utils/fc";
 import { addHubster } from "@/utils/storage";
 
-const HUB_URL = process.env['HUB_URL'] || "hub.pinata.cloud"
+const HUB_URL = process.env['HUB_URL'] || "hub-grpc.pinata.cloud"
 const client = getSSLHubRpcClient(HUB_URL);
 
 export const config = {
@@ -41,11 +41,9 @@ export default async function handler(
     try {
       console.log(req.body);
       //  Verify the signature from the payload
-      // const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
-      // const result = await client.validateMessage(frameMessage);
-      // console.log(result);
-      // if (result.isOk() && result.value.valid) {
-        //  Template should have a post_url that matches the index of the plane selected
+      const frameMessage = Message.decode(Buffer.from(req.body?.trustedData?.messageBytes || '', 'hex'));
+      const result = await client.validateMessage(frameMessage);      
+      if (result.isOk() && result.value.valid) {        
         const template1 = `
         <!DOCTYPE html>
         <html lang="en">
@@ -65,9 +63,9 @@ export default async function handler(
         </html>`
         
         return res.send(template1)
-      // } else {
-      //   return res.status(401).send("Unauthorized");
-      // }
+      } else {
+        return res.status(401).send("Unauthorized");
+      }
     } catch (error) {
       console.log(error);
       res.status(500).send("Server error");

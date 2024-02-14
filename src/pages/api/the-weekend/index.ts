@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
 
-const HUB_URL = process.env["HUB_URL"] || "hub.pinata.cloud";
+const HUB_URL = process.env["HUB_URL"] || "hub-grpc.pinata.cloud";
 const client = getSSLHubRpcClient(HUB_URL);
 
 export const config = {
@@ -13,8 +13,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   if (req.method === "GET") {
-    try {
-      //  Template should have a post_url that matches the index of the plane selected
+    try {      
       const template1 = `
       <!DOCTYPE html>
       <html lang="en">
@@ -51,8 +50,7 @@ export default async function handler(
         dayOfWeek === 6 ||
         (dayOfWeek === 5 && hours >= 17) ||
         (dayOfWeek === 1 && hours < 5);
-      if (!isWeekend) {
-        //  Template should have a post_url that matches the index of the plane selected
+      if (!isWeekend) {        
         const template1 = `
       <!DOCTYPE html>
       <html lang="en">
