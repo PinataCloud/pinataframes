@@ -4,6 +4,10 @@ import { Resvg } from "@resvg/resvg-js";
 import { getIconCode, loadEmoji } from "./twemoji";
 import fs from 'fs'
 import path from 'path';
+import dayjs, {Dayjs} from "dayjs";
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
 
 type FrameDataByDate = {
   date: Date,
@@ -263,8 +267,13 @@ const png = pngData.asPng();
 
 export const generateAnalyticsImage = async (frame_id: string) => {
   try {
+    const today = dayjs.utc().endOf('day');
+    const startDay = dayjs.utc().subtract(180, 'day').startOf('day');
+    const startDate = dayjs(startDay).format('YYYY-MM-DD HH:mm:ss');
+    const endDate = dayjs(today).format('YYYY-MM-DD HH:mm:ss');
+    console.log(`https://api.pinata.cloud/farcaster/frames/interactions?frame_id=${frame_id}&start_date=${startDate}&end_date=${endDate}`);
     //  Get analytics data here
-    const res = await fetch(`https://api.pinata.cloud/farcaster/frames/interactions?frame_id${frame_id}&start_date=2023-11-21%2021:16:20&end_date=2024-02-19%2023:59:59`, {
+    const res = await fetch(`https://api.pinata.cloud/farcaster/frames/interactions?frame_id=${frame_id}&start_date=${startDate}&end_date=${endDate}`, {
       headers: {
         Authorization: `Bearer ${process.env.PINATA_JWT}`, 
 
