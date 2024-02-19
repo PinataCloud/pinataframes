@@ -13,10 +13,10 @@ export default async function handler(
   if (req.method === "GET") {
     try {
       const frameMetadata = await fdk.getFrameMetadata({
-        post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial?id=1`,
+        post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial?id=2`,
         aspectRatio: "1.91:1",
         buttons: [{ label: "Read On 👉", action: "post" }],
-        cid: "QmUcHr9v299Vszyhy3WQNE28EvP9vvzsrwFpae6RS4jTEG/0.png",
+        cid: "QmV64KsFDVA2dZFZEPYxdKAU2GtB9qxSmi5BeQ7fW7V9L6/1.png",
       });
       res.send(frameMetadata);
     } catch (error) {
@@ -32,7 +32,7 @@ export default async function handler(
           post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial/redirect`,
           aspectRatio: "1.91:1",
           buttons: [{ label: "Read Full Post", action: "post_redirect" }, { label: "Watch Video", action: "post_redirect"}],
-          cid: `QmUcHr9v299Vszyhy3WQNE28EvP9vvzsrwFpae6RS4jTEG/${id}.png`,
+          cid: `QmV64KsFDVA2dZFZEPYxdKAU2GtB9qxSmi5BeQ7fW7V9L6/${id}.png`,
         });
         res.send(frameMetadata);
       } catch (error) {
@@ -46,7 +46,7 @@ export default async function handler(
           post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial?id=${nextId}`,
           aspectRatio: "1.91:1",
           buttons: [{ label: "next", action: "post" }],
-          cid: `QmUcHr9v299Vszyhy3WQNE28EvP9vvzsrwFpae6RS4jTEG/${id}.png`,
+          cid: `QmV64KsFDVA2dZFZEPYxdKAU2GtB9qxSmi5BeQ7fW7V9L6/${id}.png`,
         });
         res.send(frameMetadata);
       } catch (error) {
