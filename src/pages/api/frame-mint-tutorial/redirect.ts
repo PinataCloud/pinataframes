@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
-import PinataFDK from "pinata-fdk";
+import {PinataFDK} from "pinata-fdk";
 
 const fdk = new PinataFDK({
   pinata_jwt: process.env.PINATA_JWT!,
