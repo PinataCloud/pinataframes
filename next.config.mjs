@@ -12,7 +12,18 @@ const nextConfig = {
         source: '/pinatacloud',
         destination: 'https://pinata.cloud/blog',
         permanent: false
+      },
+            {
+        source: '/blog/frame-mint-tutorial',
+        destination: 'https://pinata.cloug/blog',
+        permanent: false
+      },
+      {
+        source: '/video/frame-mint-tutorial',
+        destination: 'https://youtube.com/pinatacloud',
+        permanent: false
       }
+
     ]
   }
 };
