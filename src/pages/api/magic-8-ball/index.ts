@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import PinataFDK from "pinata-fdk";
+import {PinataFDK} from "pinata-fdk";
 import { addmagic8BallRow } from "@/utils/storage";
 
 const fdk = new PinataFDK({
@@ -17,7 +17,7 @@ export default async function handler(
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/magic-8-ball`,
         input: { text: "Ask a question" },
-        aspectRatio: "1.91:1",
+        aspect_ratio: "1.91:1",
         buttons: [
           { label: 'Shake the 8 Ball', action: 'post' }
         ],
@@ -68,7 +68,7 @@ export default async function handler(
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/magic-8-ball`,
         input: { text: "Ask a question" },
-        aspectRatio: "1.91:1",
+        aspect_ratio: "1.91:1",
         buttons: [
           { label: 'Shake the 8 Ball', action: 'post' }
         ],
