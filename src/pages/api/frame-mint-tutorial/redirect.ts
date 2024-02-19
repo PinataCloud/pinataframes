@@ -11,27 +11,29 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const body = req.body
-  const buttonId = body.untrustedData.buttonIndex;
-  const { isValid } = await fdk.validateFrameMessage(body);
-  if (buttonId === 1) {
-    try {
-      return NextResponse.redirect(
-        "https://www.pinata.cloud/blog/how-to-build-a-farcaster-frame-that-mints-nfts",
-        { status: 302 },
-      );
-    } catch (error) {
-      console.log(error);
-      return NextResponse.json({ error: error });
-    }
-  } else {
-    try {
-      return NextResponse.redirect("https://youtu.be/5VVOMolm-TA", {
-        status: 302,
-      });
-    } catch (error) {
-      console.log(error);
-      return NextResponse.json({ error: error });
+  if (req.method === "POST") {
+    const body = req.body;
+    const buttonId = body.untrustedData.buttonIndex;
+    const { isValid } = await fdk.validateFrameMessage(body);
+    if (buttonId === 1) {
+      try {
+        return NextResponse.redirect(
+          "https://www.pinata.cloud/blog/how-to-build-a-farcaster-frame-that-mints-nfts",
+          { status: 302 },
+        );
+      } catch (error) {
+        console.log(error);
+        return NextResponse.json({ error: error });
+      }
+    } else {
+      try {
+        return NextResponse.redirect("https://youtu.be/5VVOMolm-TA", {
+          status: 302,
+        });
+      } catch (error) {
+        console.log(error);
+        return NextResponse.json({ error: error });
+      }
     }
   }
 }
