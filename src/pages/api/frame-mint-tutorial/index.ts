@@ -45,7 +45,7 @@ export default async function handler(
         const frameMetadata = await fdk.getFrameMetadata({
           post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial?id=${nextId}`,
           aspectRatio: "1.91:1",
-          buttons: [{ label: "next", action: "post" }],
+          buttons: [{ label: "Next", action: "post" }],
           cid: `QmV64KsFDVA2dZFZEPYxdKAU2GtB9qxSmi5BeQ7fW7V9L6/${id}.png`,
         });
         res.send(frameMetadata);

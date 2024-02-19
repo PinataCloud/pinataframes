@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 import PinataFDK from "pinata-fdk";
 
 const fdk = new PinataFDK({
@@ -10,26 +11,27 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const buttonId = req.body.untrustedData.buttonIndex;
+  const body = req.body
+  const buttonId = body.untrustedData.buttonIndex;
+  const { isValid } = await fdk.validateFrameMessage(body);
   if (buttonId === 1) {
     try {
-      const headers = new Headers();
-      headers.set("Location", `${process.env.HOSTED_URL}/`);
-      const response = res.redirect(`${process.env.HOSTED_URL}/blog/frame-mint-tutorial`);
-      return response;
+      return NextResponse.redirect(
+        "https://www.pinata.cloud/blog/how-to-build-a-farcaster-frame-that-mints-nfts",
+        { status: 302 },
+      );
     } catch (error) {
       console.log(error);
-      res.status(500).send("Server error");
+      return NextResponse.json({ error: error });
     }
   } else {
     try {
-      const headers = new Headers();
-      headers.set("Location", `${process.env.HOSTED_URL}/`);
-      const response = res.redirect(`${process.env.HOSTED_URL}/video/frame-mint-tutorial`);
-      return response;
+      return NextResponse.redirect("https://youtu.be/5VVOMolm-TA", {
+        status: 302,
+      });
     } catch (error) {
       console.log(error);
-      res.status(500).send("Server error");
+      return NextResponse.json({ error: error });
     }
   }
 }
