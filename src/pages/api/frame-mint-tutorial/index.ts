@@ -13,7 +13,7 @@ export default async function handler(
   if (req.method === "GET") {
     try {
       const frameMetadata = await fdk.getFrameMetadata({
-        post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial?id=0`,
+        post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial?id=1`,
         aspectRatio: "1.91:1",
         buttons: [{ label: "Read On 👉", action: "post" }],
         cid: "QmUcHr9v299Vszyhy3WQNE28EvP9vvzsrwFpae6RS4jTEG/0.png",
@@ -26,7 +26,6 @@ export default async function handler(
   } else if (req.method === "POST") {
     const { id }: any = req.query;
     const idAsNumber = parseInt(id);
-    const nextId = idAsNumber + 1;
     if (idAsNumber === 4) {
       try {
         const frameMetadata = await fdk.getFrameMetadata({
@@ -41,6 +40,7 @@ export default async function handler(
         res.status(500).send("Server error");
       }
     } else {
+      const nextId = idAsNumber + 1;
       try {
         const frameMetadata = await fdk.getFrameMetadata({
           post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial?id=${nextId}`,
