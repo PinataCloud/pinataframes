@@ -30,7 +30,7 @@ export default async function handler(
       try {
         const frameMetadata = await fdk.getFrameMetadata({
           post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial/redirect`,
-          aspectRatio: "1.91:1",
+          aspect_ratio: "1.91:1",
           buttons: [
             {
               label: "Read Full Post",
@@ -56,7 +56,7 @@ export default async function handler(
       try {
         const frameMetadata = await fdk.getFrameMetadata({
           post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial?id=${nextId}`,
-          aspectRatio: "1.91:1",
+          aspect_ratio: "1.91:1",
           buttons: [
             { label: "Next", action: "post" },
             {
