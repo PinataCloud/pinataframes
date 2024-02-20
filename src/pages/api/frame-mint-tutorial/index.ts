@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import PinataFDK from "pinata-fdk";
+import {PinataFDK} from "pinata-fdk";
 
 const fdk = new PinataFDK({
   pinata_jwt: process.env.PINATA_JWT!,
@@ -14,7 +14,7 @@ export default async function handler(
     try {
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial?id=2`,
-        aspectRatio: "1.91:1",
+        aspect_ratio: "1.91:1",
         buttons: [{ label: "Read On 👉", action: "post" }],
         cid: "QmV64KsFDVA2dZFZEPYxdKAU2GtB9qxSmi5BeQ7fW7V9L6/1.png",
       });
