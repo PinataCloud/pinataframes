@@ -31,7 +31,19 @@ export default async function handler(
         const frameMetadata = await fdk.getFrameMetadata({
           post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial/redirect`,
           aspectRatio: "1.91:1",
-          buttons: [{ label: "Read Full Post", action: "post_redirect" }, { label: "Watch Video", action: "post_redirect"}],
+          buttons: [
+            {
+              label: "Read Full Post",
+              action: "link",
+              target:
+                "https://www.pinata.cloud/blog/how-to-build-a-farcaster-frame-that-mints-nfts",
+            },
+            {
+              label: "Watch Video",
+              action: "link",
+              target: "https://youtu.be/5VVOMolm-TA",
+            },
+          ],
           cid: `QmV64KsFDVA2dZFZEPYxdKAU2GtB9qxSmi5BeQ7fW7V9L6/${id}.png`,
         });
         res.send(frameMetadata);
@@ -45,7 +57,14 @@ export default async function handler(
         const frameMetadata = await fdk.getFrameMetadata({
           post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial?id=${nextId}`,
           aspectRatio: "1.91:1",
-          buttons: [{ label: "Next", action: "post" }],
+          buttons: [
+            { label: "Next", action: "post" },
+            {
+              label: "Watch Video",
+              action: "link",
+              target: "https://youtu.be/5VVOMolm-TA",
+            },
+          ],
           cid: `QmV64KsFDVA2dZFZEPYxdKAU2GtB9qxSmi5BeQ7fW7V9L6/${id}.png`,
         });
         res.send(frameMetadata);
