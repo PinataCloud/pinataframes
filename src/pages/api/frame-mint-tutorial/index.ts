@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import {PinataFDK} from "pinata-fdk";
+import { PinataFDK } from "pinata-fdk";
 
 const fdk = new PinataFDK({
   pinata_jwt: process.env.PINATA_JWT!,
@@ -24,10 +24,12 @@ export default async function handler(
       res.status(500).send("Server error");
     }
   } else if (req.method === "POST") {
+    const body = req.body;
     const { id }: any = req.query;
     const idAsNumber = parseInt(id);
     if (idAsNumber === 4) {
       try {
+        await fdk.sendAnalytics("nft-mint-frame-blog-end", body);
         const frameMetadata = await fdk.getFrameMetadata({
           post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial/redirect`,
           aspect_ratio: "1.91:1",
@@ -54,6 +56,7 @@ export default async function handler(
     } else {
       const nextId = idAsNumber + 1;
       try {
+        await fdk.sendAnalytics("nft-mint-frame-blog", body);
         const frameMetadata = await fdk.getFrameMetadata({
           post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial?id=${nextId}`,
           aspect_ratio: "1.91:1",
