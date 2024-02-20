@@ -58,12 +58,12 @@ export default async function handler(
           post_url: `${process.env.HOSTED_URL}/api/frame-mint-tutorial?id=${nextId}`,
           aspect_ratio: "1.91:1",
           buttons: [
-            { label: "Next", action: "post" },
             {
               label: "Watch Video",
               action: "link",
               target: "https://youtu.be/5VVOMolm-TA",
             },
+            { label: "Next", action: "post" },
           ],
           cid: `QmV64KsFDVA2dZFZEPYxdKAU2GtB9qxSmi5BeQ7fW7V9L6/${id}.png`,
         });
