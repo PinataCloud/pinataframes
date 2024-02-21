@@ -22,12 +22,14 @@ interface AnalyticsResponse {
 
 const FRAME_ID = "pinata_race";
 
-const getPercentagePixels = (value: number, total: number, pixels: number) => {
-  return (value * pixels) / total;
-}
 
 const getCarPixels = (buttonCount: number, carId: number, highestNumber: number, maxPixels: number) => {
-  return getPercentagePixels(buttonCount || 0, highestNumber, maxPixels);
+  const aggregatedCount = buttonCount * highestNumber;
+  if (aggregatedCount === 0) {
+    return 0;
+  }
+  return (buttonCount * maxPixels) / highestNumber;
+
 }
 
 export const generateImage = async (data: AnalyticsResponse []) => {
@@ -35,16 +37,27 @@ export const generateImage = async (data: AnalyticsResponse []) => {
     "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
   );
 
-  console.log('data', data);
-
-  const maxPixels = 1000;
-  const highestInteraction = data.reduce((prev, current) => (prev.interaction_count > current.interaction_count) ? prev : current);
-  const lowestInteraction = data.reduce((prev, current) => (prev.interaction_count < current.interaction_count) ? prev : current);
 
   const buttonCount1 = data.find((item: any) => item.button_index === 1);
   const buttonCount2 = data.find((item: any) => item.button_index === 2);
   const buttonCount3 = data.find((item: any) => item.button_index === 3);
   const buttonCount4 = data.find((item: any) => item.button_index === 4);
+
+  console.log('buttonCount1', buttonCount1);
+  console.log('buttonCount2', buttonCount2);
+  console.log('buttonCount3', buttonCount3);
+  console.log('buttonCount4', buttonCount4);
+
+  if (!buttonCount1) { data.push({button_index: 1, interaction_count: 0, unique_interactions: 0})}
+  if (!buttonCount2) { data.push({button_index: 2, interaction_count: 0, unique_interactions: 0})}
+  if (!buttonCount3) { data.push({button_index: 3, interaction_count: 0, unique_interactions: 0})}
+  if (!buttonCount4) { data.push({button_index: 4, interaction_count: 0, unique_interactions: 0})}
+
+  console.log('data', data)
+
+  const maxPixels = 1000;
+  const highestInteraction = data.reduce((prev, current) => (prev.interaction_count > current.interaction_count) ? prev : current);
+  const lowestInteraction = data.reduce((prev, current) => (prev.interaction_count < current.interaction_count) ? prev : current);
 
   let car1Pixels = 0;
   let car2Pixels = 0;
@@ -53,22 +66,33 @@ export const generateImage = async (data: AnalyticsResponse []) => {
 
   const ROUND_LIMIT_FACTOR = 100;
 
-  const roundLimit = Math.floor(lowestInteraction.interaction_count / ROUND_LIMIT_FACTOR) * ROUND_LIMIT_FACTOR;
-  // if (lowestInteraction.interaction_count < roundLimit) {
-  //   car1Pixels = getCarPixels(buttonCount1?.interaction_count || 0, 1, highestInteraction.interaction_count, maxPixels);
-  //   car2Pixels = getCarPixels(buttonCount2?.interaction_count || 0, 2, highestInteraction.interaction_count, maxPixels);
-  //   car3Pixels = getCarPixels(buttonCount3?.interaction_count || 0, 3, highestInteraction.interaction_count, maxPixels);
-  //   car4Pixels = getCarPixels(buttonCount4?.interaction_count || 0, 4, highestInteraction.interaction_count, maxPixels);
-  // } else {
-    car1Pixels = getCarPixels(buttonCount1!.interaction_count - roundLimit, 1, highestInteraction.interaction_count - roundLimit, maxPixels);
-    car2Pixels = getCarPixels(buttonCount2!.interaction_count - roundLimit, 2, highestInteraction.interaction_count - roundLimit, maxPixels);
-    car3Pixels = getCarPixels(buttonCount3!.interaction_count - roundLimit, 3, highestInteraction.interaction_count - roundLimit, maxPixels);
-    car4Pixels = getCarPixels(buttonCount4!.interaction_count - roundLimit, 4, highestInteraction.interaction_count - roundLimit, maxPixels);
-  // }
+  let roundLimit
+  if (lowestInteraction.interaction_count === 0) {
+    roundLimit = 0;
+  } else {
+    roundLimit = Math.floor(lowestInteraction.interaction_count / ROUND_LIMIT_FACTOR) * ROUND_LIMIT_FACTOR;
+  }
+
+  console.log('roundLimit', roundLimit)
+
+  console.log('buttonCount1?.interaction_count', buttonCount1?.interaction_count);
+  console.log('buttonCount2?.interaction_count', buttonCount2?.interaction_count);
+  console.log('buttonCount3?.interaction_count', buttonCount3?.interaction_count);
+  console.log('buttonCount4?.interaction_count', buttonCount4?.interaction_count);
+
+  car1Pixels = getCarPixels((buttonCount1?.interaction_count) - roundLimit, 1, highestInteraction.interaction_count - roundLimit, maxPixels);
+  car2Pixels = getCarPixels((buttonCount2?.interaction_count) - roundLimit, 2, highestInteraction.interaction_count - roundLimit, maxPixels);
+  car3Pixels = getCarPixels((buttonCount3?.interaction_count) - roundLimit, 3, highestInteraction.interaction_count - roundLimit, maxPixels);
+  car4Pixels = getCarPixels((buttonCount4?.interaction_count) - roundLimit, 4, highestInteraction.interaction_count - roundLimit, maxPixels);
+
+  console.log('car1Pixels', car1Pixels);
+  console.log('car2Pixels', car2Pixels);
+  console.log('car3Pixels', car3Pixels);
+  console.log('car4Pixels', car4Pixels);
 
   const template: any = html(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmaPJLmYUZpVgQ6KZyDQYkEghqv3JJMqRbvm9EK6zKz2uX'); background-size: 1200px 630px; color: #fff;">
-    <p style="position: absolute; top: -20px; left: 520px; color: black; font-size: 40px; background-color: white">Race # 6</p>
+    <p style="position: absolute; top: -20px; left: 520px; color: black; font-size: 40px; background-color: white">Race # 7</p>
     <div style="display: flex; padding: 12px;">
       <p style="position: absolute; top: 35px; color: black; font-size: 25px">Distance: ${buttonCount1?.interaction_count}</p>
       <img style="width: 150px; left: 20px; margin-left: ${car1Pixels}px; position: absolute; top: 35px" src="https://pamadd.mypinata.cloud/ipfs/QmP7LyUCLdXrsds5HeUMqs4ur9mSoCSFdU1GkzXg83hA82" />
@@ -142,7 +166,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       if (!isValidated) {
         return res.status(400).json({error: "Invalid frame message"});
       }
-      await fdk.sendAnalytics(FRAME_ID, req.body);
+      // await fdk.sendAnalytics(FRAME_ID, req.body);
       const imgContent = await getImage(FRAME_ID);
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
       const frameMetadata = await fdk.getFrameMetadata({
