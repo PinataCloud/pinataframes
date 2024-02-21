@@ -16,7 +16,7 @@ export default async function handler(
         post_url: `${process.env.HOSTED_URL}/api/frame-analytics-tutorial?id=2`,
         aspect_ratio: "1.91:1",
         buttons: [{ label: "Read On 👉", action: "post" }],
-        cid: "/1.png",
+        cid: "QmQEBDy135KEYJ6s56W8WTHKNN2gDsGpb8dMTn2JEqozpS/1.png",
       });
       res.send(frameMetadata);
     } catch (error) {
@@ -38,15 +38,15 @@ export default async function handler(
               label: "Read Full Post",
               action: "link",
               target:
-                "",
+                "https://www.pinata.cloud/blog/how-to-use-farcaster-frame-analytics",
             },
             {
               label: "Watch Video",
               action: "link",
-              target: "",
+              target: "https://youtu.be/vaynPsuLoQA",
             },
           ],
-          cid: `/${id}.png`,
+          cid: `QmQEBDy135KEYJ6s56W8WTHKNN2gDsGpb8dMTn2JEqozpS/${id}.png`,
         });
         res.send(frameMetadata);
       } catch (error) {
@@ -64,11 +64,11 @@ export default async function handler(
             {
               label: "Watch Video",
               action: "link",
-              target: "",
+              target: "https://youtu.be/vaynPsuLoQA",
             },
             { label: "Next", action: "post" },
           ],
-          cid: `/${id}.png`,
+          cid: `QmQEBDy135KEYJ6s56W8WTHKNN2gDsGpb8dMTn2JEqozpS/${id}.png`,
         });
         res.send(frameMetadata);
       } catch (error) {
