@@ -30,8 +30,8 @@ const getPercentagePixels = (value: number, total: number, pixels: number) => {
   return (value * pixels) / total;
 }
 
-const getCarPixels = (data, carId: number, highestNumber: number, maxPixels) => {
-  const buttonCount = data.find((item) => item.button_index === carId);
+const getCarPixels = (data: any, carId: number, highestNumber: number, maxPixels: number) => {
+  const buttonCount = data.find((item: any) => item.button_index === carId);
   const percentage = getPercentage(buttonCount?.interaction_count || 0, highestNumber);
   return getPercentagePixels(buttonCount?.interaction_count || 0, highestNumber, maxPixels);
 }
