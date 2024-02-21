@@ -35,6 +35,8 @@ export const generateImage = async (data: AnalyticsResponse []) => {
     "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
   );
 
+  console.log('data', data);
+
   const maxPixels = 1000;
   const highestInteraction = data.reduce((prev, current) => (prev.interaction_count > current.interaction_count) ? prev : current);
   const lowestInteraction = data.reduce((prev, current) => (prev.interaction_count < current.interaction_count) ? prev : current);
@@ -106,10 +108,12 @@ export const generateImage = async (data: AnalyticsResponse []) => {
 const getImage = async (frame_id: string) => {
   try {
     const today = dayjs.utc().endOf('day');
-    const startDay = dayjs.utc().subtract(180, 'day').startOf('day');
-    const startDate = dayjs(startDay).format('YYYY-MM-DD HH:mm:ss');
+    const now = dayjs.utc().subtract(1, 'hour').endOf('hour');
+    const startDate = dayjs(now).format('YYYY-MM-DD HH:mm:ss');
     const endDate = dayjs(today).format('YYYY-MM-DD HH:mm:ss');
+
     const url = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=button_index&start_date=${startDate}&end_date=${endDate}&frame_id=${frame_id}`;
+    console.log(url)
     //  Get analytics data here
     const res = await fetch(url, {
       headers: {
@@ -132,7 +136,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       if (!isValidated) {
         return res.status(400).json({error: "Invalid frame message"});
       }
-      await fdk.sendAnalytics(FRAME_ID, req.body);
+      // await fdk.sendAnalytics(FRAME_ID, req.body);
       const imgContent = await getImage(FRAME_ID);
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
       const frameMetadata = await fdk.getFrameMetadata({
