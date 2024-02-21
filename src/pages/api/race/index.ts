@@ -49,7 +49,7 @@ export const generateImage = async (data: AnalyticsResponse []) => {
   let car3Pixels = 0;
   let car4Pixels = 0;
 
-  const ROUND_LIMIT_FACTOR = 100;
+  const ROUND_LIMIT_FACTOR = 500;
 
   const roundLimit = Math.floor(lowestInteraction.interaction_count / ROUND_LIMIT_FACTOR) * ROUND_LIMIT_FACTOR;
   // if (lowestInteraction.interaction_count < roundLimit) {
