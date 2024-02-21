@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSSLHubRpcClient, Message } from "@farcaster/hub-nodejs";
 
-const HUB_URL = process.env['HUB_URL'] || "hub-grpc.pinata.cloud"
+const HUB_URL = "hub-grpc.pinata.cloud"
 const client = getSSLHubRpcClient(HUB_URL);
 
 export const config = {
