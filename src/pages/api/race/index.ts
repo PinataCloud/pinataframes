@@ -51,21 +51,21 @@ export const generateImage = async (data: AnalyticsResponse []) => {
 
   const ROUND_LIMIT_FACTOR = 100;
 
-  const roundLimit = Math.floor(lowestInteraction.interaction_count / ROUND_LIMIT_FACTOR);
-  if (lowestInteraction.interaction_count < roundLimit) {
-    car1Pixels = getCarPixels(buttonCount1?.interaction_count || 0, 1, highestInteraction.interaction_count, maxPixels);
-    car2Pixels = getCarPixels(buttonCount2?.interaction_count || 0, 2, highestInteraction.interaction_count, maxPixels);
-    car3Pixels = getCarPixels(buttonCount3?.interaction_count || 0, 3, highestInteraction.interaction_count, maxPixels);
-    car4Pixels = getCarPixels(buttonCount4?.interaction_count || 0, 4, highestInteraction.interaction_count, maxPixels);
-  } else {
-    car1Pixels = getCarPixels(buttonCount1?.interaction_count - roundLimit, 1, highestInteraction.interaction_count, maxPixels);
-    car2Pixels = getCarPixels(buttonCount2?.interaction_count - roundLimit, 2, highestInteraction.interaction_count, maxPixels);
-    car3Pixels = getCarPixels(buttonCount3?.interaction_count - roundLimit, 3, highestInteraction.interaction_count, maxPixels);
-    car4Pixels = getCarPixels(buttonCount4?.interaction_count - roundLimit, 4, highestInteraction.interaction_count, maxPixels);
-  }
+  const roundLimit = Math.floor(lowestInteraction.interaction_count / ROUND_LIMIT_FACTOR) * ROUND_LIMIT_FACTOR;
+  // if (lowestInteraction.interaction_count < roundLimit) {
+  //   car1Pixels = getCarPixels(buttonCount1?.interaction_count || 0, 1, highestInteraction.interaction_count, maxPixels);
+  //   car2Pixels = getCarPixels(buttonCount2?.interaction_count || 0, 2, highestInteraction.interaction_count, maxPixels);
+  //   car3Pixels = getCarPixels(buttonCount3?.interaction_count || 0, 3, highestInteraction.interaction_count, maxPixels);
+  //   car4Pixels = getCarPixels(buttonCount4?.interaction_count || 0, 4, highestInteraction.interaction_count, maxPixels);
+  // } else {
+    car1Pixels = getCarPixels(buttonCount1?.interaction_count - roundLimit, 1, highestInteraction.interaction_count - roundLimit, maxPixels);
+    car2Pixels = getCarPixels(buttonCount2?.interaction_count - roundLimit, 2, highestInteraction.interaction_count - roundLimit, maxPixels);
+    car3Pixels = getCarPixels(buttonCount3?.interaction_count - roundLimit, 3, highestInteraction.interaction_count - roundLimit, maxPixels);
+    car4Pixels = getCarPixels(buttonCount4?.interaction_count - roundLimit, 4, highestInteraction.interaction_count - roundLimit, maxPixels);
+  // }
 
   const template: any = html(`
-  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmeAdbdGo2SZQNLGnHJRsbHyVAteYkE7HsrXTUq7dw2UqB'); color: #fff;">
+  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmaPJLmYUZpVgQ6KZyDQYkEghqv3JJMqRbvm9EK6zKz2uX'); background-size: 1200px 630px; color: #fff;">
     <div style="display: flex; padding: 12px;">
       <img style="width: 150px; left: 20px; margin-left: ${car1Pixels}px; position: absolute; top: 35px" src="https://pamadd.mypinata.cloud/ipfs/QmP7LyUCLdXrsds5HeUMqs4ur9mSoCSFdU1GkzXg83hA82" />
       <img style="width: 150px; left: 20px; margin-left: ${car2Pixels}px; position: absolute; top: 170px" src="https://pamadd.mypinata.cloud/ipfs/QmaG9HgtyLKpLGypDHFLyofgZQznrAbr4sVyJ76yxDPVTh" />
