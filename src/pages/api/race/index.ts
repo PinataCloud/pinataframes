@@ -9,7 +9,7 @@ import utc from 'dayjs/plugin/utc';
 dayjs.extend(utc);
 
 const fdk = new PinataFDK({
-    pinata_jwt: process.env.PINATA_JWT,
+    pinata_jwt: process.env.PINATA_JWT!,
     pinata_gateway: ''
   }
 );
