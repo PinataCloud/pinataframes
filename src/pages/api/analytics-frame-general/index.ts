@@ -65,7 +65,7 @@ export default async function handler(
       await fdk.sendAnalytics(FRAME_ID, req.body);
       const imgUrl = await generateAnalyticsImage(FRAME_ID);
       const frameMetadata = await fdk.getFrameMetadata({
-        post_url: `${process.env.HOSTED_URL}/api/analytics-frame`,
+        post_url: `${process.env.HOSTED_URL}/api/analytics-frame-general?frame_id=${query}`,
         aspect_ratio: "1:1",
         buttons: [
           { label: query === "pinata_race" ? "Check race stats" : 'Refresh stats', action: 'post' },
