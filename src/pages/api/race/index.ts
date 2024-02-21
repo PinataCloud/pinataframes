@@ -58,10 +58,10 @@ export const generateImage = async (data: AnalyticsResponse []) => {
   //   car3Pixels = getCarPixels(buttonCount3?.interaction_count || 0, 3, highestInteraction.interaction_count, maxPixels);
   //   car4Pixels = getCarPixels(buttonCount4?.interaction_count || 0, 4, highestInteraction.interaction_count, maxPixels);
   // } else {
-    car1Pixels = getCarPixels(buttonCount1?.interaction_count - roundLimit, 1, highestInteraction.interaction_count - roundLimit, maxPixels);
-    car2Pixels = getCarPixels(buttonCount2?.interaction_count - roundLimit, 2, highestInteraction.interaction_count - roundLimit, maxPixels);
-    car3Pixels = getCarPixels(buttonCount3?.interaction_count - roundLimit, 3, highestInteraction.interaction_count - roundLimit, maxPixels);
-    car4Pixels = getCarPixels(buttonCount4?.interaction_count - roundLimit, 4, highestInteraction.interaction_count - roundLimit, maxPixels);
+    car1Pixels = getCarPixels(buttonCount1!.interaction_count - roundLimit, 1, highestInteraction.interaction_count - roundLimit, maxPixels);
+    car2Pixels = getCarPixels(buttonCount2!.interaction_count - roundLimit, 2, highestInteraction.interaction_count - roundLimit, maxPixels);
+    car3Pixels = getCarPixels(buttonCount3!.interaction_count - roundLimit, 3, highestInteraction.interaction_count - roundLimit, maxPixels);
+    car4Pixels = getCarPixels(buttonCount4!.interaction_count - roundLimit, 4, highestInteraction.interaction_count - roundLimit, maxPixels);
   // }
 
   const template: any = html(`
@@ -128,7 +128,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       if (!isValidated) {
         return res.status(400).json({error: "Invalid frame message"});
       }
-      await fdk.sendAnalytics(FRAME_ID, req.body);
+      // await fdk.sendAnalytics(FRAME_ID, req.body);
       const imgContent = await getImage(FRAME_ID);
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
       const frameMetadata = await fdk.getFrameMetadata({
