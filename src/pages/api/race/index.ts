@@ -68,13 +68,16 @@ export const generateImage = async (data: AnalyticsResponse []) => {
 
   const template: any = html(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmaPJLmYUZpVgQ6KZyDQYkEghqv3JJMqRbvm9EK6zKz2uX'); background-size: 1200px 630px; color: #fff;">
+    <p style="position: absolute; top: -20px; left: 540px; color: black; font-size: 40px; background-color: white">Race # 3</p>
     <div style="display: flex; padding: 12px;">
       <p style="position: absolute; top: 35px; color: black; font-size: 25px">Distance: ${buttonCount1?.interaction_count}</p>
       <img style="width: 150px; left: 20px; margin-left: ${car1Pixels}px; position: absolute; top: 35px" src="https://pamadd.mypinata.cloud/ipfs/QmP7LyUCLdXrsds5HeUMqs4ur9mSoCSFdU1GkzXg83hA82" />
+      <img style="width: 40px; left: 10px; position: absolute; top: 105x" src="https://pamadd.mypinata.cloud/ipfs/QmeDs9TPT8KLgnvvjqekHRJMqVZKt66W1hgQpVRSNUpGoQ" />
       <p style="position: absolute; top: 170px; color: black; font-size: 25px">Distance: ${buttonCount2?.interaction_count}</p>
       <img style="width: 150px; left: 20px; margin-left: ${car2Pixels}px; position: absolute; top: 170px" src="https://pamadd.mypinata.cloud/ipfs/QmaG9HgtyLKpLGypDHFLyofgZQznrAbr4sVyJ76yxDPVTh" />
       <p style="position: absolute; top: 310px; color: black; font-size: 25px">Distance: ${buttonCount3?.interaction_count}</p>
       <img style="width: 150px; left: 20px; margin-left: ${car3Pixels}px; position: absolute; top: 310px" src="https://pamadd.mypinata.cloud/ipfs/QmdxLRPdkTXMSnXXEbZuCNEe42PaU5oVH81GqZbW4L5NDQ" />
+      <img style="width: 40px; left: 10px; position: absolute; top: 380x" src="https://pamadd.mypinata.cloud/ipfs/QmeDs9TPT8KLgnvvjqekHRJMqVZKt66W1hgQpVRSNUpGoQ" />
       <p style="position: absolute; top: 445px; color: black; font-size: 25px">Distance: ${buttonCount4?.interaction_count}</p>
       <img style="width: 150px; left: 20px; margin-left: ${car4Pixels}px; position: absolute; top: 445px" src="https://pamadd.mypinata.cloud/ipfs/QmdSoCvYzgYvY8GVE71VcF6p1oCyBzZCTARr7LE3Xkb7ws" />
     </div>
@@ -136,7 +139,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       if (!isValidated) {
         return res.status(400).json({error: "Invalid frame message"});
       }
-      await fdk.sendAnalytics(FRAME_ID, req.body);
+      // await fdk.sendAnalytics(FRAME_ID, req.body);
       const imgContent = await getImage(FRAME_ID);
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
       const frameMetadata = await fdk.getFrameMetadata({
