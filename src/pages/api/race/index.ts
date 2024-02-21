@@ -139,7 +139,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       if (!isValidated) {
         return res.status(400).json({error: "Invalid frame message"});
       }
-      // await fdk.sendAnalytics(FRAME_ID, req.body);
+      await fdk.sendAnalytics(FRAME_ID, req.body);
       const imgContent = await getImage(FRAME_ID);
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
       const frameMetadata = await fdk.getFrameMetadata({
