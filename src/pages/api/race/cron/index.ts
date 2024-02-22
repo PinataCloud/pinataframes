@@ -76,7 +76,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
     hoursDifference,
   }
 
-  await kv.set('latestRace', data);
+  await kv.set('latestRace', JSON.stringify(data));
 
   return response.json({ data });
 }
