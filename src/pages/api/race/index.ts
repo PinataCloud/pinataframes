@@ -154,7 +154,7 @@ const getImage = async (frame_id: string) => {
       }
     })
     const json: AnalyticsResponse [] = await res.json();
-    const latestRaceData = await kv.get('latestRace');
+    const latestRaceData: any = await kv.get('latestRace');
      // const latestRaceData = {
      //  winsPerCar: {
      //    car1: 20,
