@@ -24,14 +24,11 @@ export default async function handler(request: NextApiRequest, response: NextApi
 
   const hoursDifference = previousHour.diff(first_race, 'hour');
 
-  const hoursArray = [];
+  const winnersArray = [];
 
   for (let i = 0; i < hoursDifference; i++) {
     const utcStartHour = first_race.add(i, 'hour').format('YYYY-MM-DD HH:mm:ss');
     const utcEndHour = first_race.add(i + 1, 'hour').format('YYYY-MM-DD HH:mm:ss');
-
-    console.log('utcStartHour', utcStartHour)
-    console.log('utcEndHour', utcEndHour)
 
     const url = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=button_index&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=${FRAME_ID}`;
 
@@ -41,11 +38,31 @@ export default async function handler(request: NextApiRequest, response: NextApi
       }
     })
     const json: AnalyticsResponse [] = await res.json();
-    hoursArray.push({json, url});
+
+    if (json.length > 0) {
+      const winner = json.reduce((prev, current) => (prev.interaction_count > current.interaction_count) ? prev : current);
+      winnersArray.push({winner, raceNumber: i + 1});
+    }
   }
 
-  // const startDate = dayjs(now).format('YYYY-MM-DD HH:mm:ss');
-  // const endDate = dayjs(today).format('YYYY-MM-DD HH:mm:ss');
+  const winsPerCar = {
+    car1: 0,
+    car2: 0,
+    car3: 0,
+    car4: 0,
+  }
+
+  winnersArray.forEach(winner => {
+    if (winner.winner.button_index === 1) {
+      winsPerCar.car1++;
+    } else if (winner.winner.button_index === 2) {
+      winsPerCar.car2++;
+    } else if (winner.winner.button_index === 3) {
+      winsPerCar.car3++;
+    } else if (winner.winner.button_index === 4) {
+      winsPerCar.car4++;
+    }
+  });
 
   // const result = await fetch(
   //   'http://worldtimeapi.org/api/timezone/America/Chicago',
@@ -53,10 +70,11 @@ export default async function handler(request: NextApiRequest, response: NextApi
   // const data = await result.json();
 
   const data = {
+    winsPerCar,
     first_race,
     previousHour,
     hoursDifference,
-    hoursArray
+    winnersArray
   }
 
   return response.json({ data });
