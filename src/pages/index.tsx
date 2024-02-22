@@ -13,6 +13,18 @@ type Card = {
 
 const cards: Card[] = [
   {
+    title: "Pinata 500", 
+    imgUrl: "https://pamadd.mypinata.cloud/ipfs/QmeZ7Gfwj1hKpE9y7oLReQsc6NpRyZFWFC7DCxDr2TpCzX", 
+    castUrl: "https://warpcast.com/polluterofminds/0x60647c97", 
+    githubUrl: "https://github.com/PinataCloud/pinataframes/blob/main/src/pages/api/race/index.ts"
+  },
+  {
+    title: "Analytics Frame", 
+    imgUrl: "https://dweb.mypinata.cloud/ipfs/QmPqhuQ8HABhpFPVm3UsLoS5FJoQj8WH8yCEs9C9jxtA8K?filename=image.png", 
+    castUrl: "https://warpcast.com/polluterofminds/0x3b83b65e", 
+    githubUrl: "https://github.com/PinataCloud/pinataframes/blob/main/src/pages/api/analytics-frame/index.ts"
+  },
+  {
     title: "Cosmic Cowboys", 
     imgUrl: "https://proxy.warpcast.com/?url=https%3A%2F%2Fazure-tiny-tahr-350.mypinata.cloud%2Fipfs%2FQmdEeeA3VvYFWoB9H5XXej7EowQHx2xCvgzschSX7pdCib&s=f9817af87a5519da12213befbffcfa0baac3e89d2f15d4a0a6edf02378d269a3", 
     castUrl: "https://warpcast.com/polluterofminds/0x1d0a7bef", 
@@ -53,25 +65,25 @@ const cards: Card[] = [
     imgUrl: "https://mktg.mypinata.cloud/ipfs/QmVqEKexfVFiLB3xPXcwDyyUETLowQwvP2rqjhgpet95Cf?filename=emojichat.png", 
     castUrl: "https://warpcast.com/stevedylandev.eth/0x46e3fee2", 
     githubUrl: "https://github.com/PinataCloud/pinataframes/blob/main/src/pages/api/t3.ts"
-  }, 
+  },
 ]
 
 export default function Home() {
 
   return (
-    <div className="w-3/4 m-auto mt-20">
-      <h1 className="text-center text-4xl mb-8">Pinata Frames & Resources</h1>
+    <div className="w-3/4 m-auto mt-20 mb-20">
+      <h1 className="text-center text-4xl mb-8 font-sans text-white font-bold">Pinata Frames & Resources</h1>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
         {
           cards.map((c: Card) => {
             return (
-              <div key={c.title} className="w-full rounded-md bg-white text-gray-900 shadow shadow-md p-0 m-0">
-                <img src={c.imgUrl} className="w-full" alt={c.title} />
+              <div key={c.title} className="w-full rounded rounded-md card text-gray-900 shadow shadow-md p-0 m-0">
+                <img src={c.imgUrl} className="w-full rounded-t-md" alt={c.title} />
                 <div className="p-4">
-                  <h3 className="text-center font-bold text-2xl">{c.title}</h3>
-                  <div className="w-4/5 m-auto my-2 flex justify-around">
-                    <a className="px-1 py-2 border border-grapy-900 rounded-md" href={c.githubUrl} target="_blank" rel="noopener noreferrer">See the code</a>
-                    <a className="px-1 py-2 border border-grapy-900 rounded-md" href={c.castUrl} target="_blank" rel="noopener noreferrer">See the frame</a>
+                  <h3 className="text-left font-bold font-sans text-2xl text-white">{c.title}</h3>
+                  <div className="m-auto my-2 flex justify-between mt-4">
+                    <a className="font-sans flex justify-center px-1 w-[47%] py-1 bg-white rounded-full text-[#6C5EFF] border border-[#6C5EFF]" href={c.githubUrl} target="_blank" rel="noopener noreferrer">See the code</a>
+                    <a className="font-sans flex justify-center px-1 w-[47%] py-1 bg-[#6C5EFF] rounded-full text-white border border-[#6C5EFF]" href={c.castUrl} target="_blank" rel="noopener noreferrer">See the frame</a>
                   </div>
                 </div>
               </div>

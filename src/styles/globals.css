@@ -10,9 +10,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --font-sans: ${sans.style.fontFamily};
   }
 }
 
@@ -24,6 +22,14 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+.custom-background {
+  background: radial-gradient(29.86% 68.52% at -24.93% 6.76%, rgba(33, 24, 45, 0.30) 0%, rgba(63, 48, 84, 0.00) 100%), radial-gradient(42.76% 37.76% at 96.87% -12.56%, rgba(28, 24, 57, 0.30) 0%, rgba(138, 121, 255, 0.00) 100%), linear-gradient(228deg, #0D0F13 4.44%, #171420 40.25%, #1F162C 84.13%), #171420;
+}
+
+.card {
+  background: rgba(0, 0, 0, 0.45);
 }
 
 @layer utilities {
