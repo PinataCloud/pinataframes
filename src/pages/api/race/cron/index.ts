@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { headers } from 'next/headers'
+import { kv } from '@vercel/kv';
 import dayjs from "dayjs";
 import utc from 'dayjs/plugin/utc';
 dayjs.extend(utc);
@@ -74,8 +74,9 @@ export default async function handler(request: NextApiRequest, response: NextApi
     first_race,
     previousHour,
     hoursDifference,
-    winnersArray
   }
+
+  await kv.set('latestRace', data);
 
   return response.json({ data });
 }
