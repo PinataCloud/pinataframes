@@ -79,6 +79,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
   await kv.set('latestRace', JSON.stringify(data));
   const latestRace: any = await kv.get('latestRace');
   console.log('latestRace', latestRace);
+  console.log('latestRace type', typeof latestRace);
 
-  return response.json({ data, latestRace: JSON.parse(latestRace) });
+  return response.json({ data });
 }
