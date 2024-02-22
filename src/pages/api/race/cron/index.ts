@@ -19,10 +19,10 @@ export default async function handler(request: NextApiRequest, response: NextApi
     return response.status(401).json({ error: 'Unauthorized' });
   }
 
-  const first_race = dayjs('2024-02-21T10:00:00').utc();
-  const now = dayjs.utc();
+  const first_race = dayjs.utc('2024-02-21T15:00:00');
+  const previousHour = dayjs.utc().subtract(1, 'hour').endOf('hour');
 
-  const hoursDifference = now.diff(first_race, 'hour');
+  const hoursDifference = previousHour.diff(first_race, 'hour');
 
   const hoursArray = [];
 
@@ -41,7 +41,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
       }
     })
     const json: AnalyticsResponse [] = await res.json();
-    hoursArray.push(json);
+    hoursArray.push({json, url});
   }
 
   // const startDate = dayjs(now).format('YYYY-MM-DD HH:mm:ss');
@@ -54,7 +54,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
 
   const data = {
     first_race,
-    now,
+    previousHour,
     hoursDifference,
     hoursArray
   }
