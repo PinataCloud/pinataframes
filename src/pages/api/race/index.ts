@@ -5,6 +5,7 @@ import {html} from "satori-html";
 import {Resvg} from "@resvg/resvg-js";
 import dayjs, {Dayjs} from "dayjs";
 import utc from 'dayjs/plugin/utc';
+import { kv } from '@vercel/kv';
 
 dayjs.extend(utc);
 
@@ -32,11 +33,20 @@ const getCarPixels = (buttonCount: number, carId: number, highestNumber: number,
 
 }
 
-export const generateImage = async (data: AnalyticsResponse []) => {
+interface LatestRace {
+  winsPerCar: {
+    car1: number;
+    car2: number;
+    car3: number;
+    car4: number;
+  };
+  hoursDifference: number;
+}
+
+export const generateImage = async (data: AnalyticsResponse [], latestRaceData: LatestRace) => {
   const monoFontReg = await fetch(
     "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
   );
-
 
   const buttonCount1 = data.find((item: any) => item.button_index === 1);
   const buttonCount2 = data.find((item: any) => item.button_index === 2);
@@ -73,28 +83,39 @@ export const generateImage = async (data: AnalyticsResponse []) => {
   car4Pixels = getCarPixels((buttonCount4?.interaction_count || 0) - roundLimit, 4, highestInteraction.interaction_count - roundLimit, maxPixels);
 
 
+  // convert html to svg
+
   const template: any = html(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmaPJLmYUZpVgQ6KZyDQYkEghqv3JJMqRbvm9EK6zKz2uX'); background-size: 1200px 630px; color: #fff;">
-    <p style="position: absolute; top: -20px; left: 520px; color: black; font-size: 40px; background-color: white">Race # 7</p>
+    <p style="position: absolute; top: -20px; left: 520px; color: black; font-size: 40px; background-color: white">Race # ${latestRaceData.hoursDifference}</p>
     <div style="display: flex; padding: 12px;">
       <p style="position: absolute; top: 35px; color: black; font-size: 25px">Distance: ${buttonCount1?.interaction_count}</p>
       <img style="width: 150px; left: 20px; margin-left: ${car1Pixels}px; position: absolute; top: 35px" src="https://pamadd.mypinata.cloud/ipfs/QmP7LyUCLdXrsds5HeUMqs4ur9mSoCSFdU1GkzXg83hA82" />
-      <img style="width: 40px; left: 10px; position: absolute; top: 105x" src="https://pamadd.mypinata.cloud/ipfs/QmeDs9TPT8KLgnvvjqekHRJMqVZKt66W1hgQpVRSNUpGoQ" />
+      <div style="position: absolute; top: 80px; left: -10px; display: flex; align-items: center ">     
+        <p style="color: black; font-size: 35px; background-color: #fff8ec; padding: 5px; border-radius: 50%; border: 3px solid black">${latestRaceData.winsPerCar.car1}</p>
+        <img style="width: 40px;" src="https://pamadd.mypinata.cloud/ipfs/QmeDs9TPT8KLgnvvjqekHRJMqVZKt66W1hgQpVRSNUpGoQ" />
+      </div>
       <p style="position: absolute; top: 170px; color: black; font-size: 25px">Distance: ${buttonCount2?.interaction_count}</p>
       <img style="width: 150px; left: 20px; margin-left: ${car2Pixels}px; position: absolute; top: 170px" src="https://pamadd.mypinata.cloud/ipfs/QmaG9HgtyLKpLGypDHFLyofgZQznrAbr4sVyJ76yxDPVTh" />
-      <img style="width: 40px; left: 10px; position: absolute; top: 240x" src="https://pamadd.mypinata.cloud/ipfs/QmeDs9TPT8KLgnvvjqekHRJMqVZKt66W1hgQpVRSNUpGoQ" />
+      <div style="position: absolute; top: 215px; left: -10px; display: flex; align-items: center ">     
+        <p style="color: black; font-size: 35px; background-color: #fff8ec; padding: 5px; border-radius: 50%; border: 3px solid black">${latestRaceData.winsPerCar.car2}</p>
+        <img style="width: 40px;" src="https://pamadd.mypinata.cloud/ipfs/QmeDs9TPT8KLgnvvjqekHRJMqVZKt66W1hgQpVRSNUpGoQ" />
+      </div>
       <p style="position: absolute; top: 310px; color: black; font-size: 25px">Distance: ${buttonCount3?.interaction_count}</p>
       <img style="width: 150px; left: 20px; margin-left: ${car3Pixels}px; position: absolute; top: 310px" src="https://pamadd.mypinata.cloud/ipfs/QmdxLRPdkTXMSnXXEbZuCNEe42PaU5oVH81GqZbW4L5NDQ" />
-      <img style="width: 40px; left: 10px; position: absolute; top: 380x" src="https://pamadd.mypinata.cloud/ipfs/QmeDs9TPT8KLgnvvjqekHRJMqVZKt66W1hgQpVRSNUpGoQ" />
-      <img style="width: 40px; left: 60px; position: absolute; top: 380x" src="https://pamadd.mypinata.cloud/ipfs/QmeDs9TPT8KLgnvvjqekHRJMqVZKt66W1hgQpVRSNUpGoQ" />
-      <img style="width: 40px; left: 110px; position: absolute; top: 380x" src="https://pamadd.mypinata.cloud/ipfs/QmeDs9TPT8KLgnvvjqekHRJMqVZKt66W1hgQpVRSNUpGoQ" />
+      <div style="position: absolute; top: 350px; left: -10px; display: flex; align-items: center ">     
+        <p style="color: black; font-size: 35px; background-color: #fff8ec; padding: 5px; border-radius: 50%; border: 3px solid black">${latestRaceData.winsPerCar.car3}</p>
+        <img style="width: 40px;" src="https://pamadd.mypinata.cloud/ipfs/QmeDs9TPT8KLgnvvjqekHRJMqVZKt66W1hgQpVRSNUpGoQ" />
+      </div>
       <p style="position: absolute; top: 445px; color: black; font-size: 25px">Distance: ${buttonCount4?.interaction_count}</p>
       <img style="width: 150px; left: 20px; margin-left: ${car4Pixels}px; position: absolute; top: 445px" src="https://pamadd.mypinata.cloud/ipfs/QmdSoCvYzgYvY8GVE71VcF6p1oCyBzZCTARr7LE3Xkb7ws" />
+      <div style="position: absolute; top: 490px; left: -10px; display: flex; align-items: center ">     
+        <p style="color: black; font-size: 35px; background-color: #fff8ec; padding: 5px; border-radius: 50%; border: 3px solid black">${latestRaceData.winsPerCar.car4}</p>
+        <img style="width: 40px;" src="https://pamadd.mypinata.cloud/ipfs/QmeDs9TPT8KLgnvvjqekHRJMqVZKt66W1hgQpVRSNUpGoQ" />
+      </div>
     </div>
   </div>
   `);
-
-  // convert html to svg
   const svg = await satori(template, {
     width: 1200,
     height: 630,
@@ -126,15 +147,24 @@ const getImage = async (frame_id: string) => {
     const endDate = dayjs(today).format('YYYY-MM-DD HH:mm:ss');
 
     const url = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=button_index&start_date=${startDate}&end_date=${endDate}&frame_id=${frame_id}`;
-    console.log(url)
-    //  Get analytics data here
+
     const res = await fetch(url, {
       headers: {
         Authorization: `Bearer ${process.env.PINATA_JWT}`,
       }
     })
     const json: AnalyticsResponse [] = await res.json();
-    const image = await generateImage(json);
+    const latestRaceData = await kv.get('latestRace');
+     // const latestRaceData = {
+     //  winsPerCar: {
+     //    car1: 20,
+     //    car2: 3,
+     //    car3: 1,
+     //    car4: 103,
+     //  },
+     //   hoursDifference: 10,
+     // }
+    const image = await generateImage(json, latestRaceData);
     return image;
   } catch (error) {
     console.log(error);
