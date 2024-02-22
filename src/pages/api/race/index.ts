@@ -87,7 +87,7 @@ export const generateImage = async (data: AnalyticsResponse [], latestRaceData: 
 
   const template: any = html(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmaPJLmYUZpVgQ6KZyDQYkEghqv3JJMqRbvm9EK6zKz2uX'); background-size: 1200px 630px; color: #fff;">
-    <p style="position: absolute; top: -20px; left: 520px; color: black; font-size: 40px; background-color: white">Race # ${latestRaceData.hoursDifference}</p>
+    <p style="position: absolute; top: -20px; left: 520px; color: black; font-size: 40px; background-color: white">Race # ${latestRaceData.hoursDifference + 1}</p>
     <div style="display: flex; padding: 12px;">
       <p style="position: absolute; top: 35px; color: black; font-size: 25px">Distance: ${buttonCount1?.interaction_count}</p>
       <img style="width: 150px; left: 20px; margin-left: ${car1Pixels}px; position: absolute; top: 35px" src="https://pamadd.mypinata.cloud/ipfs/QmP7LyUCLdXrsds5HeUMqs4ur9mSoCSFdU1GkzXg83hA82" />
