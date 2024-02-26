@@ -155,7 +155,8 @@ export const generateImage = async (requestData: any) => {
   }
 };
 
-export const satoriAnalyticsHelper = async (data: FrameAnalyticsResponse) => {
+export const satoriAnalyticsHelper = async (data: FrameAnalyticsResponse, title?: string) => {
+  let titleContent = title ? title : "This frame's stats"
   const monoFontReg = await fetch(
     "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
   );
@@ -164,63 +165,13 @@ export const satoriAnalyticsHelper = async (data: FrameAnalyticsResponse) => {
     "https://api.fontsource.org/v1/fonts/inter/latin-700-normal.ttf",
   );
 
-  // const ogOptions: SatoriOptions = {
-  //   width: 1200,
-  //   height: 630,
-  //   debug: true,
-  //   embedFont: true,
-  //   fonts: [
-  //     {
-  //       name: "Roboto Mono",
-  //       data: await monoFontReg.arrayBuffer(),
-  //       weight: 400,
-  //       style: "normal",
-  //     },
-  //     {
-  //       name: "Roboto Mono",
-  //       data: await monoFontBold.arrayBuffer(),
-  //       weight: 700,
-  //       style: "normal",
-  //     },
-  //   ],
-  //   // loadAdditionalAsset: async (code: any, segment: any) => {
-  //   //   if (code === "emoji") {
-  //   //     return `data:image/svg+xml;base64,${btoa(
-  //   //       await loadEmoji("twemoji", getIconCode(segment)),
-  //   //     )}`;
-  //   //   }
-  //   //   return [];
-  //   // },
-  // };
-
-  // const markup = (): any => html`
-  //   <div
-  //     tw="flex flex-col justify-center p-12 items-center text-2xl font-semibold bg-[#5F61F2] w-full h-full"
-  //   >
-  //     <h1 tw="text-2xl text-gray-900">This frame's stats</h1>
-  //     <div tw="w-full flex flex-row justify-around items-center">
-  //       <div tw="text-center flex flex-col mr-2">
-  //         <h3 tw="text-xl">Interactions</h3>
-  //         <h5 tw="text-md font-bold">${data.total_interactions}</h5>
-  //       </div>
-  //       <div tw="text-center flex flex-col">
-  //       <h3 tw="text-xl">Unique Interactions</h3>
-  //       <h5 tw="text-md font-bold">${data.total_unique_interactions}</h5>
-  //     </div>
-  //     </div>
-  //   </div>
-  // `;
-
-  // const svg = await satori(markup(), ogOptions);
-  // const png = new Resvg(svg).render().asPng();
-
   const template: any = html(`
 <div style="padding: 20px; display: flex; flex-flow: column nowrap; justify-content: center; align-items: center; width: 1200px; height: 630px; backgroundColor: #0AAB5E; color: #fff;">
   <div style="width: 100%; display: flex; flex-direction: column;">
     <img style="width: 80px; margin: auto;" src="https://azure-tiny-tahr-350.mypinata.cloud/ipfs/Qmb1QqaaqBsZU7UihG93kw7GyjF6fe2zRo395z7xRojbwV" />
   </div>
   <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 6px; padding: 12px; color: #fff; font-size: 22px;">
-    <h1>This frame's stats</h1>
+    <h1>${titleContent}</h1>
     <div style="display: flex; flex-direction: row; align-items: center;">
       <div style="display: flex; flex-direction: column; align-items: center; margin-right: 10px;">
         <h3>Total Interactions</h3>
@@ -265,7 +216,7 @@ const png = pngData.asPng();
   return png;
 }
 
-export const generateAnalyticsImage = async (frame_id: string) => {
+export const generateAnalyticsImage = async (frame_id: string, title?: string) => {
   try {
     const today = dayjs.utc().endOf('day');
     const startDay = dayjs.utc().subtract(180, 'day').startOf('day');
@@ -281,7 +232,7 @@ export const generateAnalyticsImage = async (frame_id: string) => {
     })
     const json: FrameAnalyticsResponse = await res.json();
     console.log(json);
-    const image = await satoriAnalyticsHelper(json);
+    const image = await satoriAnalyticsHelper(json, title);
     const url = await uploadToIpfs(image);
     return url;
   } catch (error) {

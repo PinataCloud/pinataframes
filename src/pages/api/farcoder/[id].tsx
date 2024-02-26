@@ -1,5 +1,6 @@
 import { PinataFDK } from "pinata-fdk";
 import { NextApiRequest, NextApiResponse } from "next";
+import { generateAnalyticsImage } from "@/utils/satori";
 
 const fdk = new PinataFDK({
   pinata_jwt: process.env.PINATA_JWT!,
@@ -86,7 +87,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
         case "6":
           possibleAnswers = ["farcoder.slice(4, farcoder.length)", "farcoder.slice(4, farcoder.length);", "farcoder.slice(4)", "farcoder.slice(4);", "farcoder.slice(-14)", "farcoder.slice(-14);", "farcoder.substring(4)", "farcoder.substring(4);", "farcoder.substr(4)", "farcoder.substr(4);", 'farcoder.substring(farcoder.indexOf("I"))', 'farcoder.substring(farcoder.indexOf("I"));', 'farcoder.split("0101")[1]', 'farcoder.split("0101")[1];']
           if (possibleAnswers.includes(req.body.untrustedData.inputText)) {
-            imageUrl = `${process.env.GATEWAY_URL}/ipfs/Qmf8kouZJvB1DPZUFXLPQF56hhEWA39aog34uDohdBKinw`;
+            imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmQecg81c8cuZkAnTf28SkVSmJXxcUSmhY7NH9LXeGGTQE`;
+            postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/7`            
+            input = false;
+            break;
+          } else {
+            //  Game over
+            imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmaEjjAzgeztW3A3UbmfKruDgCb3oRDEPsV5N6keor9t7w`
+            postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
+            buttons = [{ label: 'Play again', action: 'post' }]
+            input = false;
+            break;
+          }
+        case "7":
+          possibleAnswers = ["farcoder.slice(4, farcoder.length)", "farcoder.slice(4, farcoder.length);", "farcoder.slice(4)", "farcoder.slice(4);", "farcoder.slice(-14)", "farcoder.slice(-14);", "farcoder.substring(4)", "farcoder.substring(4);", "farcoder.substr(4)", "farcoder.substr(4);", 'farcoder.substring(farcoder.indexOf("I"))', 'farcoder.substring(farcoder.indexOf("I"));', 'farcoder.split("0101")[1]', 'farcoder.split("0101")[1];']
+          if (possibleAnswers.includes(req.body.untrustedData.inputText)) {
+            imageUrl = await generateAnalyticsImage(FRAME_ID, "Farcoder Stats") //`${process.env.GATEWAY_URL}/ipfs/Qmf8kouZJvB1DPZUFXLPQF56hhEWA39aog34uDohdBKinw`;
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
             buttons = [{ label: 'Play again', action: 'post' }]
             input = false;
