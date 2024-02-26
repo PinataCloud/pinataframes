@@ -17,14 +17,16 @@ const fdk = new PinataFDK({
 
 const FRAME_ID = "pinata_basketball";
 
-export const generateImage = async () => {
+export const generateImage = async (team: number, counter: number) => {
   const monoFontReg = await fetch(
     "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
   );
 
   const template: any = html(`
   <div style="padding: 20px; position: relative; display: flex; flex-direction: column;  justify-content: center;  width: 1200px; height: 630px;">
-    <p style="font-size: 40px">Choose your team for this season</p>
+    <p style="font-size: 60px">Your Team ${team}</p>
+    <p style="font-size: 60px">Current Score ${counter}</p>
+    <p style="font-size: 40px">Once you're ready calculate 3 seconds to shot. The closer to 3 seconds the more chances to score</p>
   </div>
   `);
   const svg = await satori(template, {
@@ -62,28 +64,31 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         return res.status(400).json({error: "Invalid frame message"});
       }
 
-      await fdk.sendAnalytics(FRAME_ID, req.body);
+      // await fdk.sendAnalytics(FRAME_ID, req.body);
 
       const currentUUID = req.body?.untrustedData?.state ? JSON.parse(req.body.untrustedData.state) : {};
+      const currentTeam = currentUUID.team || req.body?.untrustedData?.buttonIndex || 1;
       const currentSession = currentUUID.session || uuidv4();
 
-      const imgContent = await generateImage();
+      console.log('currentUUID', currentUUID);
+      console.log('typeof currentUUID', typeof currentUUID);
+
+      const imgContent = await generateImage(currentTeam, 0);
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
 
       const frameMetadata = await fdk.getFrameMetadata({
-        post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
+        post_url: `${process.env.HOSTED_URL}/api/basketball/shot`,
         buttons: [
-          { label: "Team 1", action: 'post' },
-          { label: "Team 2", action: 'post' },
-          { label: "Team 3", action: 'post' },
-          { label: "Team 4", action: 'post' },
+          { label: "I'm Ready", action: 'post' },
         ],
         image: {url: dataURI, ipfs: false}
       });
 
       //prepare time is the current utc time
       const state = {
-        session: currentSession
+        session: currentSession,
+        prepareTime: dayjs().utc(),
+        team: currentTeam,
       }
 
       const jsonState = JSON.stringify(state).replace(/"/g, '&quot;');

@@ -17,14 +17,14 @@ const fdk = new PinataFDK({
 
 const FRAME_ID = "pinata_basketball";
 
-export const generateImage = async () => {
+export const generateImage = async (difference: number) => {
   const monoFontReg = await fetch(
     "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
   );
 
   const template: any = html(`
-  <div style="padding: 20px; position: relative; display: flex; flex-direction: column;  justify-content: center;  width: 1200px; height: 630px;">
-    <p style="font-size: 40px">Choose your team for this season</p>
+  <div style="padding: 20px; position: relative; display: flex;  justify-content: center;  width: 1200px; height: 630px;">
+    <p style="font-size: 20px">The difference in time is ${difference}</p>
   </div>
   `);
   const svg = await satori(template, {
@@ -54,7 +54,7 @@ export const generateImage = async () => {
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse,){
   if (req.method === "POST") {
-    console.log('body', req.body);
+    console.log('body. Shot endpoint', req.body);
     try {
       const isValidated = await fdk.validateFrameMessage(req.body);
 
@@ -65,25 +65,31 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       await fdk.sendAnalytics(FRAME_ID, req.body);
 
       const currentUUID = req.body?.untrustedData?.state ? JSON.parse(req.body.untrustedData.state) : {};
+      const currentTeam = currentUUID.team || req.body?.untrustedData?.buttonIndex || 1;
       const currentSession = currentUUID.session || uuidv4();
+      const prepareTime = currentUUID.prepareTime;
 
-      const imgContent = await generateImage();
+      const secondsDifference = dayjs().diff(dayjs(prepareTime), 'second');
+      console.log('secondsDifference', secondsDifference);
+
+      console.log('currentUUID', currentUUID);
+      console.log('typeof currentUUID', typeof currentUUID);
+
+      const imgContent = await generateImage(secondsDifference);
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
 
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
         buttons: [
-          { label: "Team 1", action: 'post' },
-          { label: "Team 2", action: 'post' },
-          { label: "Team 3", action: 'post' },
-          { label: "Team 4", action: 'post' },
+          { label: "Shot", action: 'post' },
         ],
         image: {url: dataURI, ipfs: false}
       });
 
-      //prepare time is the current utc time
+      //generate UUID for idempotency_key
       const state = {
-        session: currentSession
+        session: currentSession,
+        team: currentTeam
       }
 
       const jsonState = JSON.stringify(state).replace(/"/g, '&quot;');
