@@ -86,7 +86,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
         case "6":
           possibleAnswers = ["farcoder.slice(4, farcoder.length)", "farcoder.slice(4, farcoder.length);", "farcoder.slice(4)", "farcoder.slice(4);", "farcoder.slice(-14)", "farcoder.slice(-14);", "farcoder.substring(4)", "farcoder.substring(4);", "farcoder.substr(4)", "farcoder.substr(4);", 'farcoder.substring(farcoder.indexOf("I"))', 'farcoder.substring(farcoder.indexOf("I"));', 'farcoder.split("0101")[1]', 'farcoder.split("0101")[1];']
           if (possibleAnswers.includes(req.body.untrustedData.inputText)) {
-            imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmXo2kyujfrXZ8aakZuSfZ3ixgEocMHJsvpf2SrAK4pdmy`;
+            imageUrl = `${process.env.GATEWAY_URL}/ipfs/Qmf8kouZJvB1DPZUFXLPQF56hhEWA39aog34uDohdBKinw`;
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
             buttons = [{ label: 'Play again', action: 'post' }]
             input = false;
@@ -101,7 +101,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
           }
         case "1":
         default:
-          imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmTR1N24nXEkC4K3AAsXvV9j2ABJYQdBfDpkFKXNh4rwuX`;
+          imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmQxvhwhrnHgd6USpe4QvdqtbJi1T6nqApitgMtND8Vv21`;
           postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/2`
           break;        
       }
