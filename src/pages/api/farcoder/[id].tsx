@@ -87,7 +87,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
         case "6":
           possibleAnswers = ["farcoder.slice(4, farcoder.length)", "farcoder.slice(4, farcoder.length);", "farcoder.slice(4)", "farcoder.slice(4);", "farcoder.slice(-14)", "farcoder.slice(-14);", "farcoder.substring(4)", "farcoder.substring(4);", "farcoder.substr(4)", "farcoder.substr(4);", 'farcoder.substring(farcoder.indexOf("I"))', 'farcoder.substring(farcoder.indexOf("I"));', 'farcoder.split("0101")[1]', 'farcoder.split("0101")[1];']
           if (possibleAnswers.includes(req.body.untrustedData.inputText)) {
-            imageUrl = `${process.env.GATEWAY_URL}/ipfs/Qmdy4hTnwAZKdakNknLD6pKm4irJ3pKSfkrtaPPnwRrpqe`;
+            imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmQecg81c8cuZkAnTf28SkVSmJXxcUSmhY7NH9LXeGGTQE`;
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/7`            
             input = true;
             break;
