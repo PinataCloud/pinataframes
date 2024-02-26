@@ -24,7 +24,7 @@ export const generateImage = async () => {
 
   const template: any = html(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: center;  width: 1200px; height: 630px;">
-    <p style="font-size: 20px">You have 3 seconds to shot</p>
+    <p style="font-size: 60px">You have 3 seconds to shot</p>
   </div>
   `);
   const svg = await satori(template, {

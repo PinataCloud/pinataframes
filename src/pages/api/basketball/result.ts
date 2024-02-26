@@ -23,13 +23,14 @@ export const generateImage = async (difference: number) => {
   );
 
   let success = false;
+  let chance = 0;
   if (difference >= 2500 && difference <= 3500) {
     if (difference === 3000) {
       success = true;
     } else {
       // Calculate the chance of success based on the difference to 3000
       // The closer to 3000, the higher the chance (max 1 or 100% at 3000)
-      const chance = 1 - Math.abs(3000 - difference) / 500; // Normalize the difference to a 0-1 scale
+      chance = 1 - Math.abs(3000 - difference) / 500; // Normalize the difference to a 0-1 scale
       const random = Math.random();
       success = random < chance;
     }
@@ -39,10 +40,10 @@ export const generateImage = async (difference: number) => {
   }
 
   const template: any = html(`
-  <div style="padding: 20px; position: relative; display: flex;  justify-content: center;  width: 1200px; height: 630px;">
-    <p style="font-size: 20px">The difference in time is ${difference}</p>
-    <p style="font-size: 20px">Chances of scoring are ${Math.abs(3000 - difference) / 1000}</p>
-    <p style="font-size: 20px">Scored? ${success}</p>
+  <div style="padding: 20px; position: relative; display: flex; flex-direction: column; justify-content: center;  width: 1200px; height: 630px;">
+    <p style="font-size: 40px">The difference in time is ${difference}</p>
+    <p style="font-size: 40px">Chances of scoring are ${chance}</p>
+    <p style="font-size: 40px">Scored? ${success}</p>
   </div>
   `);
   const svg = await satori(template, {
