@@ -22,9 +22,21 @@ export const generateImage = async (difference: number) => {
     "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
   );
 
+  let success = false;
+  //if the difference is 3000 there's a 100% chance of success. If it's 2500 or 3500 there's a 0% chance. All values in between increase chances being 3000 the highes chance
+  if (difference === 3000) {
+    success = true;
+  } else {
+    const chance = Math.abs(3000 - difference) / 1000;
+    const random = Math.random();
+    success = random <= chance;
+  }
+
   const template: any = html(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: center;  width: 1200px; height: 630px;">
     <p style="font-size: 20px">The difference in time is ${difference}</p>
+    <p style="font-size: 20px">Chances of scoring are ${Math.abs(3000 - difference) / 1000}</p>
+    <p style="font-size: 20px">Scored? ${success}</p>
   </div>
   `);
   const svg = await satori(template, {
