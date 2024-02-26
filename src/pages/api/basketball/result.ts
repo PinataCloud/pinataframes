@@ -23,13 +23,19 @@ export const generateImage = async (difference: number) => {
   );
 
   let success = false;
-  //if the difference is 3000 there's a 100% chance of success. If it's 2500 or 3500 there's a 0% chance. All values in between increase chances being 3000 the highes chance
-  if (difference === 3000) {
-    success = true;
+  if (difference >= 2500 && difference <= 3500) {
+    if (difference === 3000) {
+      success = true;
+    } else {
+      // Calculate the chance of success based on the difference to 3000
+      // The closer to 3000, the higher the chance (max 1 or 100% at 3000)
+      const chance = 1 - Math.abs(3000 - difference) / 500; // Normalize the difference to a 0-1 scale
+      const random = Math.random();
+      success = random < chance;
+    }
   } else {
-    const chance = Math.abs(3000 - difference) / 1000;
-    const random = Math.random();
-    success = random <= chance;
+    // If outside 2500 to 3500 range, success is always false
+    success = false;
   }
 
   const template: any = html(`
