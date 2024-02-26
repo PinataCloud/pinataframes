@@ -25,6 +25,7 @@
     "react-dom": "^18",
     "satori": "^0.10.11",
     "satori-html": "^0.3.2",
+    "uuid": "^9.0.1",
     "viem": "^2.7.11"
   },
   "devDependencies": {
