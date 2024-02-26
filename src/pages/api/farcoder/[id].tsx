@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
 
       let imageUrl = ""
       let postEndpoint = "";
-      let buttons: any = [{ label: 'Submit answer', action: 'post' }]
+      let buttons: any = [{ label: 'Submit answer', action: 'post' }, { label: 'Build your own', action: "link", target: "https://docs.pinata.cloud/farcaster/fdk" }]
       let possibleAnswers = [""]
       let input = true;
       switch (req.query.id) {
@@ -38,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             //  Game over screen
             imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmevCfJbagZiBhWYs1y2nLUMo3AQ7NcDwnvJkk9fswf9nN`
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
-            buttons = [{ label: 'Play again', action: 'post' }]
+            buttons = [{ label: 'Play again', action: 'post' }, { label: 'Build your own', action: "link", target: "https://docs.pinata.cloud/farcaster/fdk" }]
             input = false;
             break;
           }
@@ -52,7 +52,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             //  Game over screen  
             imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmSeftd8vDvhYUb8SYRnDswzzKDarST7UxKnDkXQ9Dz7w4`
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
-            buttons = [{ label: 'Play again', action: 'post' }]
+            buttons = [{ label: 'Play again', action: 'post' }, { label: 'Build your own', action: "link", target: "https://docs.pinata.cloud/farcaster/fdk" }]
             input = false;
             break;
           }
@@ -66,7 +66,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             //  Game over screen
             imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmSPqx6gtVyiUM5psLVoLcoCpmkUEXibmCP6Pm2QoC36Nv`
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
-            buttons = [{ label: 'Play again', action: 'post' }]
+            buttons = [{ label: 'Play again', action: 'post' }, { label: 'Build your own', action: "link", target: "https://docs.pinata.cloud/farcaster/fdk" }]
             input = false;
             break;
           }
@@ -80,14 +80,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             //  Game over screen
             imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmSPqx6gtVyiUM5psLVoLcoCpmkUEXibmCP6Pm2QoC36Nv`
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
-            buttons = [{ label: 'Play again', action: 'post' }]
+            buttons = [{ label: 'Play again', action: 'post' }, { label: 'Build your own', action: "link", target: "https://docs.pinata.cloud/farcaster/fdk" }]
             input = false;
             break;
           }
         case "6":
           possibleAnswers = ["farcoder.slice(4, farcoder.length)", "farcoder.slice(4, farcoder.length);", "farcoder.slice(4)", "farcoder.slice(4);", "farcoder.slice(-14)", "farcoder.slice(-14);", "farcoder.substring(4)", "farcoder.substring(4);", "farcoder.substr(4)", "farcoder.substr(4);", 'farcoder.substring(farcoder.indexOf("I"))', 'farcoder.substring(farcoder.indexOf("I"));', 'farcoder.split("0101")[1]', 'farcoder.split("0101")[1];']
           if (possibleAnswers.includes(req.body.untrustedData.inputText)) {
-            imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmQecg81c8cuZkAnTf28SkVSmJXxcUSmhY7NH9LXeGGTQE`;
+            imageUrl = `${process.env.GATEWAY_URL}/ipfs/Qmdy4hTnwAZKdakNknLD6pKm4irJ3pKSfkrtaPPnwRrpqe`;
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/7`            
             input = true;
             break;
@@ -95,7 +95,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             //  Game over
             imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmaEjjAzgeztW3A3UbmfKruDgCb3oRDEPsV5N6keor9t7w`
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
-            buttons = [{ label: 'Play again', action: 'post' }]
+            buttons = [{ label: 'Play again', action: 'post' }, { label: 'Build your own', action: "link", target: "https://docs.pinata.cloud/farcaster/fdk" }]
             input = false;
             break;
           }
@@ -104,14 +104,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
           if (possibleAnswers.includes(req.body.untrustedData.inputText)) {
             imageUrl = await generateAnalyticsImage(FRAME_ID, "Farcoder Stats") //`${process.env.GATEWAY_URL}/ipfs/Qmf8kouZJvB1DPZUFXLPQF56hhEWA39aog34uDohdBKinw`;
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
-            buttons = [{ label: 'Play again', action: 'post' }]
+            buttons = [{ label: 'Play again', action: 'post' }, { label: 'Build your own', action: "link", target: "https://docs.pinata.cloud/farcaster/fdk" }]
             input = false;
             break;
           } else {
             //  Game over
             imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmQYFs1DyeYz41BkhiGmyoLGMfxi7eh8EZjenEAZYcXdYt`
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
-            buttons = [{ label: 'Play again', action: 'post' }]
+            buttons = [{ label: 'Play again', action: 'post' }, { label: 'Build your own', action: "link", target: "https://docs.pinata.cloud/farcaster/fdk" }]
             input = false;
             break;
           }
