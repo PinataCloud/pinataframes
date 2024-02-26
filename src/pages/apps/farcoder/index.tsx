@@ -12,7 +12,7 @@ export default function Index() {
         <meta property="og:title" content="Farcoder" />
         <meta property="og:description" content="Solve coding puzzles, become a Farcoder." />
         <meta property="fc:frame:button:1" content="Start coding" />
-        <meta property="fc:frame:post_url" content={`${process.env.HOSTED_URL}/api/farcoder`} />
+        <meta property="fc:frame:post_url" content={`${process.env.HOSTED_URL}/api/farcoder/1`} />
       </Head>
       <h1>Farcoder</h1>
       <p>Solve coding problems by writing code in-frame. Climb the leaderboard.</p>
