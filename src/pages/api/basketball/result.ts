@@ -69,7 +69,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const currentSession = currentUUID.session || uuidv4();
       const prepareTime = currentUUID.prepareTime;
 
-      const secondsDifference = dayjs().diff(dayjs(prepareTime), 'second');
+      const secondsDifference = dayjs().diff(prepareTime);
       console.log('secondsDifference', secondsDifference);
 
       console.log('currentUUID', currentUUID);

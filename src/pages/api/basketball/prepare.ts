@@ -87,7 +87,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       //prepare time is the current utc time
       const state = {
         session: currentSession,
-        prepareTime: dayjs().utc(),
         team: currentTeam,
       }
 

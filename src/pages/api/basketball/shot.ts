@@ -56,6 +56,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
   if (req.method === "POST") {
     console.log('body. Shot endpoint', req.body);
     try {
+      const prepareTime = dayjs().utc();
       const isValidated = await fdk.validateFrameMessage(req.body);
 
       if (!isValidated) {
@@ -67,7 +68,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const currentUUID = req.body?.untrustedData?.state ? JSON.parse(req.body.untrustedData.state) : {};
       const currentTeam = currentUUID.team || req.body?.untrustedData?.buttonIndex || 1;
       const currentSession = currentUUID.session || uuidv4();
-      const prepareTime = currentUUID.prepareTime;
 
       const imgContent = await generateImage();
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
