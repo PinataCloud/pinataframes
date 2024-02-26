@@ -95,12 +95,14 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         session: currentSession
       }
 
+      const jsonState = JSON.stringify(state).replace(/"/g, '&quot;');
+
       const frameRes =
         `<!DOCTYPE html><html><head>
             <title>Pinata basketball</title>
             <meta property="fc:frame" content="vNext" />
             <meta property="og:title" content="Users Chart" />
-            <meta property="fc:frame:state" content="${JSON.stringify(state)}" />
+            <meta property="fc:frame:state" content="${jsonState}" />
             <meta property="og:description" content="Pinata basketball" />
             ${frameMetadata}
             </head></html>`;
