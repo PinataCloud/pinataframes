@@ -25,6 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
       let postEndpoint = "";
       let buttons: any = [{ label: 'Submit answer', action: 'post' }]
       let possibleAnswers = [""]
+      let input = true;
       switch (req.query.id) {
         case "2":
           possibleAnswers = ["fcPhrases[2]", "fcPhrases[2];", "console.log(fcPhrases[2])"]
@@ -37,6 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmevCfJbagZiBhWYs1y2nLUMo3AQ7NcDwnvJkk9fswf9nN`
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
             buttons = [{ label: 'Play again', action: 'post' }]
+            input = false;
             break;
           }
         case "3":
@@ -50,6 +52,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmSeftd8vDvhYUb8SYRnDswzzKDarST7UxKnDkXQ9Dz7w4`
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
             buttons = [{ label: 'Play again', action: 'post' }]
+            input = false;
             break;
           }
         case "4":
@@ -63,6 +66,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmSPqx6gtVyiUM5psLVoLcoCpmkUEXibmCP6Pm2QoC36Nv`
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
             buttons = [{ label: 'Play again', action: 'post' }]
+            input = false;
             break;
           }
         case "5":
@@ -76,6 +80,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmSPqx6gtVyiUM5psLVoLcoCpmkUEXibmCP6Pm2QoC36Nv`
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
             buttons = [{ label: 'Play again', action: 'post' }]
+            input = false;
             break;
           }
         case "6":
@@ -84,12 +89,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
             imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmXo2kyujfrXZ8aakZuSfZ3ixgEocMHJsvpf2SrAK4pdmy`;
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
             buttons = [{ label: 'Play again', action: 'post' }]
+            input = false;
             break;
           } else {
             //  Game over
             imageUrl = `${process.env.GATEWAY_URL}/ipfs/QmaEjjAzgeztW3A3UbmfKruDgCb3oRDEPsV5N6keor9t7w`
             postEndpoint = `${process.env.HOSTED_URL}/api/farcoder/1`
             buttons = [{ label: 'Play again', action: 'post' }]
+            input = false;
             break;
           }
         case "1":
@@ -99,11 +106,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
           break;        
       }
 
-      const frameMetadata = await fdk.getFrameMetadata({
-        post_url: postEndpoint,
-        buttons: buttons,
-        image: { url: imageUrl, ipfs: false }
-      });
+      let frameMetadata;
+
+      if(input) {
+        frameMetadata = await fdk.getFrameMetadata({
+          post_url: postEndpoint,
+          buttons: buttons,
+          input: {text: "Type your code"},
+          image: { url: imageUrl, ipfs: false }
+        });
+      } else {
+        frameMetadata = await fdk.getFrameMetadata({
+          post_url: postEndpoint,
+          buttons: buttons,
+          image: { url: imageUrl, ipfs: false }
+        });
+      }  
 
 
       const frameRes =
