@@ -17,14 +17,14 @@ const fdk = new PinataFDK({
 
 const FRAME_ID = "pinata_basketball";
 
-export const generateImage = async () => {
+export const generateImage = async (difference: number) => {
   const monoFontReg = await fetch(
     "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
   );
 
   const template: any = html(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: center;  width: 1200px; height: 630px;">
-    <p style="font-size: 20px">You have 3 seconds to shot</p>
+    <p style="font-size: 20px">The difference in time is ${difference}</p>
   </div>
   `);
   const svg = await satori(template, {
@@ -69,13 +69,19 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const currentSession = currentUUID.session || uuidv4();
       const prepareTime = currentUUID.prepareTime;
 
-      const imgContent = await generateImage();
+      const secondsDifference = dayjs().diff(dayjs(prepareTime), 'second');
+      console.log('secondsDifference', secondsDifference);
+
+      console.log('currentUUID', currentUUID);
+      console.log('typeof currentUUID', typeof currentUUID);
+
+      const imgContent = await generateImage(secondsDifference);
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
 
       const frameMetadata = await fdk.getFrameMetadata({
-        post_url: `${process.env.HOSTED_URL}/api/basketball/result`,
+        post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
         buttons: [
-          { label: "Shot", action: 'post' },
+          { label: "Try again", action: 'post' },
         ],
         image: {url: dataURI, ipfs: false}
       });
@@ -83,8 +89,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       //generate UUID for idempotency_key
       const state = {
         session: currentSession,
-        team: currentTeam,
-        prepareTime: prepareTime
+        team: currentTeam
       }
 
       const jsonState = JSON.stringify(state).replace(/"/g, '&quot;');
