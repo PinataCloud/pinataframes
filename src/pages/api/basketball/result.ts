@@ -75,7 +75,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       console.log('currentUUID', currentUUID);
       console.log('typeof currentUUID', typeof currentUUID);
 
-      const dataUri = await generateImage(secondsDifference, req.body, currentTeam);
+      const dataUri: any = await generateImage(secondsDifference, req.body, currentTeam);
 
       const frameMetadata = fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
