@@ -76,7 +76,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         buttons: [
           { label: "Shot", action: 'post' },
         ],
-        image: {url: dataURI, ipfs: false}
+        image: {url: dataURI}
       });
 
       //generate UUID for idempotency_key

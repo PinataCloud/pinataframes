@@ -41,7 +41,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const currentUUID = req.body?.untrustedData?.state ? JSON.parse(req.body.untrustedData.state) : {};
       const currentSession = currentUUID.session || uuidv4();
 
-      const imgContent = await generateImage();
+      const imgContent: any = await generateImage();
 
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
@@ -51,7 +51,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
           { label: "Team 3", action: 'post' },
           { label: "Team 4", action: 'post' },
         ],
-        image: {url: imgContent, ipfs: false}
+        image: {url: imgContent}
       });
 
       //prepare time is the current utc time

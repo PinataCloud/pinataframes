@@ -190,7 +190,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
           { label: 'Car 3', action: 'post' },
           { label: 'Car 4', action: 'post' },
         ],
-        image: {url: dataURI, ipfs: false}
+        image: {url: dataURI}
       });
       const frameRes =
         `<!DOCTYPE html><html><head>

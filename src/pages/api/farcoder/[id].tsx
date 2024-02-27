@@ -129,13 +129,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
           post_url: postEndpoint,
           buttons: buttons,
           input: {text: "Type your code"},
-          image: { url: imageUrl, ipfs: false }
+          image: { url: imageUrl }
         });
       } else {
         frameMetadata = await fdk.getFrameMetadata({
           post_url: postEndpoint,
           buttons: buttons,
-          image: { url: imageUrl, ipfs: false }
+          image: { url: imageUrl}
         });
       }  
 

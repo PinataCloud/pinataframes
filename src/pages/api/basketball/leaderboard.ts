@@ -76,7 +76,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
           { label: "Try again", action: 'post' },
           { label: "Change team", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball` },
         ],
-        image: {url: dataURI, ipfs: false}
+        image: {url: dataURI}
       });
 
       const frameRes = `<!DOCTYPE html><html><head>

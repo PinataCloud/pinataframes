@@ -266,7 +266,7 @@ export const generateHtmlImage = async (content: string, props?: {asUri?: boolea
   const pngData = resvg.render();
   const png = pngData.asPng();
 
-  if (props.asUri) {
+  if (props?.asUri) {
     return 'data:image/png;base64,' + png.toString('base64');
   } else {
     return png;

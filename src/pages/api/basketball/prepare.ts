@@ -81,7 +81,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         buttons: [
           { label: "I'm Ready", action: 'post' },
         ],
-        image: {url: dataURI, ipfs: false}
+        image: {url: dataURI}
       });
 
       //prepare time is the current utc time
