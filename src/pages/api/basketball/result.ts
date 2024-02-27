@@ -85,7 +85,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         image: {url: dataURI}
       });
 
-      console.log('frameMetadata', frameMetadata);
+      // console.log('frameMetadata', frameMetadata);
 
       //generate UUID for idempotency_key
       const state = {
@@ -94,6 +94,8 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       }
 
       const jsonState = JSON.stringify(state).replace(/"/g, '&quot;');
+
+      console.log('jsonState,', jsonState);
 
       const frameRes =
         `<!DOCTYPE html><html><head>

@@ -77,7 +77,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
 
       const frameMetadata = await fdk.getFrameMetadata({
-        post_url: `${process.env.HOSTED_URL}/api/basketball/shot`,
+        post_url: `${process.env.HOSTED_URL}/api/basketball/shoot`,
         buttons: [
           { label: "I'm Ready", action: 'post' },
         ],
