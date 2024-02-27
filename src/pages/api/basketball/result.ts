@@ -123,9 +123,9 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
             <meta property="og:title" content="Pinata Basketball" />
             <meta property="fc:frame:state" content="${jsonState}" />
             <meta property="og:description" content="Pinata basketball" />
-            <meta name="fc:frame:button:4:action" content="post"/>
-            <meta name="fc:frame:button:4" content="Test button leaderboard"/>
-            <meta name="fc:frame:button:4:target" content="http://pinatadrops.com/apps/basketball/leaderboard"/>
+            <meta name="fc:frame:button:3:action" content="post"/>
+            <meta name="fc:frame:button:3:target" content="http://pinatadrops.com/apps/basketball/leaderboard"/>
+            <meta name="fc:frame:button:3" content="Test button leaderboard"/>
             ${frameMetadata}
             </head></html>`;
 
