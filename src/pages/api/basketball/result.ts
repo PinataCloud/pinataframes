@@ -42,7 +42,7 @@ export const generateImage = async (difference: number) => {
   const template: any = html(`
   <div style="padding: 20px; position: relative; display: flex; flex-direction: column; justify-content: center;  width: 1200px; height: 630px;">
     <p style="font-size: 40px">The difference in time is ${difference}</p>
-    <p style="font-size: 40px">Chances of scoring are ${chance}</p>
+    <p style="font-size: 40px">Chances of scoring are ${chance*100}%</p>
     <p style="font-size: 40px">Scored? ${success}</p>
   </div>
   `);
@@ -101,6 +101,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
         buttons: [
           { label: "Try again", action: 'post' },
+          { label: "Leaderboard", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/leaderboard` },
         ],
         image: {url: dataURI, ipfs: false}
       });

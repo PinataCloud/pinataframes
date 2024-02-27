@@ -17,14 +17,14 @@ const fdk = new PinataFDK({
 
 const FRAME_ID = "pinata_basketball";
 
-export const generateImage = async () => {
+export const generateLeaderboardImage = async () => {
   const monoFontReg = await fetch(
     "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
   );
 
   const template: any = html(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: center;  width: 1200px; height: 630px;">
-    <p style="font-size: 60px">You have 3 seconds to shot</p>
+    <p style="font-size: 60px">Leaderboard Here</p>
   </div>
   `);
   const svg = await satori(template, {
@@ -55,7 +55,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
   if (req.method === "POST") {
     console.log('body. Shot endpoint', req.body);
     try {
-      const prepareTime = dayjs().utc();
       const isValidated = await fdk.validateFrameMessage(req.body);
 
       if (!isValidated) {
@@ -68,35 +67,33 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const currentTeam = currentUUID.team;
       const currentSession = currentUUID.session || uuidv4();
 
-      const imgContent = await generateImage();
+      const imgContent = await generateLeaderboardImage();
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
 
-      const frameMetadata = await fdk.getFrameMetadata({
-        post_url: `${process.env.HOSTED_URL}/api/basketball/result`,
-        buttons: [
-          { label: "Shot", action: 'post' },
-        ],
-        image: {url: dataURI, ipfs: false}
-      });
-
-      //generate UUID for idempotency_key
       const state = {
         session: currentSession,
         team: currentTeam,
-        prepareTime: prepareTime
       }
 
       const jsonState = JSON.stringify(state).replace(/"/g, '&quot;');
 
-      const frameRes =
-        `<!DOCTYPE html><html><head>
-            <title>Pinata basketball</title>
-            <meta property="fc:frame" content="vNext" />
-            <meta property="og:title" content="Pinata Basketball" />
-            <meta property="fc:frame:state" content="${jsonState}" />
-            <meta property="og:description" content="Pinata basketball" />
-            ${frameMetadata}
-            </head></html>`;
+      const frameMetadata = await fdk.getFrameMetadata({
+        post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
+        buttons: [
+          { label: "Try again", action: 'post' },
+          { label: "Change team", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball` },
+        ],
+        image: {url: dataURI, ipfs: false}
+      });
+
+      const frameRes = `<!DOCTYPE html><html><head>
+        <title>Pinata basketball leaderboard</title>
+        <meta property="fc:frame" content="vNext" />
+        <meta property="og:title" content="Pinata Basketball" />
+        <meta property="fc:frame:state" content="${jsonState}" />
+        <meta property="og:description" content="Pinata basketball" />
+          ${frameMetadata}
+          </head></html>`
 
       return res.setHeader('content-type', 'text/html').send(frameRes);
     } catch (error) {
