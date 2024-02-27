@@ -21,7 +21,7 @@ const FRAME_ID = "pinata_basketball";
 export const generateImage = async () => {
   return generateHtmlImage(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: center;  width: 1200px; height: 630px;">
-    <p style="font-size: 60px">You have 3 seconds to shot</p>
+    <p style="font-size: 60px">You have 3 seconds to shoot</p>
   </div>`, {asUri: true});
 }
 
@@ -48,7 +48,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/result`,
         buttons: [
-          { label: "Shot", action: 'post' },
+          { label: "Shoot", action: 'post' },
         ],
         image: {url: imgContent}
       });

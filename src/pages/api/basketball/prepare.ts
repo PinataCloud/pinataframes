@@ -26,7 +26,7 @@ export const generateImage = async (team: number, counter: number) => {
   <div style="padding: 20px; position: relative; display: flex; flex-direction: column;  justify-content: center;  width: 1200px; height: 630px;">
     <p style="font-size: 60px">Your Team ${team}</p>
     <p style="font-size: 60px">Current Score ${counter}</p>
-    <p style="font-size: 40px">Once you're ready calculate 3 seconds to shot. The closer to 3 seconds the more chances to score</p>
+    <p style="font-size: 40px">Once you're ready calculate 3 seconds to shoot. The closer to 3 seconds the more chances to score</p>
   </div>
   `);
   const svg = await satori(template, {

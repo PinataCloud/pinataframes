@@ -21,18 +21,15 @@ const FRAME_ID = "pinata_basketball_winners";
 export const generateImage = async (difference: number, body: any, team: number) => {
   let success;
   let chance = 0;
-  if (difference >= 2500 && difference <= 3500) {
+  if (difference >= 2200 && difference <= 3800) {
     if (difference === 3000) {
       success = true;
     } else {
-      // Calculate the chance of success based on the difference to 3000
-      // The closer to 3000, the higher the chance (max 1 or 100% at 3000)
-      chance = 1 - Math.abs(3000 - difference) / 500; // Normalize the difference to a 0-1 scale
+      chance = 1 - Math.abs(3000 - difference) / 800; // Normalize the difference to a 0-1 scale
       const random = Math.random();
       success = random < chance;
     }
   } else {
-    // If outside 2500 to 3500 range, success is always false
     success = false;
   }
 
