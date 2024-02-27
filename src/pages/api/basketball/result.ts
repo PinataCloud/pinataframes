@@ -98,9 +98,10 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
 
       const frameMetadata = await fdk.getFrameMetadata({
+        post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
         buttons: [
           { label: "Try again", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/prepare` },
-          { label: "Leaderboard", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/leaderboard` },
+          { label: "Leaderboard", action: 'post_redirect', target: `${process.env.HOSTED_URL}/api/basketball/leaderboard` },
         ],
         image: {url: dataURI, ipfs: false}
       });
