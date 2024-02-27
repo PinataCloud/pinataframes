@@ -56,7 +56,7 @@ export const generateImage = async (difference: number, body: any, team: number)
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse,){
   if (req.method === "POST") {
-    console.log('body. Shot endpoint', req.body);
+    console.log('body. Result endpoint', req.body);
     try {
       const isValidated = await fdk.validateFrameMessage(req.body);
 
@@ -75,8 +75,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       console.log('currentUUID', currentUUID);
       console.log('typeof currentUUID', typeof currentUUID);
 
-      const imgContent = await generateImage(secondsDifference, req.body, currentTeam);
-      const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
+      const dataUri = await generateImage(secondsDifference, req.body, currentTeam);
 
       const frameMetadata = fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
@@ -84,7 +83,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
           { label: "Try again", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/prepare` },
           { label: "Leaderboard", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/leaderboard` },
         ],
-        image: {url: dataURI}
+        image: {url: dataUri}
       });
 
       // console.log('frameMetadata', frameMetadata);
