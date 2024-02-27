@@ -40,6 +40,8 @@ export const generateImage = async (difference: number, body: any, team: number)
     await fdk.sendAnalytics(FRAME_ID, body, `team_${team}`);
   }
 
+  console.log('shot success, difference', success, difference);
+
   return generateHtmlImage(`
   <div style="padding: 20px; position: relative; display: flex; flex-direction: column; justify-content: center;  width: 1200px; height: 630px;">
     <p style="font-size: 40px">The difference in time is ${difference}</p>

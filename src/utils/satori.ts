@@ -260,11 +260,15 @@ export const generateHtmlImage = async (content: string, props?: {asUri?: boolea
     ]
   });
 
+  console.log('svg creation good');
+
   const resvg = new Resvg(svg, {
     background: "rgba(238, 235, 230, .9)",
   });
   const pngData = resvg.render();
   const png = pngData.asPng();
+
+  console.log('Png generation good');
 
   if (props?.asUri) {
     return 'data:image/png;base64,' + png.toString('base64');
