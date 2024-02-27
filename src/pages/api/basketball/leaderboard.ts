@@ -24,21 +24,35 @@ export const generateLeaderboardImage = async () => {
   const startDate = dayjs(now).format('YYYY-MM-DD HH:mm:ss');
   const endDate = dayjs(today).format('YYYY-MM-DD HH:mm:ss');
 
-  const url = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners&custom_id=team_1`;
+  const url1 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners&custom_id=team_1`;
+  const url2 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners&custom_id=team_1`;
+  const url3 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners&custom_id=team_1`;
+  const url4 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners&custom_id=team_1`;
 
-  const res = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${process.env.PINATA_JWT}`,
-    }
-  })
-  const json: any = await res.json();
+  const res1 = await fetch(url1, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
+  const json1: any = await res1.json();
 
-  console.log('json', json);
+  const res2 = await fetch(url2, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
+  const json2: any = await res2.json();
+
+  const res3 = await fetch(url3, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
+  const json3: any = await res3.json();
+
+  const res4 = await fetch(url4, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
+  const json4: any = await res4.json();
+
+  console.log('json1', json1);
+  console.log('json2', json2);
+  console.log('json3', json3);
+  console.log('json4', json4);
 
   return generateHtmlImage(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: center;  width: 1200px; height: 630px;">
     <p style="font-size: 60px">Leaderboard Here</p>
-    <p>${JSON.stringify(json)}</p>
+    <p>${JSON.stringify(json1)}</p>
+    <p>${JSON.stringify(json2)}</p>
+    <p>${JSON.stringify(json3)}</p>
+    <p>${JSON.stringify(json4)}</p>
   </div>
   `, {asUri: true});
 }
