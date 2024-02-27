@@ -60,8 +60,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const currentTeam = currentUUID.team;
       const currentSession = currentUUID.session || uuidv4();
 
-      const imgContent = await generateLeaderboardImage();
-      const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
+      const imgContent: any = await generateLeaderboardImage();
 
       const state = {
         session: currentSession,
@@ -76,7 +75,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
           { label: "Try again", action: 'post' },
           { label: "Change team", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball` },
         ],
-        image: {url: dataURI}
+        image: {url: imgContent}
       });
 
       const frameRes = `<!DOCTYPE html><html><head>
