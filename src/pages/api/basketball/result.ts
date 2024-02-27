@@ -16,7 +16,7 @@ const fdk = new PinataFDK({
   }
 );
 
-const FRAME_ID = "pinata_basketball_point";
+const FRAME_ID = "pinata_basketball_winners";
 
 export const generateImage = async (difference: number, body: any, team: number) => {
   let success;
