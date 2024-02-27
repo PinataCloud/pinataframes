@@ -240,3 +240,35 @@ export const generateAnalyticsImage = async (frame_id: string, title?: string) =
     throw error;
   }
 }
+
+export const generateHtmlImage = async (content: string, props?: {asUri?: boolean}) => {
+  const monoFontReg = await fetch(
+    "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
+  );
+
+  const template: any = html(content);
+  const svg = await satori(template, {
+    width: 1200,
+    height: 630,
+    fonts: [
+      {
+        name: "Roboto Mono",
+        data: await monoFontReg.arrayBuffer(),
+        weight: 400,
+        style: "normal",
+      }
+    ]
+  });
+
+  const resvg = new Resvg(svg, {
+    background: "rgba(238, 235, 230, .9)",
+  });
+  const pngData = resvg.render();
+  const png = pngData.asPng();
+
+  if (props.asUri) {
+    return 'data:image/png;base64,' + png.toString('base64');
+  } else {
+    return png;
+  }
+}

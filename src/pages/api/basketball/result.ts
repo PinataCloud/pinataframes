@@ -5,6 +5,7 @@ import {html} from "satori-html";
 import {Resvg} from "@resvg/resvg-js";
 import dayjs, {Dayjs} from "dayjs";
 import utc from 'dayjs/plugin/utc';
+import {generateHtmlImage} from "@/utils/satori";
 const { v4: uuidv4 } = require('uuid');
 
 dayjs.extend(utc);
@@ -15,14 +16,10 @@ const fdk = new PinataFDK({
   }
 );
 
-const FRAME_ID = "pinata_basketball";
+const FRAME_ID = "pinata_basketball_point";
 
-export const generateImage = async (difference: number) => {
-  const monoFontReg = await fetch(
-    "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
-  );
-
-  let success = false;
+export const generateImage = async (difference: number, body: any, team: number) => {
+  let success;
   let chance = 0;
   if (difference >= 2500 && difference <= 3500) {
     if (difference === 3000) {
@@ -39,34 +36,18 @@ export const generateImage = async (difference: number) => {
     success = false;
   }
 
-  const template: any = html(`
+  if (success) {
+    await fdk.sendAnalytics(FRAME_ID, body, `team_${team}`);
+  }
+
+  return generateHtmlImage(`
   <div style="padding: 20px; position: relative; display: flex; flex-direction: column; justify-content: center;  width: 1200px; height: 630px;">
     <p style="font-size: 40px">The difference in time is ${difference}</p>
     <p style="font-size: 40px">Chances of scoring are ${chance*100}%</p>
     <p style="font-size: 40px">Scored? ${success}</p>
   </div>
-  `);
-  const svg = await satori(template, {
-    width: 1200,
-    height: 630,
-    fonts: [
-      {
-        name: "Roboto Mono",
-        data: await monoFontReg.arrayBuffer(),
-        weight: 400,
-        style: "normal",
-      }
-    ]
-  });
+  `, {asUri: true});
 
-// render png
-  const resvg = new Resvg(svg, {
-    background: "rgba(238, 235, 230, .9)",
-  });
-  const pngData = resvg.render();
-  const png = pngData.asPng();
-
-  return png;
 }
 
 
@@ -81,10 +62,8 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         return res.status(400).json({error: "Invalid frame message"});
       }
 
-      await fdk.sendAnalytics(FRAME_ID, req.body);
-
       const currentUUID = req.body?.untrustedData?.state ? JSON.parse(req.body.untrustedData.state) : {};
-      const currentTeam = currentUUID.team || req.body?.untrustedData?.buttonIndex || 1;
+      const currentTeam = currentUUID.team;
       const currentSession = currentUUID.session || uuidv4();
       const prepareTime = currentUUID.prepareTime;
 
@@ -94,10 +73,10 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       console.log('currentUUID', currentUUID);
       console.log('typeof currentUUID', typeof currentUUID);
 
-      const imgContent = await generateImage(secondsDifference);
+      const imgContent = await generateImage(secondsDifference, req.body, currentTeam);
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
 
-      const frameMetadata = await fdk.getFrameMetadata({
+      const frameMetadata = fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
         buttons: [
           { label: "Try again", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/prepare` },

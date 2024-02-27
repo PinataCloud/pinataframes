@@ -5,6 +5,7 @@ import {html} from "satori-html";
 import {Resvg} from "@resvg/resvg-js";
 import dayjs, {Dayjs} from "dayjs";
 import utc from 'dayjs/plugin/utc';
+import {generateHtmlImage} from "@/utils/satori";
 const { v4: uuidv4 } = require('uuid');
 
 dayjs.extend(utc);
@@ -18,39 +19,12 @@ const fdk = new PinataFDK({
 const FRAME_ID = "pinata_basketball";
 
 export const generateImage = async () => {
-  const monoFontReg = await fetch(
-    "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
-  );
-
-  const template: any = html(`
-  <div style="padding: 20px; position: relative; display: flex; flex-direction: column;  justify-content: center;  width: 1200px; height: 630px;">
-    <p style="font-size: 40px">Choose your team for this season</p>
-  </div>
-  `);
-  const svg = await satori(template, {
-    width: 1200,
-    height: 630,
-    fonts: [
-      {
-        name: "Roboto Mono",
-        data: await monoFontReg.arrayBuffer(),
-        weight: 400,
-        style: "normal",
-      }
-    ]
-  });
-
-// render png
-  const resvg = new Resvg(svg, {
-    background: "rgba(238, 235, 230, .9)",
-  });
-  const pngData = resvg.render();
-  const png = pngData.asPng();
-
-  return png;
+  return generateHtmlImage(`
+    <div style="padding: 20px; position: relative; display: flex; flex-direction: column;  justify-content: center;  width: 1200px; height: 630px;">
+      <p style="font-size: 40px">Choose your team for this season</p>
+    </div>
+  `, {asUri: true});
 }
-
-
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse,){
   if (req.method === "POST") {
@@ -68,7 +42,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const currentSession = currentUUID.session || uuidv4();
 
       const imgContent = await generateImage();
-      const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
 
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
@@ -78,7 +51,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
           { label: "Team 3", action: 'post' },
           { label: "Team 4", action: 'post' },
         ],
-        image: {url: dataURI, ipfs: false}
+        image: {url: imgContent, ipfs: false}
       });
 
       //prepare time is the current utc time

@@ -1,16 +1,6 @@
 import Head from 'next/head';
 
-const testAsyncFn = async () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log('remote called');
-      resolve('done');
-    }, 2000);
-  });
-}
-
 export default function Index() {
-  testAsyncFn();
   return (
     <>
       <Head>
