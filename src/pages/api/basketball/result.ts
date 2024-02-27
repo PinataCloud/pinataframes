@@ -98,7 +98,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
 
       const frameMetadata = await fdk.getFrameMetadata({
-        post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
         buttons: [
           { label: "Try again", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/prepare` },
           { label: "Leaderboard", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/leaderboard` },
@@ -123,10 +122,10 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
             <meta property="og:title" content="Pinata Basketball" />
             <meta property="fc:frame:state" content="${jsonState}" />
             <meta property="og:description" content="Pinata basketball" />
+            ${frameMetadata}           
             <meta name="fc:frame:button:3:action" content="post"/>
             <meta name="fc:frame:button:3:target" content="http://pinatadrops.com/apps/basketball/leaderboard"/>
             <meta name="fc:frame:button:3" content="Test button leaderboard"/>
-            ${frameMetadata}
             </head></html>`;
 
       return res.setHeader('content-type', 'text/html').send(frameRes);
