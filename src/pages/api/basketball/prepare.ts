@@ -5,6 +5,7 @@ import {html} from "satori-html";
 import {Resvg} from "@resvg/resvg-js";
 import dayjs, {Dayjs} from "dayjs";
 import utc from 'dayjs/plugin/utc';
+import { uploadToIpfs } from "@/utils/satori";
 const { v4: uuidv4 } = require('uuid');
 
 dayjs.extend(utc);
@@ -45,8 +46,8 @@ export const generateImage = async (team: number, counter: number) => {
   });
   const pngData = resvg.render();
   const png = pngData.asPng();
-
-  return png;
+  const url = await uploadToIpfs(png);
+  return url;
 }
 
 
@@ -71,14 +72,14 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       console.log('typeof currentUUID', typeof currentUUID);
 
       const imgContent = await generateImage(currentTeam, 0);
-      const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
+      // const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
 
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/shoot`,
         buttons: [
           { label: "I'm Ready", action: 'post' },
         ],
-        image: {url: dataURI}
+        image: {url: imgContent}
       });
 
       //prepare time is the current utc time
