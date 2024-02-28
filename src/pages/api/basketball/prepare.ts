@@ -27,8 +27,8 @@ export const generateImage = async (team: number, counter: number) => {
   </div>
   `);
   const svg = await satori(template, {
-    width: 1000,
-    height: 525,
+    width: 1200,
+    height: 630,
     fonts: [
       {
         name: "Tickerbit",
