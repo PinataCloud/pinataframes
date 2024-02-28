@@ -49,7 +49,8 @@ export const generateGlobalLeaderboardImage = async () => {
 
 export default async function handler (req: NextApiRequest, res: NextApiResponse,){
   if (req.method === "POST") {
-    console.log('body. Shot endpoint', req.body);
+    console.log('body. global leaderboard endpoint', req.body);
+    console.log('request', req);
     try {
       const isValidated = await fdk.validateFrameMessage(req.body);
 
