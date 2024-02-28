@@ -271,7 +271,6 @@ export const generateHtmlImage = async (content: string, props?: {asUri?: boolea
   if (props?.asUri) {
     return 'data:image/png;base64,' + png.toString('base64');
   } else {
-    const url = await uploadToIpfs(png);
-    return url;
+    return png;
   }
 }

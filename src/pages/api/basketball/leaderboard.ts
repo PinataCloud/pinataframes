@@ -18,6 +18,13 @@ const fdk = new PinataFDK({
 
 const FRAME_ID = "pinata_basketball";
 
+const usersMap: any = {
+  1: "@woj",
+  2: "@alvejtiago",
+  3: "@df",
+  4: "@adrienne",
+}
+
 export const generateCurrentLeaderboardImage = async () => {
   const today = dayjs.utc().endOf('day');
   const now = dayjs.utc().subtract(1, 'hour').endOf('hour');
@@ -56,14 +63,24 @@ export const generateCurrentLeaderboardImage = async () => {
   const team4Score = winningTeams.find((team: any) => team.team === "team_4")?.score || 0;
 
   return generateHtmlImage(`
-  <div style="padding: 20px; position: relative; display: flex; flex-direction: column; justify-content: center;  width: 1200px; height: 630px;">
-    <p style="font-size: 60px">Current Match Leaderboard</p>
-    <p>Team 1 score: ${team1Score}</p>
-    <p>Team 2 score: ${team2Score}</p>
-    <p>Team 3 score: ${team3Score}</p>
-    <p>Team 4 score: ${team4Score}</p>
+    <div style="padding: 20px; 
+        position: relative; 
+        display: flex;
+        flex-direction: column;
+        padding-top: 90px;
+        justify-content: flex-start;  
+        width: 600px; 
+        height: 315px; 
+        background-image: url('https://pamadd.mypinata.cloud/ipfs/QmR67BJaSXXm9k8mbVsQvFHFapGtShTtsWgGa3AnEvfMSH'); 
+        background-size: 600px 315px;
+        font-size: 20px;     
+        ">
+    <p style="color: #fe4f74">Team ${usersMap[1]}: ${team1Score}</p>
+    <p style="color: #fb9908">Team ${usersMap[2]}: ${team2Score}</p>
+    <p style="color: #8a79ff">Team ${usersMap[3]}: ${team3Score}</p>
+    <p style="color: #34d9aa">Team ${usersMap[4]}: ${team4Score}</p>
   </div>
-  `, {asUri: true});
+  `, {asUri: true, width: 600, height: 315});
 }
 
 

@@ -54,7 +54,6 @@ export const generateImage = async (team: number, counter: number) => {
   const pngData = resvg.render();
   const png = pngData.asPng();
   const url = await uploadToIpfs(png);
-  console.log('url', url);
   return url;
 }
 
@@ -80,7 +79,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       console.log('typeof currentUUID', typeof currentUUID);
 
       const imgContent = await generateImage(currentTeam, 0);
-      // const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
 
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/shoot`,
