@@ -36,6 +36,8 @@ export const generateGlobalLeaderboardImage = async () => {
     const utcStartHour = first_game.add(i, 'hour').format('YYYY-MM-DD HH:mm:ss');
     const utcEndHour = first_game.add(i + 1, 'hour').format('YYYY-MM-DD HH:mm:ss');
 
+    console.log('utcStartHour, utcEndHour', utcStartHour, utcEndHour)
+
     const url1 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=custom_id&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=pinata_basketball_winners`;
 
     const res1 = await fetch(url1, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
