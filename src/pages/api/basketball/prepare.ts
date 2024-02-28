@@ -21,14 +21,14 @@ export const generateImage = async (team: number, counter: number) => {
   const pixelFont = await fetch(`${process.env.HOSTED_URL}/tickerbit-regular.ttf`)
 
   const template: any = html(`
-  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 120px; height: 63px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmPC86ENNELHJR5yr9QT1vnCT72qVuByTbC28gmomac13W'); background-size: 120px 63px; color: #fff;">
+  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmcDBush8uV3UsAAE2MYB4RyJPrUZSkosEVoqeaWQxmgfA'); background-size: 1200px 630px; color: #fff;">
     <p style="font-size: 60px">Your Team ${team}</p>
     <p style="font-size: 40px">Once you're ready calculate 3 seconds to shoot. The closer to 3 seconds the more chances to score</p>
   </div>
   `);
   const svg = await satori(template, {
-    width: 120,
-    height: 63,
+    width: 1200,
+    height: 630,
     fonts: [
       {
         name: "Tickerbit",
