@@ -48,7 +48,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/result?team=${currentTeam}`,
         buttons: [
-          { label: "Shoot", action: 'post' },
+          { label: "Shoot", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/result?team=${currentTeam}` },
         ],
         image: {url: imgContent}
       });
