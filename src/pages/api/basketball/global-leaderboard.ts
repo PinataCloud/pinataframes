@@ -24,6 +24,13 @@ interface CustomIDResponse  {
   unique_interactions: number;
 }
 
+const usersMap: any = {
+  1: "@woj",
+  2: "@alvejtiago",
+  3: "@df",
+  4: "@adrienne",
+}
+
 export const generateGlobalLeaderboardImage = async () => {
   const first_game = dayjs.utc('2024-02-28T12:00:00');
   const previousHour = dayjs.utc().subtract(1, 'hour').endOf('hour');
@@ -58,14 +65,13 @@ export const generateGlobalLeaderboardImage = async () => {
   }
 
   return generateHtmlImage(`
-  <div style="padding: 20px; position: relative; display: flex; flex-direction: column; justify-content: center;  width: 1200px; height: 630px;">
-    <p style="font-size: 60px">Global Leaderboard</p>
-    <p>Team 1 ${winnersCount.team_1}</p>
-    <p>Team 2 ${winnersCount.team_2}</p>
-    <p>Team 3 ${winnersCount.team_3}</p>
-    <p>Team 4 ${winnersCount.team_4}</p>
+  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 600px; height: 315px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmZciRgXkx7VSyTrRh2kFPP6TYQDM8BGKL9p2PAHkeL597'); background-size: 600px 315px; color: #fff;">
+    <p style="color: #fe4f74">Team ${usersMap[1]}: ${winnersCount.team_1}</p>
+    <p style="color: #fb9908">Team ${usersMap[2]}: ${winnersCount.team_2}</p>
+    <p style="color: #8a79ff">Team ${usersMap[3]}: ${winnersCount.team_3}</p>
+    <p style="color: #34d9aa">Team ${usersMap[4]}: ${winnersCount.team_4}</p>
   </div>
-  `, {asUri: true});
+  `, {asUri: true, width: 600, height: 315});
 }
 
 
