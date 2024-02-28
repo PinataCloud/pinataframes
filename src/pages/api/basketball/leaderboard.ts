@@ -62,7 +62,7 @@ export const generateCurrentLeaderboardImage = async () => {
   const team3Score = winningTeams.find((team: any) => team.team === "team_3")?.score || 0;
   const team4Score = winningTeams.find((team: any) => team.team === "team_4")?.score || 0;
 
-  const png= generateHtmlImage(`
+  const png= await generateHtmlImage(`
     <div style="padding: 20px; 
         position: relative; 
         display: flex;

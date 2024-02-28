@@ -64,7 +64,7 @@ export const generateGlobalLeaderboardImage = async () => {
     }
   }
 
-  const png = generateHtmlImage(`
+  const png = await generateHtmlImage(`
    <div style="padding: 20px; 
         position: relative; 
         display: flex;
