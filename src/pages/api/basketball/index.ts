@@ -20,8 +20,7 @@ const FRAME_ID = "pinata_basketball";
 
 export const generateImage = async () => {
   return generateHtmlImage(`
-    <div style="padding: 20px; position: relative; display: flex; flex-direction: column;  justify-content: center;  width: 1200px; height: 630px;">
-      <p style="font-size: 40px">Choose your team for this season</p>
+    <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmPC86ENNELHJR5yr9QT1vnCT72qVuByTbC28gmomac13W'); background-size: 1200px 630px; color: #fff;">
     </div>
   `, {asUri: true});
 }
@@ -46,10 +45,10 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
         buttons: [
-          { label: "Team 1", action: 'post' },
-          { label: "Team 2", action: 'post' },
-          { label: "Team 3", action: 'post' },
-          { label: "Team 4", action: 'post' },
+          { label: "@woj", action: 'post' },
+          { label: "@alvejtiago", action: 'post' },
+          { label: "@df", action: 'post' },
+          { label: "@adrienne", action: 'post' },
         ],
         image: {url: imgContent}
       });

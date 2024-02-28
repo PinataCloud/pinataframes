@@ -18,14 +18,11 @@ const fdk = new PinataFDK({
 const FRAME_ID = "pinata_basketball";
 
 export const generateImage = async (team: number, counter: number) => {
-  const monoFontReg = await fetch(
-    "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
-  );
+  const pixelFont = await fetch(`${process.env.HOSTED_URL}/tickerbit-regular.ttf`)
 
   const template: any = html(`
-  <div style="padding: 20px; position: relative; display: flex; flex-direction: column;  justify-content: center;  width: 1200px; height: 630px;">
+  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmPC86ENNELHJR5yr9QT1vnCT72qVuByTbC28gmomac13W'); background-size: 1200px 630px; color: #fff;">
     <p style="font-size: 60px">Your Team ${team}</p>
-    <p style="font-size: 60px">Current Score ${counter}</p>
     <p style="font-size: 40px">Once you're ready calculate 3 seconds to shoot. The closer to 3 seconds the more chances to score</p>
   </div>
   `);
@@ -34,8 +31,8 @@ export const generateImage = async (team: number, counter: number) => {
     height: 630,
     fonts: [
       {
-        name: "Roboto Mono",
-        data: await monoFontReg.arrayBuffer(),
+        name: "Tickerbit",
+        data: await pixelFont.arrayBuffer(),
         weight: 400,
         style: "normal",
       }

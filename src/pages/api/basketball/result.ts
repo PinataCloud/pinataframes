@@ -39,13 +39,19 @@ export const generateImage = async (difference: number, body: any, team: number)
 
   console.log('shot success, difference', success, difference);
 
-  return generateHtmlImage(`
-  <div style="padding: 20px; position: relative; display: flex; flex-direction: column; justify-content: center;  width: 1200px; height: 630px;">
+  return success ? generateHtmlImage(`
+  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/Qmap2Ss1dQDWH4u18DXxxzc8MSuHeeNuVxey3KwKrLLwhU'); background-size: 1200px 630px; color: #fff;">
     <p style="font-size: 40px">The difference in time is ${difference}</p>
     <p style="font-size: 40px">Chances of scoring are ${chance*100}%</p>
     <p style="font-size: 40px">Scored? ${success}</p>
   </div>
-  `, {asUri: true});
+  `, {asUri: true}) : generateHtmlImage(`
+  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmaAprsLz7w2odmycXFqTgxissNtCt96MT9NhTLCQWJWJi'); background-size: 1200px 630px; color: #fff;">
+    <p style="font-size: 40px">You shot in ${difference/1000} seconds</p>
+    <p style="font-size: 40px">Chances of scoring are ${chance*100}%</p>
+    <p style="font-size: 40px">Scored? ${success}</p>
+  </div>
+  `, {asUri: true})
 
 }
 
