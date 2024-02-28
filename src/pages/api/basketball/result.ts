@@ -34,7 +34,7 @@ export const generateImage = async (difference: number, body: any, team: number)
   }
 
   if (success) {
-    await fdk.sendAnalytics(FRAME_ID, body);
+    await fdk.sendAnalytics(FRAME_ID, body, `team_${team}`);
   }
 
   console.log('shot success, difference', success, difference);
