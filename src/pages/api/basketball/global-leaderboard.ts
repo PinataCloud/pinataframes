@@ -30,7 +30,7 @@ export const generateGlobalLeaderboardImage = async () => {
     const utcStartHour = first_game.add(i, 'hour').format('YYYY-MM-DD HH:mm:ss');
     const utcEndHour = first_game.add(i + 1, 'hour').format('YYYY-MM-DD HH:mm:ss');
 
-    const url1 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=url&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=pinata_basketball_winners`;
+    const url1 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=custom_id&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=pinata_basketball_winners`;
 
     const res1 = await fetch(url1, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
     const json1: any = await res1.json();
@@ -50,7 +50,6 @@ export const generateGlobalLeaderboardImage = async () => {
 export default async function handler (req: NextApiRequest, res: NextApiResponse,){
   if (req.method === "POST") {
     console.log('body. global leaderboard endpoint', req.body);
-    console.log('request', req);
     try {
       const isValidated = await fdk.validateFrameMessage(req.body);
 

@@ -24,7 +24,7 @@ export const generateCurrentLeaderboardImage = async () => {
   const startDate = dayjs(now).format('YYYY-MM-DD HH:mm:ss');
   const endDate = dayjs(today).format('YYYY-MM-DD HH:mm:ss');
 
-  const url1 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=url&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners`;
+  const url1 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=custom_id&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners`;
   // const url2 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners&custom_id=team_2`;
   // const url3 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners&custom_id=team_3`;
   // const url4 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners&custom_id=team_4`;
@@ -42,14 +42,26 @@ export const generateCurrentLeaderboardImage = async () => {
   // const json4: any = await res4.json();
 
   console.log('json1', json1);
-  // console.log('json2', json2);
-  // console.log('json3', json3);
-  // console.log('json4', json4);
+
+  const winningTeams = json1.map((team: any) => {
+    return {
+      team: team.custom_id,
+      score: team.interaction_count
+    }
+  });
+
+  const team1Score = winningTeams.find((team: any) => team.team === "team_1")?.score || 0;
+  const team2Score = winningTeams.find((team: any) => team.team === "team_2")?.score || 0;
+  const team3Score = winningTeams.find((team: any) => team.team === "team_3")?.score || 0;
+  const team4Score = winningTeams.find((team: any) => team.team === "team_4")?.score || 0;
 
   return generateHtmlImage(`
   <div style="padding: 20px; position: relative; display: flex; flex-direction: column; justify-content: center;  width: 1200px; height: 630px;">
     <p style="font-size: 60px">Current Match Leaderboard</p>
-    <p>Team 1 score: ${json1.interaction_count}</p>
+    <p>Team 1 score: ${team1Score}</p>
+    <p>Team 2 score: ${team2Score}</p>
+    <p>Team 3 score: ${team3Score}</p>
+    <p>Team 4 score: ${team4Score}</p>
   </div>
   `, {asUri: true});
 }
