@@ -57,6 +57,8 @@ export const generateCurrentLeaderboardImage = async () => {
     }
   });
 
+  console.log('winningTeams', winningTeams);
+
   const team1Score = winningTeams.find((team: any) => team.team === "team_1")?.score || 0;
   const team2Score = winningTeams.find((team: any) => team.team === "team_2")?.score || 0;
   const team3Score = winningTeams.find((team: any) => team.team === "team_3")?.score || 0;
