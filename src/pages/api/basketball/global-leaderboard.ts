@@ -32,7 +32,7 @@ const usersMap: any = {
 }
 
 export const generateGlobalLeaderboardImage = async () => {
-  const first_game = dayjs.utc('2024-02-28T12:00:00');
+  const first_game = dayjs.utc('2024-02-28T22:00:00');
   const previousHour = dayjs.utc().subtract(1, 'hour').endOf('hour');
 
   const hoursDifference = previousHour.diff(first_game, 'hour');
@@ -65,11 +65,22 @@ export const generateGlobalLeaderboardImage = async () => {
   }
 
   return generateHtmlImage(`
-  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 600px; height: 315px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmZciRgXkx7VSyTrRh2kFPP6TYQDM8BGKL9p2PAHkeL597'); background-size: 600px 315px; color: #fff;">
-    <p style="color: #fe4f74">Team ${usersMap[1]}: ${winnersCount.team_1}</p>
-    <p style="color: #fb9908">Team ${usersMap[2]}: ${winnersCount.team_2}</p>
-    <p style="color: #8a79ff">Team ${usersMap[3]}: ${winnersCount.team_3}</p>
-    <p style="color: #34d9aa">Team ${usersMap[4]}: ${winnersCount.team_4}</p>
+   <div style="padding: 20px; 
+        position: relative; 
+        display: flex;
+        flex-direction: column;
+        padding-top: 95px;
+        justify-content: flex-start;  
+        width: 600px; 
+        height: 315px; 
+        background-image: url('https://pamadd.mypinata.cloud/ipfs/QmZciRgXkx7VSyTrRh2kFPP6TYQDM8BGKL9p2PAHkeL597'); 
+        background-size: 600px 315px;
+        font-size: 20px;     
+        ">
+    <p style="color: #fe4f74">Team ${usersMap[1]}: ${winnersCount.team_1} games</p>
+    <p style="color: #fb9908">Team ${usersMap[2]}: ${winnersCount.team_2} games</p>
+    <p style="color: #8a79ff">Team ${usersMap[3]}: ${winnersCount.team_3} games</p>
+    <p style="color: #34d9aa">Team ${usersMap[4]}: ${winnersCount.team_4} games</p>
   </div>
   `, {asUri: true, width: 600, height: 315});
 }

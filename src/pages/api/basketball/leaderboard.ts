@@ -67,7 +67,7 @@ export const generateCurrentLeaderboardImage = async () => {
         position: relative; 
         display: flex;
         flex-direction: column;
-        padding-top: 90px;
+        padding-top: 95px;
         justify-content: flex-start;  
         width: 600px; 
         height: 315px; 
@@ -75,10 +75,10 @@ export const generateCurrentLeaderboardImage = async () => {
         background-size: 600px 315px;
         font-size: 20px;     
         ">
-    <p style="color: #fe4f74">Team ${usersMap[1]}: ${team1Score}</p>
-    <p style="color: #fb9908">Team ${usersMap[2]}: ${team2Score}</p>
-    <p style="color: #8a79ff">Team ${usersMap[3]}: ${team3Score}</p>
-    <p style="color: #34d9aa">Team ${usersMap[4]}: ${team4Score}</p>
+    <p style="color: #fe4f74">Team ${usersMap[1]}: ${team1Score} points</p>
+    <p style="color: #fb9908">Team ${usersMap[2]}: ${team2Score} points</p>
+    <p style="color: #8a79ff">Team ${usersMap[3]}: ${team3Score} points</p>
+    <p style="color: #34d9aa">Team ${usersMap[4]}: ${team4Score} points</p>
   </div>
   `, {asUri: true, width: 600, height: 315});
 }
