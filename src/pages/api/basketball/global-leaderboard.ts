@@ -30,27 +30,12 @@ export const generateGlobalLeaderboardImage = async () => {
     const utcStartHour = first_game.add(i, 'hour').format('YYYY-MM-DD HH:mm:ss');
     const utcEndHour = first_game.add(i + 1, 'hour').format('YYYY-MM-DD HH:mm:ss');
 
-    const url1 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=pinata_basketball_winners&custom_id=team_1`;
-    const url2 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=pinata_basketball_winners&custom_id=team_2`;
-    const url3 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=pinata_basketball_winners&custom_id=team_3`;
-    const url4 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=pinata_basketball_winners&custom_id=team_4`;
+    const url1 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=url&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=pinata_basketball_winners`;
 
     const res1 = await fetch(url1, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
     const json1: any = await res1.json();
 
-    const res2 = await fetch(url2, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
-    const json2: any = await res2.json();
-
-    const res3 = await fetch(url3, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
-    const json3: any = await res3.json();
-
-    const res4 = await fetch(url4, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
-    const json4: any = await res4.json();
-
-    console.log('json 1',json1);
-    console.log('json 2',json2);
-    console.log('json 3',json3);
-    console.log('json 4',json4);
+    console.log('json global leaderboard',json1);
   }
 
   return generateHtmlImage(`
