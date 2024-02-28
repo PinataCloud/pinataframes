@@ -50,7 +50,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
           { label: "@df", action: 'post' },
           { label: "@adrienne", action: 'post' },
         ],
-        image: {url: imgContent}
+        image: {url: 'https://pamadd.mypinata.cloud/ipfs/QmSbHwsYLaGG4kHNjNmyXXu1xCjULRsMbsyAUyDK4ukbY4'}
       });
 
       //prepare time is the current utc time
