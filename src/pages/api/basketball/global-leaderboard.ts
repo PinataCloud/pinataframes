@@ -30,7 +30,12 @@ export const generateGlobalLeaderboardImage = async () => {
 
   const hoursDifference = previousHour.diff(first_game, 'hour');
 
-  const winnersArray: any [] = [];
+  const winnersCount: any = {
+    team_1: 0,
+    team_2: 0,
+    team_3: 0,
+    team_4: 0,
+  };
 
   for (let i = 0; i < hoursDifference+1; i++) {
     const utcStartHour = first_game.add(i, 'hour').format('YYYY-MM-DD HH:mm:ss');
@@ -46,14 +51,19 @@ export const generateGlobalLeaderboardImage = async () => {
     //get the winner for this response by interaction_count
     if (json.length > 0) {
       const winner = json.reduce((prev, current) => (prev.interaction_count > current.interaction_count) ? prev : current);
-      console.log('Winner team, hour',winner, i);
+      if (winner.custom_id) {
+        winnersCount[winner.custom_id] += 1;
+      }
     }
   }
 
   return generateHtmlImage(`
   <div style="padding: 20px; position: relative; display: flex; flex-direction: column; justify-content: center;  width: 1200px; height: 630px;">
     <p style="font-size: 60px">Global Leaderboard</p>
-    <p>${winnersArray}</p>
+    <p>Team 1 ${winnersCount.team_1}</p>
+    <p>Team 2 ${winnersCount.team_2}</p>
+    <p>Team 3 ${winnersCount.team_3}</p>
+    <p>Team 4 ${winnersCount.team_4}</p>
   </div>
   `, {asUri: true});
 }
