@@ -18,41 +18,45 @@ const fdk = new PinataFDK({
 
 const FRAME_ID = "pinata_basketball";
 
-export const generateCurrentLeaderboardImage = async () => {
-  const today = dayjs.utc().endOf('day');
-  const now = dayjs.utc().subtract(1, 'hour').endOf('hour');
-  const startDate = dayjs(now).format('YYYY-MM-DD HH:mm:ss');
-  const endDate = dayjs(today).format('YYYY-MM-DD HH:mm:ss');
+export const generateGlobalLeaderboardImage = async () => {
+  const first_game = dayjs.utc('2024-02-27T21:00:00');
+  const previousHour = dayjs.utc().subtract(1, 'hour').endOf('hour');
 
-  const url1 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners&custom_id=team_1`;
-  const url2 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners&custom_id=team_2`;
-  const url3 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners&custom_id=team_3`;
-  const url4 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${startDate}&end_date=${endDate}&frame_id=pinata_basketball_winners&custom_id=team_4`;
+  const hoursDifference = previousHour.diff(first_game, 'hour');
 
-  const res1 = await fetch(url1, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
-  const json1: any = await res1.json();
+  const winnersArray: any [] = [];
 
-  const res2 = await fetch(url2, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
-  const json2: any = await res2.json();
+  for (let i = 0; i < hoursDifference; i++) {
+    const utcStartHour = first_game.add(i, 'hour').format('YYYY-MM-DD HH:mm:ss');
+    const utcEndHour = first_game.add(i + 1, 'hour').format('YYYY-MM-DD HH:mm:ss');
 
-  const res3 = await fetch(url3, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
-  const json3: any = await res3.json();
+    const url1 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=pinata_basketball_winners&custom_id=team_1`;
+    const url2 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=pinata_basketball_winners&custom_id=team_2`;
+    const url3 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=pinata_basketball_winners&custom_id=team_3`;
+    const url4 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=frame_id&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=pinata_basketball_winners&custom_id=team_4`;
 
-  const res4 = await fetch(url4, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
-  const json4: any = await res4.json();
+    const res1 = await fetch(url1, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
+    const json1: any = await res1.json();
 
-  console.log('json1', json1);
-  console.log('json2', json2);
-  console.log('json3', json3);
-  console.log('json4', json4);
+    const res2 = await fetch(url2, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
+    const json2: any = await res2.json();
+
+    const res3 = await fetch(url3, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
+    const json3: any = await res3.json();
+
+    const res4 = await fetch(url4, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
+    const json4: any = await res4.json();
+
+    console.log('json 1',json1);
+    console.log('json 2',json2);
+    console.log('json 3',json3);
+    console.log('json 4',json4);
+  }
 
   return generateHtmlImage(`
   <div style="padding: 20px; position: relative; display: flex; flex-direction: column; justify-content: center;  width: 1200px; height: 630px;">
-    <p style="font-size: 60px">Current Match Leaderboard</p>
-    <p>Team 1 score: ${json1.interaction_count}</p>
-    <p>Team 2 score: ${json2.interaction_count}</p>
-    <p>Team 3 score: ${json3.interaction_count}</p>
-    <p>Team 4 score: ${json4.interaction_count}</p>
+    <p style="font-size: 60px">Global Leaderboard</p>
+    <p>${winnersArray}</p>
   </div>
   `, {asUri: true});
 }
@@ -74,7 +78,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const currentTeam = currentUUID.team;
       const currentSession = currentUUID.session || uuidv4();
 
-      const imgContent: any = await generateCurrentLeaderboardImage();
+      const imgContent: any = await generateGlobalLeaderboardImage();
 
       const state = {
         session: currentSession,
@@ -88,7 +92,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         buttons: [
           { label: "Try again", action: 'post' },
           { label: "Change team", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball` },
-          { label: "Global Leaderboard", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/global-leaderboard` },
         ],
         image: {url: imgContent}
       });
