@@ -21,7 +21,7 @@ const FRAME_ID = "pinata_basketball";
 export const generateImage = async () => {
   return generateHtmlImage(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: center;  width: 1200px; height: 630px;">
-    <img src="Whttps://pamadd.mypinata.cloud/ipfs/Qmeg3ea6kP1eawa4zgqjvX3oKESRJC9S3X6n5bW895mVto" style="width: 1200px; height: 630px;"/>
+    <img src="https://pamadd.mypinata.cloud/ipfs/Qmeg3ea6kP1eawa4zgqjvX3oKESRJC9S3X6n5bW895mVto" style="width: 1200px; height: 630px;"/>
   </div>`, {asUri: true});
 }
 

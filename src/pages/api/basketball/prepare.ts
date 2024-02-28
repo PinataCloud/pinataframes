@@ -72,6 +72,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       console.log('typeof currentUUID', typeof currentUUID);
 
       const imgContent = await generateImage(currentTeam, 0);
+      console.log({imgContent});
       // const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
 
       const frameMetadata = await fdk.getFrameMetadata({
