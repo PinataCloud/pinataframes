@@ -41,13 +41,13 @@ export const generateImage = async (difference: number, body: any, team: number)
 
   const png = success ? await generateHtmlImage(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 600px; height: 315px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmTnLHKtCxurnXQk59w8UPYb6nmcKktfVdGMQFWy5E5Ghb'); background-size: 600px 315px; color: #fff;">
-   <p style="font-size: 19px; color: darkseagreen; position: absolute; top: 226px; left: 191px ">${(difference/1000).toFixed(2)}</p>
-    <p style="font-size: 19px; color: darkseagreen; position: absolute; top: 226px; left: 520px ">${(chance*100).toFixed(2)}%</p>
+   <p style="font-size: 21px; color: darkseagreen; position: absolute; top: 222px; left: 191px ">${(difference/1000).toFixed(2)}</p>
+    <p style="font-size: 21px; color: darkseagreen; position: absolute; top: 222px; left: 520px ">${(chance*100).toFixed(2)}%</p>
   </div>
   `, {asUri: false, width: 600, height: 315}) : await generateHtmlImage(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 600px; height: 315px; background-image: url('https://pamadd.mypinata.cloud/ipfs/Qmf8maJYPVBYyi7XC8hQ62Gf3fE8aSM3f5e88buBtX1DWg'); background-size: 600px 315px; color: #fff;">
-    <p style="font-size: 19px; color: orange; position: absolute; top: 226px; left: 191px ">${(difference/1000).toFixed(2)}</p>
-    <p style="font-size: 19px; color: orange; position: absolute; top: 226px; left: 520px ">${(chance*100).toFixed(2)}%</p>
+    <p style="font-size: 21px; color: orange; position: absolute; top: 222px; left: 191px ">${(difference/1000).toFixed(2)}</p>
+    <p style="font-size: 21px; color: orange; position: absolute; top: 222px; left: 520px ">${(chance*100).toFixed(2)}%</p>
   </div>
   `, {asUri: false, width: 600, height: 315})
 

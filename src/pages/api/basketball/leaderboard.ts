@@ -80,7 +80,7 @@ export const generateCurrentLeaderboardImage = async () => {
     <p style="color: #8a79ff">Team ${usersMap[3]}: ${team3Score} points</p>
     <p style="color: #34d9aa">Team ${usersMap[4]}: ${team4Score} points</p>
   </div>
-  `, {asUri: true, width: 600, height: 315});
+  `, {asUri: false, width: 600, height: 315});
   const url = await uploadToIpfs(png);
   return url;
 }
