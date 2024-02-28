@@ -5,7 +5,7 @@ import {html} from "satori-html";
 import {Resvg} from "@resvg/resvg-js";
 import dayjs, {Dayjs} from "dayjs";
 import utc from 'dayjs/plugin/utc';
-import {generateHtmlImage} from "@/utils/satori";
+import {generateHtmlImage, uploadToIpfs} from "@/utils/satori";
 const { v4: uuidv4 } = require('uuid');
 
 dayjs.extend(utc);
@@ -62,7 +62,7 @@ export const generateCurrentLeaderboardImage = async () => {
   const team3Score = winningTeams.find((team: any) => team.team === "team_3")?.score || 0;
   const team4Score = winningTeams.find((team: any) => team.team === "team_4")?.score || 0;
 
-  return generateHtmlImage(`
+  const png= generateHtmlImage(`
     <div style="padding: 20px; 
         position: relative; 
         display: flex;
@@ -81,6 +81,8 @@ export const generateCurrentLeaderboardImage = async () => {
     <p style="color: #34d9aa">Team ${usersMap[4]}: ${team4Score} points</p>
   </div>
   `, {asUri: true, width: 600, height: 315});
+  const url = await uploadToIpfs(png);
+  return url;
 }
 
 
