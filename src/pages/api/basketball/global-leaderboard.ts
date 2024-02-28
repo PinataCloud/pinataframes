@@ -32,7 +32,7 @@ export const generateGlobalLeaderboardImage = async () => {
 
   const winnersArray: any [] = [];
 
-  for (let i = 0; i < hoursDifference; i++) {
+  for (let i = 0; i < hoursDifference+1; i++) {
     const utcStartHour = first_game.add(i, 'hour').format('YYYY-MM-DD HH:mm:ss');
     const utcEndHour = first_game.add(i + 1, 'hour').format('YYYY-MM-DD HH:mm:ss');
 
