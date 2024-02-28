@@ -42,9 +42,10 @@ export const generateGlobalLeaderboardImage = async () => {
     const json: CustomIDResponse [] = await res1.json();
 
     //get the winner for this response by interaction_count
-    const winner = json.reduce((prev, current) => (prev.interaction_count > current.interaction_count) ? prev : current);
-
-    console.log('Winner team, hour',winner, i);
+    if (json.length > 0) {
+      const winner = json.reduce((prev, current) => (prev.interaction_count > current.interaction_count) ? prev : current);
+      console.log('Winner team, hour',winner, i);
+    }
   }
 
   return generateHtmlImage(`
