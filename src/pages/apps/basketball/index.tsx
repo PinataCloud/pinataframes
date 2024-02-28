@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Home from "@/pages";
 
 export default function Index() {
   return (
@@ -13,7 +14,7 @@ export default function Index() {
         <meta property="fc:frame:button:1" content="Start" />
         <meta property="fc:frame:post_url" content={`${process.env.HOSTED_URL}/api/basketball`} />
       </Head>
-      <h1>Pinata Basketball</h1>
+      <Home />
       {/*<img src="/api/race" alt="FC User Stats" />*/}
     </>
   );
