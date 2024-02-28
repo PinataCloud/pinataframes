@@ -6,8 +6,8 @@ export default function Index() {
       <Head>
         <title>Farcaster basketball</title>
         <meta property="fc:frame" content="vNext" />
-        <meta property="fc:frame:image" content={"https://pamadd.mypinata.cloud/ipfs/QmeZ7Gfwj1hKpE9y7oLReQsc6NpRyZFWFC7DCxDr2TpCzX"} />
-        <meta property="og:image" content={"https://pamadd.mypinata.cloud/ipfs/QmeZ7Gfwj1hKpE9y7oLReQsc6NpRyZFWFC7DCxDr2TpCzX"} />
+        <meta property="fc:frame:image" content={"https://pamadd.mypinata.cloud/ipfs/QmTL741ruhSPnCEQJKDPJD7M2rtDgx19mBcEK3TjKLSEeg"} />
+        <meta property="og:image" content={"https://pamadd.mypinata.cloud/ipfs/QmTL741ruhSPnCEQJKDPJD7M2rtDgx19mBcEK3TjKLSEeg"} />
         <meta property="og:title" content="Users Chart" />
         <meta property="og:description" content="FC users by time" />
         <meta property="fc:frame:button:1" content="Start" />

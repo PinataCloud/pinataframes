@@ -18,6 +18,12 @@ const fdk = new PinataFDK({
 
 const FRAME_ID = "pinata_basketball";
 
+interface CustomIDResponse  {
+  custom_id: string | null;
+  interaction_count: number;
+  unique_interactions: number;
+}
+
 export const generateGlobalLeaderboardImage = async () => {
   const first_game = dayjs.utc('2024-02-28T12:00:00');
   const previousHour = dayjs.utc().subtract(1, 'hour').endOf('hour');
@@ -33,9 +39,12 @@ export const generateGlobalLeaderboardImage = async () => {
     const url1 = `${process.env.PINATA_API}/farcaster/frames/interactions/top?by=custom_id&start_date=${utcStartHour}&end_date=${utcEndHour}&frame_id=pinata_basketball_winners`;
 
     const res1 = await fetch(url1, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
-    const json1: any = await res1.json();
+    const json: CustomIDResponse [] = await res1.json();
 
-    console.log('json global leaderboard, hour',json1, i);
+    //get the winner for this response by interaction_count
+    const winner = json.reduce((prev, current) => (prev.interaction_count > current.interaction_count) ? prev : current);
+
+    console.log('Winner team, hour',winner, i);
   }
 
   return generateHtmlImage(`
@@ -77,6 +86,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         buttons: [
           { label: "Try again", action: 'post' },
           { label: "Change team", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball` },
+          { label: "Leaderboard", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/leaderboard` },
         ],
         image: {url: imgContent}
       });
