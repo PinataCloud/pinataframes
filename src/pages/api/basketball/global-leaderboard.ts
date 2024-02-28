@@ -19,7 +19,7 @@ const fdk = new PinataFDK({
 const FRAME_ID = "pinata_basketball";
 
 export const generateGlobalLeaderboardImage = async () => {
-  const first_game = dayjs.utc('2024-02-27T21:00:00');
+  const first_game = dayjs.utc('2024-02-28T12:00:00');
   const previousHour = dayjs.utc().subtract(1, 'hour').endOf('hour');
 
   const hoursDifference = previousHour.diff(first_game, 'hour');
@@ -35,7 +35,7 @@ export const generateGlobalLeaderboardImage = async () => {
     const res1 = await fetch(url1, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
     const json1: any = await res1.json();
 
-    console.log('json global leaderboard',json1);
+    console.log('json global leaderboard, hour',json1, i);
   }
 
   return generateHtmlImage(`
