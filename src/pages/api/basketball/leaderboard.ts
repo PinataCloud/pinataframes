@@ -47,7 +47,7 @@ export const generateLeaderboardImage = async () => {
   console.log('json4', json4);
 
   return generateHtmlImage(`
-  <div style="padding: 20px; position: relative; display: flex;  justify-content: center;  width: 1200px; height: 630px;">
+  <div style="padding: 20px; position: relative; display: flex; flex-direction: column; justify-content: center;  width: 1200px; height: 630px;">
     <p style="font-size: 60px">Leaderboard Here</p>
     <p>${JSON.stringify(json1)}</p>
     <p>${JSON.stringify(json2)}</p>
