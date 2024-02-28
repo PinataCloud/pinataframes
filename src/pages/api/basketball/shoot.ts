@@ -50,7 +50,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         buttons: [
           { label: "Shoot", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/result` },
         ],
-        image: {url: 'https://pamadd.mypinata.cloud/ipfs/QmfWNvfRhL1JUsHLZ9SZuC5Bp9U8LT1wiXierXLWz8DGFZ'}
+        image: {url: `${process.env.HOSTED_URL}/images/shoot.gif`}
       });
 
       //generate UUID for idempotency_key
