@@ -40,18 +40,16 @@ export const generateImage = async (difference: number, body: any, team: number)
   console.log('shot success, difference', success, difference);
 
   return success ? generateHtmlImage(`
-  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/Qmap2Ss1dQDWH4u18DXxxzc8MSuHeeNuVxey3KwKrLLwhU'); background-size: 1200px 630px; color: #fff;">
-    <p style="font-size: 40px">The difference in time is ${difference}</p>
-    <p style="font-size: 40px">Chances of scoring are ${chance*100}%</p>
-    <p style="font-size: 40px">Scored? ${success}</p>
+  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 600px; height: 315px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmTnLHKtCxurnXQk59w8UPYb6nmcKktfVdGMQFWy5E5Ghb'); background-size: 600px 315px; color: #fff;">
+   <p style="font-size: 19px; color: darkseagreen; position: absolute; top: 226px; left: 191px ">${(difference/1000).toFixed(2)}</p>
+    <p style="font-size: 19px; color: darkseagreen; position: absolute; top: 226px; left: 520px ">${(chance*100).toFixed(2)}%</p>
   </div>
-  `, {asUri: true}) : generateHtmlImage(`
-  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmaAprsLz7w2odmycXFqTgxissNtCt96MT9NhTLCQWJWJi'); background-size: 1200px 630px; color: #fff;">
-    <p style="font-size: 40px">You shot in ${difference/1000} seconds</p>
-    <p style="font-size: 40px">Chances of scoring are ${chance*100}%</p>
-    <p style="font-size: 40px">Scored? ${success}</p>
+  `, {asUri: true, width: 600, height: 315}) : generateHtmlImage(`
+  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 600px; height: 315px; background-image: url('https://pamadd.mypinata.cloud/ipfs/Qmf8maJYPVBYyi7XC8hQ62Gf3fE8aSM3f5e88buBtX1DWg'); background-size: 600px 315px; color: #fff;">
+    <p style="font-size: 19px; color: orange; position: absolute; top: 226px; left: 191px ">${(difference/1000).toFixed(2)}</p>
+    <p style="font-size: 19px; color: orange; position: absolute; top: 226px; left: 520px ">${(chance*100).toFixed(2)}%</p>
   </div>
-  `, {asUri: true})
+  `, {asUri: true, width: 600, height: 315})
 
 }
 

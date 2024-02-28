@@ -38,7 +38,7 @@ export const uploadToIpfs = async (image: any) => {
     });
     formData.append("pinataMetadata", metadata);
     const imageUpload = await fetch(
-      "https://api.pinata.cloud/pinning/pinFileToIPFS",
+      `${process.env.PINATA_API}/pinning/pinFileToIPFS`,
       {
         method: "POST",
         headers: {
@@ -241,19 +241,17 @@ export const generateAnalyticsImage = async (frame_id: string, title?: string) =
   }
 }
 
-export const generateHtmlImage = async (content: string, props?: {asUri?: boolean}) => {
-  const monoFontReg = await fetch(
-    "https://api.fontsource.org/v1/fonts/inter/latin-400-normal.ttf",
-  );
+export const generateHtmlImage = async (content: string, props?: {asUri?: boolean, width?: number, height?: number}) => {
+  const pixelFont = await fetch(`${process.env.HOSTED_URL}/tickerbit-regular.ttf`)
 
   const template: any = html(content);
   const svg = await satori(template, {
-    width: 1200,
-    height: 630,
+    width: props?.width || 1200,
+    height: props?.height || 630,
     fonts: [
       {
-        name: "Roboto Mono",
-        data: await monoFontReg.arrayBuffer(),
+        name: "Tickerbit",
+        data: await pixelFont.arrayBuffer(),
         weight: 400,
         style: "normal",
       }

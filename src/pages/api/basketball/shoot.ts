@@ -20,9 +20,9 @@ const FRAME_ID = "pinata_basketball";
 
 export const generateImage = async () => {
   return generateHtmlImage(`
-  <div style="padding: 20px; position: relative; display: flex;  justify-content: center;  width: 1200px; height: 630px;">
-    <img src="https://pamadd.mypinata.cloud/ipfs/Qmeg3ea6kP1eawa4zgqjvX3oKESRJC9S3X6n5bW895mVto" style="width: 1200px; height: 630px;"/>
-  </div>`, {asUri: false});
+  <div style="padding: 20px; position: relative; display: flex;  justify-content: center;  width: 600px; height: 315px;">
+    <img src="https://pamadd.mypinata.cloud/ipfs/QmfWNvfRhL1JUsHLZ9SZuC5Bp9U8LT1wiXierXLWz8DGFZ" style="width: 600px; height: 315px;"/>
+  </div>`, {asUri: false, width: 600, height: 315});
 }
 
 
@@ -43,14 +43,14 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const currentTeam = currentUUID.team;
       const currentSession = currentUUID.session || uuidv4();
 
-      const imgContent: any = await generateImage();
+      // const imgContent: any = await generateImage();
 
       const frameMetadata = await fdk.getFrameMetadata({
-        post_url: `${process.env.HOSTED_URL}/api/basketball/result?team=${currentTeam}`,
+        post_url: `${process.env.HOSTED_URL}/api/basketball/result`,
         buttons: [
-          { label: "Shoot", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/result?team=${currentTeam}` },
+          { label: "Shoot", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/result` },
         ],
-        image: {url: imgContent}
+        image: {url: 'https://pamadd.mypinata.cloud/ipfs/QmfWNvfRhL1JUsHLZ9SZuC5Bp9U8LT1wiXierXLWz8DGFZ'}
       });
 
       //generate UUID for idempotency_key

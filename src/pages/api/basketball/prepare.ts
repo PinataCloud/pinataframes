@@ -18,13 +18,20 @@ const fdk = new PinataFDK({
 
 const FRAME_ID = "pinata_basketball";
 
+const usersMap: any = {
+  1: "@woj",
+  2: "@alvejtiago",
+  3: "@df",
+  4: "@adrienne",
+}
+
 export const generateImage = async (team: number, counter: number) => {
   const pixelFont = await fetch(`${process.env.HOSTED_URL}/tickerbit-regular.ttf`)
 
   const template: any = html(`
-  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 600px; height: 315px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmcDBush8uV3UsAAE2MYB4RyJPrUZSkosEVoqeaWQxmgfA'); background-size: 600px 315px; color: #fff;">
-    <p style="font-size: 60px">Your Team ${team}</p>
-    <p style="font-size: 40px">Once you're ready calculate 3 seconds to shoot. The closer to 3 seconds the more chances to score</p>
+  <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 600px; height: 315px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmYFgP6DsSqZ3eQqCoShe2HT7VcyXRL5WPhEB8mo5jXg41'); background-size: 600px 315px; color: #fff;">
+    <p style="font-size: 30px; position: absolute; left: 52%">Your Team</p>
+    <p style="font-size: 30px; position: absolute; left: 52%; top: 18%">${usersMap[team]}</p>
   </div>
   `);
   const svg = await satori(template, {
@@ -47,6 +54,7 @@ export const generateImage = async (team: number, counter: number) => {
   const pngData = resvg.render();
   const png = pngData.asPng();
   const url = await uploadToIpfs(png);
+  console.log('url', url);
   return url;
 }
 
@@ -72,7 +80,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       console.log('typeof currentUUID', typeof currentUUID);
 
       const imgContent = await generateImage(currentTeam, 0);
-      console.log({imgContent});
       // const dataURI = 'data:image/png;base64,' + imgContent.toString('base64');
 
       const frameMetadata = await fdk.getFrameMetadata({
