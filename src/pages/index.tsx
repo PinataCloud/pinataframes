@@ -84,7 +84,7 @@ export default function Home() {
           <h2 className="text-center font-bold font-sans text-2xl text-black">Free Farcaster Hub</h2>
         </a>
         <a href="" className="w-full flex items-center justify-center rounded rounded-md bg-white h-20 w-auto  text-gray-900 shadow shadow-md p-0 m-0">
-          <h2 className="text-center font-bold font-sans text-2xl text-black">Frame Development Kit</h2>
+          <h2 className="text-center font-bold font-sans text-2xl text-black">Farcaster Development Kit</h2>
         </a>
         <a href="" className="w-full flex items-center justify-center rounded rounded-md bg-white h-20 w-auto text-gray-900 shadow shadow-md p-0 m-0">
           <h2 className="text-center font-bold font-sans text-2xl text-black">Frame Analytics</h2>
