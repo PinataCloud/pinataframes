@@ -59,7 +59,7 @@ export const generateGlobalLeaderboardImage = async () => {
 
       gamesCount += `
         <div style="display: flex">
-            <p style="width: 100px; margin-top: 0;">1</p>
+            <p style="width: 100px; margin-top: 0;">${i+1}</p>
             <p style="color: #fe4f74; margin-top: 0; width: 80px">${countTeam1}</p>
             <p style="color: #fb9908; margin-top: 0; width: 140px">${countTeam2}</p>
             <p style="color: #8a79ff; margin-top: 0; width: 80px">${countTeam3}</p>
