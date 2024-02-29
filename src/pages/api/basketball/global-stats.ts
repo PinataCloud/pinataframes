@@ -37,12 +37,7 @@ export const generateGlobalLeaderboardImage = async () => {
 
   const hoursDifference = previousHour.diff(first_game, 'hour');
 
-  const winnersCount: any = {
-    team_1: 0,
-    team_2: 0,
-    team_3: 0,
-    team_4: 0,
-  };
+  let gamesCount: string = '';
 
   for (let i = 0; i < hoursDifference+1; i++) {
     const utcStartHour = first_game.add(i, 'hour').format('YYYY-MM-DD HH:mm:ss');
@@ -55,12 +50,22 @@ export const generateGlobalLeaderboardImage = async () => {
     const res1 = await fetch(url1, {headers: {Authorization: `Bearer ${process.env.PINATA_JWT}`,}})
     const json: CustomIDResponse [] = await res1.json();
 
-    //get the winner for this response by interaction_count
+    //get interactions for each player
     if (json.length > 0) {
-      const winner = json.reduce((prev, current) => (prev.interaction_count > current.interaction_count) ? prev : current);
-      if (winner.custom_id) {
-        winnersCount[winner.custom_id] += 1;
-      }
+      const countTeam1 = json.find((team: any) => team.custom_id === "team_1")?.interaction_count || 0;
+      const countTeam2 = json.find((team: any) => team.custom_id === "team_2")?.interaction_count || 0;
+      const countTeam3 = json.find((team: any) => team.custom_id === "team_3")?.interaction_count || 0;
+      const countTeam4 = json.find((team: any) => team.custom_id === "team_4")?.interaction_count || 0;
+
+      gamesCount += `
+        <div style="display: flex">
+            <p style="width: 100px; margin-top: 0;">1</p>
+            <p style="color: #fe4f74; margin-top: 0; width: 80px">${countTeam1}</p>
+            <p style="color: #fb9908; margin-top: 0; width: 140px">${countTeam2}</p>
+            <p style="color: #8a79ff; margin-top: 0; width: 80px">${countTeam3}</p>
+            <p style="color: #34d9aa; margin-top: 0; width: 100px">${countTeam4}</p>
+        </div>
+      `;
     }
   }
 
@@ -69,18 +74,27 @@ export const generateGlobalLeaderboardImage = async () => {
         position: relative; 
         display: flex;
         flex-direction: column;
-        padding-top: 95px;
         justify-content: flex-start;  
         width: 600px; 
-        height: 315px; 
-        background-image: url('https://pamadd.mypinata.cloud/ipfs/QmZciRgXkx7VSyTrRh2kFPP6TYQDM8BGKL9p2PAHkeL597'); 
+        height: 315px;
+        background-color: #000;
         background-size: 600px 315px;
         font-size: 20px;     
+        color: #fff;
+        gap: 0;
+        margin: 0;
         ">
-    <p style="color: #fe4f74">Team ${usersMap[1]}: ${winnersCount.team_1} games</p>
-    <p style="color: #fb9908">Team ${usersMap[2]}: ${winnersCount.team_2} games</p>
-    <p style="color: #8a79ff">Team ${usersMap[3]}: ${winnersCount.team_3} games</p>
-    <p style="color: #34d9aa">Team ${usersMap[4]}: ${winnersCount.team_4} games</p>
+        <p style="margin: 0">Game stats</p>
+        <div style="display: flex; flex-direction: column; margin: 0">
+            <div style="display: flex; margin: 0">
+              <p style="padding: 3px; width: 100px">Game #</p>
+              <p style="color: #f892a8; padding: 3px; width: 80px" >${usersMap[1]}</p>
+              <p style="color: #f8c376; padding: 3px; width: 140px" >${usersMap[2]}</p>
+              <p style="color: #c7bffa; padding: 3px; width: 80px" >${usersMap[3]}</p>
+              <p style="color: #87d7c0; padding: 3px; width: 100px" >${usersMap[4]}</p>
+            </div>
+            ${gamesCount}
+        </div>
   </div>
   `, {asUri: false, width: 600, height: 315});
 
@@ -120,7 +134,6 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
           { label: "Try again", action: 'post' },
           { label: "Change team", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball` },
           { label: "Leaderboard", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/leaderboard` },
-          { label: "Games stats", action: 'post', target: `${process.env.HOSTED_URL}/api/basketball/global-stats` },
         ],
         image: {url: imgContent}
       });
