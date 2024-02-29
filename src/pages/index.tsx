@@ -80,13 +80,13 @@ export default function Home() {
     <div className="w-3/4 m-auto mt-20 mb-20">
       <h1 className="text-center text-4xl mb-8 font-sans text-white font-bold">Pinata Frames & Resources</h1>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-4">
-        <a href="" className="w-full flex items-center justify-center rounded rounded-md bg-white h-20 w-auto shadow shadow-md p-0 m-0">
+        <a href="https://docs.pinata.cloud/farcaster/hubs" className="w-full flex items-center justify-center rounded rounded-md bg-white h-20 w-auto shadow shadow-md p-0 m-0">
           <h2 className="text-center font-bold font-sans text-2xl text-black">Free Farcaster Hub</h2>
         </a>
-        <a href="" className="w-full flex items-center justify-center rounded rounded-md bg-white h-20 w-auto  text-gray-900 shadow shadow-md p-0 m-0">
+        <a href="https://github.com/PinataCloud/pinata-fdk" className="w-full flex items-center justify-center rounded rounded-md bg-white h-20 w-auto  text-gray-900 shadow shadow-md p-0 m-0">
           <h2 className="text-center font-bold font-sans text-2xl text-black">Farcaster Development Kit</h2>
         </a>
-        <a href="" className="w-full flex items-center justify-center rounded rounded-md bg-white h-20 w-auto text-gray-900 shadow shadow-md p-0 m-0">
+        <a href="https://docs.pinata.cloud/farcaster/frames#frame-analytics" className="w-full flex items-center justify-center rounded rounded-md bg-white h-20 w-auto text-gray-900 shadow shadow-md p-0 m-0">
           <h2 className="text-center font-bold font-sans text-2xl text-black">Frame Analytics</h2>
         </a>
       </div>
