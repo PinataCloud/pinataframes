@@ -9,10 +9,9 @@ const fdk = new PinataFDK({
 const HUB_URL = process.env['HUB_URL'] || "hub-grpc.pinata.cloud"
 const client = getSSLHubRpcClient(HUB_URL);
 
-const STARTING_CID = "QmQYFeub8vRJzrX7EExfQqJoc3xswEk5NZyN8Yj2Ape6To"
-const SUCCESS_CID = "QmPSoJTvnJ3jA5HTxX7q8EwdxZAQBJvx8fUce6grrmRP4K"
-const TRYAGAIN_CID = "QmQkn6zGsPDbmkSzoJLDEi7Bp6RNY533nnhiH5AhicMpAE"
-const DOCS_URL = ""
+const SUCCESS_CID = "QmeVPeDgTmt8X4rJM6UHPbsUAYg1RELCHmgf7S6M2UjmvX"
+const TRYAGAIN_CID = "QmYRzAd91gNgqkJShEcoprHYkLkTQqpEmNVakXq5dEJhgY"
+const DOCS_URL = "https://docs.pinata.cloud/farcaster/api-reference/endpoint/cast-by-hash"
 const HASH = ""
 
 export default async function handler(
@@ -32,7 +31,7 @@ export default async function handler(
     // if(likes > 623) {
     //   return true
     // }
-    return false;
+    return true;
   }
 
   if (req.method === "POST") {
