@@ -31,7 +31,7 @@ export default async function handler(
     // if(likes > 623) {
     //   return true
     // }
-    return true;
+    return false;
   }
 
   if (req.method === "POST") {
