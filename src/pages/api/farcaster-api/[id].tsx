@@ -38,6 +38,7 @@ export default async function handler(
   if (req.method === "POST") {
     try {
       const { id } = req.query
+      await fdk.sendAnalytics("farcaster-api", req.body);
       switch(id) {
         case "check": 
         default:
@@ -64,7 +65,7 @@ export default async function handler(
               </html>`)
           } else {
             const notEnoughLikesMetadata = fdk.getFrameMetadata({
-              post_url: `${process.env.HOSTED_URL}/api/check`,
+              post_url: `${process.env.HOSTED_URL}/api/farcaster-api/check`,
               aspect_ratio: "1.91:1",
               buttons: [
                 { label: 'Check again', action: 'post' },              
@@ -83,7 +84,7 @@ export default async function handler(
               </body>
               </html>`)
           }
-      }
+      }      
     } catch (error) {
       console.log(error);
       res.status(500).send("Server error");
