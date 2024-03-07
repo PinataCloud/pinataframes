@@ -12,7 +12,7 @@ const client = getSSLHubRpcClient(HUB_URL);
 const SUCCESS_CID = "QmeVPeDgTmt8X4rJM6UHPbsUAYg1RELCHmgf7S6M2UjmvX"
 const TRYAGAIN_CID = "QmYRzAd91gNgqkJShEcoprHYkLkTQqpEmNVakXq5dEJhgY"
 const DOCS_URL = "https://docs.pinata.cloud/farcaster/api-reference/endpoint/cast-by-hash"
-const HASH = "0x695a6b01f7b910e370aba37f36309170d6ace931"
+const HASH = "0x66d56e0e5d587cd576b05b861f0b6e35a946f322"
 
 export default async function handler(
   req: NextApiRequest,
