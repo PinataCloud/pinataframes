@@ -12,7 +12,7 @@ const client = getSSLHubRpcClient(HUB_URL);
 const SUCCESS_CID = "QmeVPeDgTmt8X4rJM6UHPbsUAYg1RELCHmgf7S6M2UjmvX"
 const TRYAGAIN_CID = "QmYRzAd91gNgqkJShEcoprHYkLkTQqpEmNVakXq5dEJhgY"
 const DOCS_URL = "https://docs.pinata.cloud/farcaster/api-reference/endpoint/cast-by-hash"
-const HASH = ""
+const HASH = "0x695a6b01f7b910e370aba37f36309170d6ace931"
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,18 +20,23 @@ export default async function handler(
 ) {
 
   const checkIfWeCanReleaseDocs = async () => {
-    // const res = await fetch(`https://api.pinata.cloud/v3/farcaster/casts/${HASH}`, {
-    //   headers: {
-    //     Authorization: `Bearer ${process.env.PINATA_JWT}`
-    //   }
-    // })
-    // const json = await res.json();
-    // const likes = json?.data?.reactions?.likes.length || 0
-    // console.log({likes})
-    // if(likes > 623) {
-    //   return true
-    // }
-    return false;
+    try {
+      const res = await fetch(`https://api.pinata.cloud/v3/farcaster/casts/${HASH}`, {
+        headers: {
+          Authorization: `Bearer ${process.env.PINATA_JWT}`
+        }
+      })
+      const json = await res.json();
+      const likes = json?.data?.reactions?.likes.length || 0
+      console.log({likes})
+      if(likes > 623) {
+        return true
+      }
+      return false; 
+    } catch (error) {
+      console.log(error)
+      return false;
+    }    
   }
 
   if (req.method === "POST") {
