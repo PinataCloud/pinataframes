@@ -88,30 +88,5 @@ export default async function handler(
       console.log(error);
       res.status(500).send("Server error");
     }
-  } else {
-    try {
-      const mainMeta = fdk.getFrameMetadata({
-        post_url: `${process.env.HOSTED_URL}/api/check`,
-        aspect_ratio: "1.91:1",
-        buttons: [
-          { label: 'Unlock Docs', action: 'post' },              
-        ],
-        cid: STARTING_CID
-      });
-      return res.send(`<!DOCTYPE html>
-      <html lang="en">
-        <head>
-          ${mainMeta}
-        </head>
-        <body>
-          <div style="background: #fff;">
-            <img style="width: 50%; margin: auto;" src="${process.env.GATEWAY_URL}/ipfs/${STARTING_CID}" />
-          </div>
-        </body>
-        </html>`)
-    } catch (error) {
-      console.log(error);
-      res.status(500).send("Server error");
-    }
-  }
+  } 
 }
