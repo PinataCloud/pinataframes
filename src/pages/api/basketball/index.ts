@@ -24,7 +24,7 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         return res.status(400).json({error: "Invalid frame message"});
       }
 
-      // await fdk.sendAnalytics(FRAME_ID, req.body);
+      await fdk.sendAnalytics(FRAME_ID, req.body);
 
       const currentUUID = req.body?.untrustedData?.state ? JSON.parse(req.body.untrustedData.state) : {};
       const currentSession = currentUUID.session || uuidv4();
