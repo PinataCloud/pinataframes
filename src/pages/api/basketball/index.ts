@@ -1,11 +1,7 @@
 import {PinataFDK} from "pinata-fdk";
-import satori from 'satori';
 import {NextApiRequest, NextApiResponse} from "next";
-import {html} from "satori-html";
-import {Resvg} from "@resvg/resvg-js";
 import dayjs, {Dayjs} from "dayjs";
 import utc from 'dayjs/plugin/utc';
-import {generateHtmlImage} from "@/utils/satori";
 const { v4: uuidv4 } = require('uuid');
 
 dayjs.extend(utc);
@@ -18,13 +14,6 @@ const fdk = new PinataFDK({
 
 const FRAME_ID = "pinata_basketball";
 
-export const generateImage = async () => {
-  return generateHtmlImage(`
-    <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 1200px; height: 630px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmPC86ENNELHJR5yr9QT1vnCT72qVuByTbC28gmomac13W'); background-size: 1200px 630px; color: #fff;">
-    </div>
-  `, {asUri: true});
-}
-
 export default async function handler (req: NextApiRequest, res: NextApiResponse,){
   if (req.method === "POST") {
     console.log('body', req.body);
@@ -35,12 +24,10 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         return res.status(400).json({error: "Invalid frame message"});
       }
 
-      await fdk.sendAnalytics(FRAME_ID, req.body);
+      // await fdk.sendAnalytics(FRAME_ID, req.body);
 
       const currentUUID = req.body?.untrustedData?.state ? JSON.parse(req.body.untrustedData.state) : {};
       const currentSession = currentUUID.session || uuidv4();
-
-      const imgContent: any = await generateImage();
 
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
