@@ -1,13 +1,13 @@
 import Head from 'next/head';
 import Image from 'next/image';
 
-export default function Index({ imgUrl } : { imgUrl: string }) {
-  const handleButtonClick = async (direction: string) => {
-    console.log(direction)
-  }
+export default function Index() {
+  // const handleButtonClick = async (direction: string) => {
+  //   console.log(direction)
+  // }
   return (
     <>
-      {
+      {/* {
         imgUrl &&
         <>
           <Head>
@@ -31,23 +31,23 @@ export default function Index({ imgUrl } : { imgUrl: string }) {
             </div>
           </div>
         </>
-      }
+      } */}
 
     </>
   );
 }
 
-export async function getStaticProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  const res = await fetch('http://localhost:3000/api/frogger/draw')
-  const imgUrl = await res.text()
+// export async function getStaticProps() {
+//   // Call an external API endpoint to get posts.
+//   // You can use any data fetching library
+//   const res = await fetch('http://localhost:3000/api/frogger/draw')
+//   const imgUrl = await res.text()
  
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {
-      imgUrl,
-    },
-  }
-}
+//   // By returning { props: { posts } }, the Blog component
+//   // will receive `posts` as a prop at build time
+//   return {
+//     props: {
+//       imgUrl,
+//     },
+//   }
+// }
