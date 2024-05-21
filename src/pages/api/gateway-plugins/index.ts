@@ -34,7 +34,7 @@ export default async function handler(
 
     const idAsNumber = parseInt(id);
 
-    let idToUseInQuery = idAsNumber + 1;
+    let idToUseInQuery = idAsNumber === 3 ? 3 : idAsNumber + 1;
 
     let joinText = "Interested?"
 
