@@ -9,6 +9,18 @@ type User = {
   fid: number;
 }
 
+export const addToGatewayPluginInterestList = async (fid: number, username?: string) => {
+
+  const { data, error } = await supabase
+    .from('gateway_plugins')
+    .upsert({ fid: fid, username: username }, {onConflict: 'fid'})
+    .select()
+
+  if (error) {
+    throw error;
+  }
+}
+
 export const addMessage = async (user: User, message: string) => {
 
   const { data, error } = await supabase
