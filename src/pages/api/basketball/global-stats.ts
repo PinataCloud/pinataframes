@@ -25,9 +25,9 @@ interface CustomIDResponse  {
 }
 
 const usersMap: any = {
-  1: "@woj",
-  2: "@alvejtiago",
-  3: "@df",
+  1: "@grace",
+  2: "@toadyhawk.eth",
+  3: "@cameron",
   4: "@adrienne",
 }
 

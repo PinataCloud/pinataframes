@@ -32,12 +32,12 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/prepare`,
         buttons: [
-          { label: "@woj", action: 'post' },
-          { label: "@alvejtiago", action: 'post' },
-          { label: "@df", action: 'post' },
+          { label: "@grace", action: 'post' },
+          { label: "@toadyhawk.eth", action: 'post' },
+          { label: "@cameron", action: 'post' },
           { label: "@adrienne", action: 'post' },
         ],
-        image: {url: 'https://pamadd.mypinata.cloud/ipfs/QmSbHwsYLaGG4kHNjNmyXXu1xCjULRsMbsyAUyDK4ukbY4'}
+        image: {url: 'https://pamadd.mypinata.cloud/ipfs/QmdpsPVVAPP5sfVTwn1KwKBQYduSr6R4ouss4Zne46CWEv'}
       });
 
       //prepare time is the current utc time
