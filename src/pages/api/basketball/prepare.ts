@@ -27,6 +27,7 @@ const usersMap: any = {
 
 export const generateImage = async (team: number, counter: number) => {
   const pixelFont = await fetch(`${process.env.HOSTED_URL}/tickerbit-regular.ttf`)
+  console.log('pixelFont res', pixelFont)
 
   const template: any = html(`
   <div style="padding: 20px; position: relative; display: flex;  justify-content: flex-start;  width: 600px; height: 315px; background-image: url('https://pamadd.mypinata.cloud/ipfs/QmYFgP6DsSqZ3eQqCoShe2HT7VcyXRL5WPhEB8mo5jXg41'); background-size: 600px 315px; color: #fff;">
@@ -34,6 +35,8 @@ export const generateImage = async (team: number, counter: number) => {
     <p style="font-size: 30px; position: absolute; left: 52%; top: 18%">${usersMap[team]}</p>
   </div>
   `);
+
+  console.log('template', template)
   const svg = await satori(template, {
     width: 600,
     height: 315,
