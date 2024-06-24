@@ -80,6 +80,8 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
 
       const imgContent = await generateImage(currentTeam, 0);
 
+      console.log('imgContent', imgContent);
+
       const frameMetadata = await fdk.getFrameMetadata({
         post_url: `${process.env.HOSTED_URL}/api/basketball/shoot`,
         buttons: [
