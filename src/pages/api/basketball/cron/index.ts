@@ -19,7 +19,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
     return response.status(401).json({ error: 'Unauthorized' });
   }
 
-  const first_race = dayjs.utc('2024-06-24T15:00:00');
+  const first_race = dayjs.utc('2024-06-24T12:00:00');
   const previousHour = dayjs.utc().subtract(1, 'hour').endOf('hour');
 
   const hoursDifference = previousHour.diff(first_race, 'hour');
