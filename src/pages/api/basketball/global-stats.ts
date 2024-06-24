@@ -32,7 +32,7 @@ const usersMap: any = {
 }
 
 export const generateGlobalLeaderboardImage = async () => {
-  const first_game = dayjs.utc('2024-02-29T16:00:00');
+  const first_game = dayjs.utc('2024-06-24T16:00:00');
   const previousHour = dayjs.utc().subtract(1, 'hour').endOf('hour');
 
   const hoursDifference = previousHour.diff(first_game, 'hour');
